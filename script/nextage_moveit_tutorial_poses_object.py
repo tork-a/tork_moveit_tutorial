@@ -40,11 +40,13 @@ if __name__ == '__main__':
 
     box_pose = PoseStamped()
     box_pose.header.frame_id = group.get_planning_frame()
-    box_pose.pose.position.x = 0.35
+    box_pose.pose.position.x = 0.3
     box_pose.pose.position.y = -0.3
-    box_pose.pose.position.z = -0.2
+    box_pose.pose.position.z = -0.25
     box_pose.pose.orientation.w = 1.0
-    scene.add_box( 'box_object', box_pose, ( 0.3, 0.1, 0.5 ) )
+    
+    scene.add_box( 'box_object', box_pose, ( 0.4, 0.1, 0.5 ) )
+    rospy.sleep(2)
 
     rospy.loginfo( "Scene Objects : {}".format( scene.get_known_object_names() ) )
     
