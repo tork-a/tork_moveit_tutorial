@@ -16,8 +16,8 @@ ROS の環境設定と対話的にプログラミングを行えるように準�
 #### NEXTAGE OPEN の場合
 
 「シミュレータと MoveIt! の起動」の
-「[NEXTAGE OPEN - hrpsys シミュレータ](/moveit-tutorial_ja_robot-simulator.md#start-nextage-hrpsys-simulator)」もしくは
-「[NEXTAGE OPEN - Gazebo シミュレータ](/moveit-tutorial_ja_robot-simulator.md#start-nextage-gazebo-simulator)」を参照して
+「[NEXTAGE OPEN - hrpsys シミュレータ](/doc/moveit-tutorial_ja_robot-simulator.md#start-nextage-hrpsys-simulator)」もしくは
+「[NEXTAGE OPEN - Gazebo シミュレータ](/doc/moveit-tutorial_ja_robot-simulator.md#start-nextage-gazebo-simulator)」を参照して
 hrpsys か Gazebo のどちらか一方のシミュレータと MoveIt! を起動します．
 
 次に1行もしくは複数行ごとにプログラミングとその実行を行う
