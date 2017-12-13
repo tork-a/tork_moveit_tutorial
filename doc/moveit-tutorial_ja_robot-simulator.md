@@ -42,17 +42,27 @@
 - ROS Indigo
 
 
-### ROS とチュートリアルパッケージのインストール
+### ROS のインストール
 
 ターミナルから次のコマンドを実行して
-ROS とチュートリアルパッケージのソフトウェアをインストールします．
+[ROS ソフトウェアをインストール](http://wiki.ros.org/indigo/Installation/Ubuntu)
+します．
+既に ROS がインストールされていれば，次のチュートリアルパッケージのインストールに進んでください．
 
-<!-- 要確認 : ros-indigo-tork-moveit-tutorial -->
 ```
 $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list'
 $ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key0xB01FA116
 $ sudo apt-get update
-$ sudo apt-get install ros-indigo-desktop-full ros-indigo-tork-moveit-tutorial
+$ sudo apt-get install ros-indigo-desktop-full
+```
+
+### チュートリアルパッケージのインストール
+
+ターミナルから次のコマンドを実行して
+チュートリアルパッケージのソフトウェアをインストールします．
+
+```
+$ sudo apt-get install ros-indigo-tork-moveit-tutorial
 ```
 
 
@@ -114,7 +124,8 @@ $ echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
 
 ## シミュレータと MoveIt! の起動
 
-### NEXTAGE OPEN - hrpsys シミュレータ
+<a id="start-nextage-hrpsys-simulator"></a>
+### <a href="#start-nextage-hrpsys-simulator">NEXTAGE OPEN - hrpsys シミュレータ</a>
 
 #### hrpsys シミュレータ・MoveIt! などの起動
 
@@ -143,8 +154,8 @@ $ rtmlaunch nextage_moveit_config nextage_demo.launch
 シミュレータを終了するには全体を起動したターミナル上で
 Ctrl-C を入力すると全体が終了します．
 
-
-### NEXTAGE OPEN - Gazebo シミュレータ
+<a id="start-nextage-gazebo-simulator"></a>
+### <a href="#start-nextage-gazebo-simulator">NEXTAGE OPEN - Gazebo シミュレータ</a>
 
 NEXTAGE OPEN のもうひとつの動力学シミュレータは
 ROS の動力学環境シミュレータ Gazebo 上で動きます．

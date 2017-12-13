@@ -15,22 +15,15 @@ ROS の環境設定と対話的にプログラミングを行えるように準�
 
 #### NEXTAGE OPEN の場合
 
-**ターミナル-1** : 物理シミュレータの起動
-```
-$ source /opt/ros/indigo/setup.bash
-$ roslaunch nextage_gazebo nextage_world.launch
-```
+「シミュレータと MoveIt! の起動」の
+「[NEXTAGE OPEN - hrpsys シミュレータ](/moveit-tutorial_ja_robot-simulator.md#start-nextage-hrpsys-simulator)」もしくは
+「[NEXTAGE OPEN - Gazebo シミュレータ](/moveit-tutorial_ja_robot-simulator.md#start-nextage-gazebo-simulator)」を参照して
+hrpsys か Gazebo のどちらか一方のシミュレータと MoveIt! を起動します．
 
-- メモ : hrpsys (RTM) シミュレータでも可
+次に1行もしくは複数行ごとにプログラミングとその実行を行う
+対話的プログラミングコンソールを起動します．
 
-**ターミナル-2** : MoveIt! の起動
-```
-$ source /opt/ros/indigo/setup.bash
-$ roslaunch nextage_moveit_config moveit_planning_execution.launch
-```
-
-**ターミナル-3** : 対話的プログラミングのコンソールの起動
-<!-- パッケージ名を実際のものと要整合 tork_moveit_tutorial -->
+**ターミナル** : 対話的プログラミングのコンソールの起動
 ```
 $ source /opt/ros/indigo/setup.bash
 $ rosrun tork_moveit_tutorial moveit_tutorial_tools.py
