@@ -36,14 +36,14 @@ MoveIt! Commander のプログラミングインタフェースには Python や
 
 チュートリアルの構成は次のようになっています．
 
-- [はじめに（本章）](/doc/moveit-tutorial_ja_introduction.md)
-- [ロボットシミュレータを使う](/doc/moveit-tutorial_ja_robot-simulator.md)
-- [プログラムでロボットを動かす](/doc/moveit-tutorial_ja_robot-python_basic.md)
-- [発展的なロボットプログラミング](/doc/moveit-tutorial_ja_robot-python_advanced.md)
-- [トラブルシューティング](/doc/moveit-tutorial_ja_trouble-shooting.md)
-- [クラス・関数リファレンス](/doc/moveit-tutorial_ja_reference-class-functions.md)
-- [Python チュートリアル - その1](/doc/moveit-tutorial_ja_python-basic.md)
-- [Python チュートリアル - その2](/doc/moveit-tutorial_ja_python-advanced.md)
+- [はじめに（本章）](moveit-tutorial_ja_introduction.md)
+- [ロボットシミュレータを使う](moveit-tutorial_ja_robot-simulator.md)
+- [プログラムでロボットを動かす](moveit-tutorial_ja_robot-python_basic.md)
+- [発展的なロボットプログラミング](moveit-tutorial_ja_robot-python_advanced.md)
+- [トラブルシューティング](moveit-tutorial_ja_trouble-shooting.md)
+- [クラス・関数リファレンス](moveit-tutorial_ja_reference-class-functions.md)
+- [Python チュートリアル - その1](moveit-tutorial_ja_python-basic.md)
+- [Python チュートリアル - その2](moveit-tutorial_ja_python-advanced.md)
 
 本チュートリアルのロボットプログラミングではプログラム言語 Python を使いますが，
 Python の知識がなくてもコマンドやプログラムを実行できるように構成されています．
