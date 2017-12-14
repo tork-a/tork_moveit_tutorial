@@ -234,7 +234,7 @@ latex_elements = {
 #'pointsize': '10pt',
 
 # Additional stuff for the LaTeX preamble.
-  'preamble': '\setcounter{chapter}{0}\setcounter{tocdepth}{3}',
+  'preamble': '\usepackage{ascmac}\usepackage{fancybox}\setcounter{chapter}{0}\setcounter{tocdepth}{3}',
 
 # Latex figure (float) alignment
 #'figure_align': 'htbp',
