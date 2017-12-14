@@ -40,7 +40,7 @@ test:
     - sudo sed -i 's@str(content)@content@' /usr/local/lib/python2.7/dist-packages/recommonmark/states.py
     ##
     - . /opt/ros/$ROS_DISTRO/setup.bash && cd ~/catkin_ws && catkin_make --pkg $CIRCLE_PROJECT_REPONAME --make-args docbuild_$CIRCLE_PROJECT_REPONAME
-    - find ~/catkin_ws/ -iname '*.pdf' -exec cp {} $CIRCLE_ARTIFACTS \;
+    - find -L ~/catkin_ws/ -iname '*.pdf' -exec cp {} $CIRCLE_ARTIFACTS \;
 
 deployment:
   release:
