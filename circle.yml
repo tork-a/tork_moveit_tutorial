@@ -33,6 +33,7 @@ test:
     - sudo pip install recommonmark
     - sudo apt-get install -y -q doxygen pandoc python-catkin-sphinx
     - sudo apt-get install -y -q texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
+    - sudo apt-get install -y -q texlive-lang-cjk
     ##
     ## not sure why but we need this hack only for 14.04
     - sudo sed -i 's@role(name@role("download"@' /usr/local/lib/python2.7/dist-packages/recommonmark/states.py
