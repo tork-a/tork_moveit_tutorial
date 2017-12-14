@@ -29,9 +29,10 @@ test:
     - . /opt/ros/$ROS_DISTRO/setup.bash && cd ~/catkin_ws && catkin_make run_tests
     - . /opt/ros/$ROS_DISTRO/setup.bash && cd ~/catkin_ws && catkin_test_results --verbose build
     # doc build
-    - sudo apt-get install -y -q python-sphinx doxygen pandoc python-catkin-sphinx
-    - sudo apt-get install -y -q texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
+    - sudo pip install sphinx
     - sudo pip install recommonmark
+    - sudo apt-get install -y -q doxygen pandoc python-catkin-sphinx
+    - sudo apt-get install -y -q texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
     - . /opt/ros/$ROS_DISTRO/setup.bash && cd ~/catkin_ws && catkin_make --pkg $CIRCLE_PROJECT_REPONAME --make-args docbuild_$CIRCLE_PROJECT_REPONAME
     - find ~/catkin_ws/ -iname '*.pdf' -exec cp {} $CIRCLE_ARTIFACTS \;
 
