@@ -31,6 +31,7 @@ test:
     # doc build
     - sudo apt-get install -y -q python-sphinx doxygen pandoc python-catkin-sphinx
     - sudo apt-get install -y -q texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
+    - sudo pip install recommonmark
     - . /opt/ros/$ROS_DISTRO/setup.bash && cd ~/catkin_ws && catkin_make --pkg $CIRCLE_PROJECT_REPONAME --make-args docbuild_$CIRCLE_PROJECT_REPONAME
     - find ~/catkin_ws/ -iname '*.pdf' -exec cp {} $CIRCLE_ARTIFACTS \;
 
