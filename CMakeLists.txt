@@ -204,9 +204,11 @@ add_custom_target(docbuild_${PROJECT_NAME}
   COMMAND cmake -E remove_directory output
   COMMAND cmake -E make_directory output
   COMMAND sphinx-build -b latex doc output
+  COMMAND cmake -E copy doc/by-nc-sa.png output/by-nc-sa.png
   #COMMAND cmake -E chdir output sh -c 'ls *.png | xargs extractbb'
   COMMAND cd output \\; ls *.png | xargs extractbb
   COMMAND sed -i 's@\\\\setcounter{tocdepth}{0}@@' output/${PROJECT_NAME}.tex
+  COMMAND sed -i 's@\\\\end{document}@\\\\newpage\\\\input{../doc/cc.tex}\\\\end{document}@' output/${PROJECT_NAME}.tex
   COMMAND cmake -E chdir output platex ${PROJECT_NAME}.tex
   COMMAND cmake -E chdir output platex ${PROJECT_NAME}.tex
   COMMAND cmake -E chdir output dvipdfmx ${PROJECT_NAME}
