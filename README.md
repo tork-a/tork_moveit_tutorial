@@ -1,1 +1,1 @@
-# tork_moveit_tutorial
+# tork_moveit_tutorial [![CircleCI](https://circleci.com/gh/tork-a/tork_moveit_tutorial.svg?style=svg&circle-token=6262274dd1fa12ee8ed6b0a4d4e7bd85c6c0f7d3)](https://circleci.com/gh/tork-a/tork_moveit_tutorial)
