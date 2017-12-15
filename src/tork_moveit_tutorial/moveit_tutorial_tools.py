@@ -1,5 +1,10 @@
 #!/usr/bin/env python  
 
+## workaround until https://github.com/ros-planning/moveit/pull/581 is released
+import sys
+sys.modules["pyassimp"] = sys
+import pyassimp
+   
 import sys, math, copy
 import rospy, tf, geometry_msgs.msg
 
