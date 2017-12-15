@@ -26,7 +26,7 @@ hrpsys か Gazebo のどちらか一方のシミュレータと MoveIt! を起�
 **ターミナル** : 対話的プログラミングのコンソールの起動
 ```
 $ source /opt/ros/indigo/setup.bash
-$ rosrun tork_moveit_tutorial moveit_tutorial_tools.py
+$ rosrun tork_moveit_tutorial demo.py
 ```
 
 
