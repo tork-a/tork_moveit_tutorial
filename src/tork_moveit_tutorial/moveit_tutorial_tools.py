@@ -1,14 +1,16 @@
 #!/usr/bin/env python  
 
+## workaround until https://github.com/ros-planning/moveit/pull/581 is released
+import sys
+sys.modules["pyassimp"] = sys
+import pyassimp
+   
 import sys, math, copy
 import rospy, tf, geometry_msgs.msg
 
 from PyQt4 import QtGui
 from moveit_commander import MoveGroupCommander, RobotCommander
 from geometry_msgs.msg import Pose, PoseStamped
-
-import IPython
-
 
 def init_node( node_name = "commander_example" ):
     '''
@@ -239,21 +241,4 @@ def make_waypoints_circular( center=[0.3, -0.2, 0.1], radius=0.1 ,steps=12, rpy=
         wpts.append( copy.deepcopy( pose_target ) )
     
     return wpts
-
-
-if __name__ == '__main__':
-    
-    init_node()
-    
-    # Waypoints for NEXTAGE OPEN
-    waypoints = make_waypoints_example()
-    
-    rpy_nextage = [ 0.0, -math.pi/2, 0.0 ]
-    waypoints_circular = make_waypoints_circular( rpy=rpy_nextage )
-    waypoints_rectangular = make_waypoints_rectangular( rpy=rpy_nextage )
-    
-    # Start IPython Console
-    rospy.loginfo( "[moveit_tutorial_tools] Start IPython Console" )
-    IPython.embed()
-
 

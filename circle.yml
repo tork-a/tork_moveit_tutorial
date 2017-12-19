@@ -3,11 +3,15 @@ general:
     - "$CIRCLE_ARTIFACTS/"
 machine:
   environment:
-    PATH: /usr/local/sbin:/usr/local/bin:/usr/local/go/bin:/usr/sbin:/usr/bin:/sbin:/bin  # disable circle ci virtual env...
     ROS_DISTRO: indigo
     ROS_REPOSITORY_PATH: http://packages.ros.org/ros/ubuntu
 dependencies:
   pre:
+    - rm -fr  /opt/circleci/.pyenv/
+    - rm -fr  /home/ubuntu/virtualenvs/
+    - hash -r
+    - type python
+    - python -c 'import sys; print(sys.path)'
     - env | grep ROS
     #- sudo rm /etc/apt/sources.list.d/*
     - sudo sh -c "echo \"deb $ROS_REPOSITORY_PATH `lsb_release -cs` main\" > /etc/apt/sources.list.d/ros-latest.list"

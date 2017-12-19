@@ -34,7 +34,7 @@ import rospy
 from moveit_commander import MoveGroupCommander
 from geometry_msgs.msg import Pose
 
-from moveit_tutorial_tools import init_node, question_yn
+from tork_moveit_tutorial import init_node, question_yn
 
 
 if __name__ == '__main__':
@@ -102,7 +102,7 @@ import rospy
 from moveit_commander import MoveGroupCommander
 from geometry_msgs.msg import Pose
 
-from moveit_tutorial_tools import init_node, question_yn
+from tork_moveit_tutorial import init_node, question_yn
 
 
 if __name__ == '__main__':
@@ -267,7 +267,7 @@ import rospy
 from moveit_commander import MoveGroupCommander
 from geometry_msgs.msg import Pose
 
-from moveit_tutorial_tools import init_node
+from tork_moveit_tutorial import init_node
 
 
 if __name__ == '__main__':
@@ -348,7 +348,7 @@ import rospy
 from moveit_commander import MoveGroupCommander
 from geometry_msgs.msg import Pose
 
-from moveit_tutorial_tools import init_node, question_yn
+from tork_moveit_tutorial import init_node, question_yn
 
 
 if __name__ == '__main__':
@@ -464,7 +464,7 @@ import rospy
 from moveit_commander import MoveGroupCommander
 from geometry_msgs.msg import Pose
 
-from moveit_tutorial_tools import init_node, question_yn
+from tork_moveit_tutorial import init_node, question_yn
 
 
 if __name__ == '__main__':
@@ -609,7 +609,7 @@ import rospy
 from moveit_commander import MoveGroupCommander
 from geometry_msgs.msg import Pose, PoseStamped
 
-from moveit_tutorial_tools import init_node
+from tork_moveit_tutorial import init_node
 
 
 if __name__ == '__main__':
@@ -740,7 +740,7 @@ import rospy
 from moveit_commander import MoveGroupCommander
 from geometry_msgs.msg import Pose
 
-from moveit_tutorial_tools import init_node, get_current_target_pose
+from tork_moveit_tutorial import init_node, get_current_target_pose
 
 
 def main():
@@ -930,7 +930,7 @@ from moveit_commander import MoveGroupCommander
 from geometry_msgs.msg import Pose
 from tf.transformations import quaternion_multiply, quaternion_about_axis
 
-from moveit_tutorial_tools import init_node, get_current_target_pose
+from tork_moveit_tutorial import init_node, get_current_target_pose
 
 
 def main():
@@ -1109,7 +1109,7 @@ import rospy, tf
 from moveit_commander import MoveGroupCommander, PlanningSceneInterface
 from geometry_msgs.msg import Pose, PoseStamped
 
-from moveit_tutorial_tools import init_node
+from tork_moveit_tutorial import init_node
 
 
 if __name__ == '__main__':
@@ -1254,7 +1254,7 @@ from moveit_commander import MoveGroupCommander, PlanningSceneInterface
 from geometry_msgs.msg import Pose, PoseStamped
 from moveit_msgs.msg import Constraints, OrientationConstraint
 
-from moveit_tutorial_tools import init_node
+from tork_moveit_tutorial import init_node
 
 
 if __name__ == '__main__':

@@ -26,7 +26,7 @@ hrpsys か Gazebo のどちらか一方のシミュレータと MoveIt! を起�
 **ターミナル** : 対話的プログラミングのコンソールの起動
 ```
 $ source /opt/ros/indigo/setup.bash
-$ rosrun tork_moveit_tutorial moveit_tutorial_tools.py
+$ rosrun tork_moveit_tutorial demo.py
 ```
 
 
@@ -502,7 +502,7 @@ $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses.py
 ```python
 #!/usr/bin/env python
 
-from moveit_tutorial_tools import *
+from tork_moveit_tutorial import *
 
 
 if __name__ == '__main__':
@@ -589,7 +589,7 @@ $ rosrun tork_moveit_tutorial baxter_moveit_tutorial_poses.py
 ```python
 #!/usr/bin/env python
 
-from moveit_tutorial_tools import *
+from tork_moveit_tutorial import *
 
 
 if __name__ == '__main__':
@@ -664,7 +664,7 @@ $ rosrun tork_moveit_tutorial tra1_moveit_tutorial_poses.py
 ```python
 #!/usr/bin/env python
 
-from moveit_tutorial_tools import *
+from tork_moveit_tutorial import *
 
 
 if __name__ == '__main__':
