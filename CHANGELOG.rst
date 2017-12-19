@@ -2,8 +2,8 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.3 (2017-12-19)
+------------------
 * Fix python src path (`#5 <https://github.com/tork-a/tork_moveit_tutorial/issues/5>`_)
   * disable virtualenv
   * forget to add setup.py
