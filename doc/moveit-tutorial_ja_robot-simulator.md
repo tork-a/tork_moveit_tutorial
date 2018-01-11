@@ -183,6 +183,10 @@ NEXTAGE OPEN ロボットの準備が完了しています．
 
 ![NEXTAGE - Gazebo Starts](images/nextage_gazebo-starts.png)
 
+- 注意: 最初にgazeboを立ち上げる際にはモデルデータをダウンロードするために
+  以下のようにWarningやErrorが表示され数秒から数分の時間がかかります．
+![Gazebo Initial Error](images/gazebo_startup_error.png)
+
 #### MoveIt! の起動
 
 2つ目のターミナルで次のコマンドを入力して MoveIt! を起動します．
