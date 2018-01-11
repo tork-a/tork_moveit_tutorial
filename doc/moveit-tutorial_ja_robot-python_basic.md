@@ -460,7 +460,18 @@ Out[95]: True
 ```python
 In [96]: exit
 ```
-
+- 注意: Indigoでは
+```
+terminate called after throwing an instance of 'boost::exception_detail::clone_impl<boost::exception_detail::error_info_injector<boost::lock_error> >'
+  what():  boost: mutex lock failed in pthread_mutex_lock: Invalid argument
+Aborted (core dumped)
+```
+というエラーが表示されます．このままでも動作に支障はありませんが気になる方は以下のようにすることで正常終了できます．
+```
+In [97]: import moveit_commander
+In [98]: moveit_commander.roscpp_shutdown()
+In [99]: moveit_commander.os._exit(0)
+```
 
 ### 直線補間軌道でロボットを動かす
 
