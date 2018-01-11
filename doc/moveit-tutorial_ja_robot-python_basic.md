@@ -42,6 +42,13 @@ In [1]: group = MoveGroupCommander("right_arm")
 In [2]:
 ```
 
+- 注意：以下のように`TrajectoryExecution will use old action capability.`と表示される場合も有りますが問題ありません．
+```python
+In [1]: group = MoveGroupCommander("right_arm")
+[ INFO] [1511506815.441893962, 135.795000000]: TrajectoryExecution will use old action capability.
+[ INFO] [1511506815.442105792, 135.795000000]: Ready to take MoveGroup commands for group right_arm.
+```
+
 - 注意 : MINAS TRA1 の場合はグループ名が異なります．
 ```python
 In [4]: group = MoveGroupCommander("manipulator")
