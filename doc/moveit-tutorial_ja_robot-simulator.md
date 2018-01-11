@@ -89,6 +89,9 @@ $ sudo apt-get install gazebo2 ros-indigo-qt-build ros-indigo-driver-common ros-
 $ sudo apt-get install ros-indigo-baxter-simulator
 ```
 
+　インストール方法については以下の公式ページにも説明があるので参照ください．このページから該当部分をコピーペーストすると上記のコマンドを打たなくても良くなります．
+ - [http://sdk.rethinkrobotics.com/wiki/Workstation_Setup](http://sdk.rethinkrobotics.com/wiki/Workstation_Setup)
+ - [http://sdk.rethinkrobotics.com/wiki/Workstation_Setup](http://sdk.rethinkrobotics.com/wiki/Simulator_Installation) 
 
 ### MINAS TRA1 シミュレータのインストール
 
