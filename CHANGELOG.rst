@@ -2,6 +2,18 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Apply feedback (`#6 <https://github.com/tork-a/tork_moveit_tutorial/issues/6>`_)
+  * add images/gazebo_startup_error.png
+  * add link to gazebo-start-not-show-robot
+  * add comment on clean exit
+  * add comment on ABORTED: Solution found but controller failed during execution
+  * add comment about: TrajectoryExecution will use old action capability.
+  * add link to official baxter setup
+  * explain first gazebo startup needs wait
+* Contributors: Tokyo Opensource Robotics Developer 534
+
 0.0.3 (2017-12-19)
 ------------------
 * Fix python src path (`#5 <https://github.com/tork-a/tork_moveit_tutorial/issues/5>`_)
