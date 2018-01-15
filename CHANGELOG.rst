@@ -2,8 +2,8 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.4 (2018-01-15)
+------------------
 * Apply feedback (`#6 <https://github.com/tork-a/tork_moveit_tutorial/issues/6>`_)
   * add images/gazebo_startup_error.png
   * add link to gazebo-start-not-show-robot
