@@ -42,6 +42,13 @@ In [1]: group = MoveGroupCommander("right_arm")
 In [2]:
 ```
 
+- 注意：以下のように`TrajectoryExecution will use old action capability.`と表示される場合も有りますが問題ありません．
+```python
+In [1]: group = MoveGroupCommander("right_arm")
+[ INFO] [1511506815.441893962, 135.795000000]: TrajectoryExecution will use old action capability.
+[ INFO] [1511506815.442105792, 135.795000000]: Ready to take MoveGroup commands for group right_arm.
+```
+
 - 注意 : MINAS TRA1 の場合はグループ名が異なります．
 ```python
 In [4]: group = MoveGroupCommander("manipulator")
@@ -172,6 +179,10 @@ Out[32]: True
 手先の「姿勢」しか指定していないので
 手先の「位置」は思わぬところにあることもあります．
 
+- 注意：以下のようなエラーメッセージが表示された場合は，再度 `group.go()` をお送りください．
+```
+[ INFO] [1515668193.145149146, 166.319999999]: ABORTED: Solution found but controller failed during execution
+```
 
 ### 手先の位置と姿勢を指定して動かす
 
@@ -449,7 +460,18 @@ Out[95]: True
 ```python
 In [96]: exit
 ```
-
+- 注意: Indigoでは
+```
+terminate called after throwing an instance of 'boost::exception_detail::clone_impl<boost::exception_detail::error_info_injector<boost::lock_error> >'
+  what():  boost: mutex lock failed in pthread_mutex_lock: Invalid argument
+Aborted (core dumped)
+```
+というエラーが表示されます．このままでも動作に支障はありませんが気になる方は以下のようにすることで正常終了できます．
+```
+In [97]: import moveit_commander
+In [98]: moveit_commander.roscpp_shutdown()
+In [99]: moveit_commander.os._exit(0)
+```
 
 ### 直線補間軌道でロボットを動かす
 
