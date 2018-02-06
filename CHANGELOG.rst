@@ -2,8 +2,8 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.5 (2018-02-06)
+------------------
 * run debbuild within circleci (`#9 <https://github.com/tork-a/tork_moveit_tutorial/issues/9>`_)
   * do not copy but rename pdf file
   * enable docker
