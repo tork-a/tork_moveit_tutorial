@@ -2,6 +2,15 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* run debbuild within circleci (`#9 <https://github.com/tork-a/tork_moveit_tutorial/issues/9>`_)
+  * do not copy but rename pdf file
+  * enable docker
+  * run debbuild within circleci
+* correct image of opening moveit_armarker.rviz config file (the file directory was wrong) (`#8 <https://github.com/tork-a/tork_moveit_tutorial/issues/8>`_)
+* Contributors: Tokyo Opensource Robotics Developer 534, Yosuke Yamamoto
+
 0.0.4 (2018-01-15)
 ------------------
 * Apply feedback (`#6 <https://github.com/tork-a/tork_moveit_tutorial/issues/6>`_)
