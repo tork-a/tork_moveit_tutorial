@@ -44,6 +44,6 @@ add_custom_target(docbuild_${PROJECT_NAME}
   COMMAND cmake -E chdir output platex ${PROJECT_NAME}.tex
   COMMAND cmake -E chdir output platex ${PROJECT_NAME}.tex
   COMMAND cmake -E chdir output dvipdfmx ${PROJECT_NAME}
-  COMMAND cmake -E copy output/${PROJECT_NAME}.pdf output/${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}.pdf
+  COMMAND cmake -E rename output/${PROJECT_NAME}.pdf output/${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}.pdf
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
   )

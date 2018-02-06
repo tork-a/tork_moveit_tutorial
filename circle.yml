@@ -2,6 +2,8 @@ general:
   artifacts:
     - "$CIRCLE_ARTIFACTS/"
 machine:
+  services:
+    - docker
   environment:
     ROS_DISTRO: indigo
     ROS_REPOSITORY_PATH: http://packages.ros.org/ros/ubuntu
@@ -45,6 +47,10 @@ test:
     ##
     - . /opt/ros/$ROS_DISTRO/setup.bash && cd ~/catkin_ws && catkin_make --pkg $CIRCLE_PROJECT_REPONAME --make-args docbuild_$CIRCLE_PROJECT_REPONAME
     - find -L ~/catkin_ws/ -iname '*.pdf' -exec cp {} $CIRCLE_ARTIFACTS \;
+    ## deb build
+    - docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:indigo-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python-bloom debhelper; cd src; bloom-generate rosdebian --os-name ubuntu --os-version trusty --ros-distro indigo; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
+    - docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:kinetic-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python-bloom debhelper; cd src; bloom-generate rosdebian --os-name ubuntu --os-version xenial --ros-distro kinetic; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
+    - find -L ~/catkin_ws/ -iname '*.deb' -exec cp {} $CIRCLE_ARTIFACTS \;
 
 deployment:
   release:
