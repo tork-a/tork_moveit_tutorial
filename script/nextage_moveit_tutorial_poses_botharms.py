@@ -65,8 +65,8 @@ if __name__ == '__main__':
     
     # Move to Pose Target 1
     rospy.loginfo( "Move to Pose Target 1" )    
-    group.set_pose_target( pose_target_rarm_2, 'RARM_JOINT5_Link' )
-    group.set_pose_target( pose_target_larm_2, 'LARM_JOINT5_Link' )
+    group.set_pose_target( pose_target_rarm_1, 'RARM_JOINT5_Link' )
+    group.set_pose_target( pose_target_larm_1, 'LARM_JOINT5_Link' )
     group.go()
     
     # Move to Pose Target 2
