@@ -6,7 +6,7 @@ import rospy
 from moveit_commander import MoveGroupCommander
 from geometry_msgs.msg import Pose
 
-from moveit_tutorial_tools import init_node, question_yn
+from tork_moveit_tutorial import init_node, question_yn
 
 
 if __name__ == '__main__':

@@ -7,7 +7,7 @@ from moveit_commander import MoveGroupCommander, PlanningSceneInterface
 from geometry_msgs.msg import Pose, PoseStamped
 from moveit_msgs.msg import Constraints, OrientationConstraint
 
-from moveit_tutorial_tools import init_node
+from tork_moveit_tutorial import init_node
 
 
 if __name__ == '__main__':

@@ -6,7 +6,7 @@ import rospy
 from moveit_commander import MoveGroupCommander
 from geometry_msgs.msg import Pose
 
-from moveit_tutorial_tools import init_node, question_yn
+from tork_moveit_tutorial import init_node, question_yn
 
 
 if __name__ == '__main__':
@@ -65,8 +65,8 @@ if __name__ == '__main__':
     
     # Move to Pose Target 1
     rospy.loginfo( "Move to Pose Target 1" )    
-    group.set_pose_target( pose_target_rarm_2, 'RARM_JOINT5_Link' )
-    group.set_pose_target( pose_target_larm_2, 'LARM_JOINT5_Link' )
+    group.set_pose_target( pose_target_rarm_1, 'RARM_JOINT5_Link' )
+    group.set_pose_target( pose_target_larm_1, 'LARM_JOINT5_Link' )
     group.go()
     
     # Move to Pose Target 2
