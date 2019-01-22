@@ -36,8 +36,8 @@ test:
     - . /opt/ros/$ROS_DISTRO/setup.bash && cd ~/catkin_ws && catkin_make run_tests
     - . /opt/ros/$ROS_DISTRO/setup.bash && cd ~/catkin_ws && catkin_test_results --verbose build
     # doc build
-    - sudo pip install sphinx
-    - sudo pip install recommonmark
+    - sudo pip install sphinx==1.8.1
+    - sudo pip install recommonmark==0.4.0
     - sudo apt-get install -y -q doxygen pandoc python-catkin-sphinx
     - sudo apt-get install -y -q texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
     - sudo apt-get install -y -q texlive-lang-cjk
