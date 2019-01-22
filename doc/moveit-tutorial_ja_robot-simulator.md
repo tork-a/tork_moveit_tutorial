@@ -187,7 +187,7 @@ NEXTAGE OPEN ロボットの準備が完了しています．
 ![NEXTAGE - Gazebo Starts](images/nextage_gazebo-starts.png)
 
 - 注意: 最初にgazeboを立ち上げる際にはモデルデータをダウンロードするために
-  以下のようにWarningやErrorが表示され数秒から数分の時間がかかります場合が有ります．
+  以下のようにWarningやErrorが表示され数秒から数分の時間がかかる場合が有ります．
   「[トラブルシューティング (Gazebo を起動してもロボットが表示されない)](moveit-tutorial_ja_trouble-shooting.md#gazebo-start-not-show-robot)」もご参照ください．
 
 ![Gazebo Initial Error](images/gazebo_startup_error.png)
