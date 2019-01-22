@@ -19,6 +19,7 @@ dependencies:
     - sudo sh -c "echo \"deb $ROS_REPOSITORY_PATH `lsb_release -cs` main\" > /etc/apt/sources.list.d/ros-latest.list"
     - wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
     - sudo apt-get update
+    - sudo apt-get install -y --force-yes -q -qq dpkg # https://github.com/travis-ci/travis-ci/issues/9361#issuecomment-408431262 dpkg-deb: error: archive has premature member 'control.tar.xz' before 'control.tar.gz' #9361
     - sudo apt-get install -y -q python-catkin-pkg python-rosdep ros-$ROS_DISTRO-catkin
     - sudo apt-get install -y -q mongodb # to install ros-indigo-warehouse-ros
     - sudo rosdep init && rosdep update
@@ -35,8 +36,8 @@ test:
     - . /opt/ros/$ROS_DISTRO/setup.bash && cd ~/catkin_ws && catkin_make run_tests
     - . /opt/ros/$ROS_DISTRO/setup.bash && cd ~/catkin_ws && catkin_test_results --verbose build
     # doc build
-    - sudo pip install sphinx
-    - sudo pip install recommonmark
+    - sudo pip install sphinx==1.8.1
+    - sudo pip install recommonmark==0.4.0
     - sudo apt-get install -y -q doxygen pandoc python-catkin-sphinx
     - sudo apt-get install -y -q texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
     - sudo apt-get install -y -q texlive-lang-cjk
