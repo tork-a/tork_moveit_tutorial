@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 import sys
-from PyQt4 import QtGui
+from PyQt5.QtWidgets import QApplication, QMessageBox
 
 def question_yn( qmsg='Message', title='Question' ):
     
-    msgbox = QtGui.QMessageBox()
+    msgbox = QMessageBox()
     result = msgbox.question( msgbox, title, qmsg, msgbox.Yes | msgbox.No, msgbox.No )
     
     if result == msgbox.Yes:
@@ -16,7 +16,7 @@ def question_yn( qmsg='Message', title='Question' ):
 
 if __name__ == '__main__':
 
-    app = QtGui.QApplication(sys.argv)    
+    app = QApplication(sys.argv)
 
     print( question_yn() )
     print( question_yn("No/Yes") )

@@ -586,7 +586,7 @@ $ roslaunch baxter_gazebo baxter_world.launch
 **ターミナル-2**
 ```
 $ source /opt/ros/indigo/setup.bash
-$ rosrun baxtetools enable_robot.py -e
+$ rosrun baxter_tools enable_robot.py -e
 $ rosrun baxter_tools tuck_arms.py -u
 $ rosrun baxter_interface joint_trajectory_action_server.py
 ```
