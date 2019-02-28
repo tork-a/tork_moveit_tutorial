@@ -8,7 +8,13 @@ import pyassimp
 import sys, math, copy
 import rospy, tf, geometry_msgs.msg
 
-from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
+from distutils.version import LooseVersion
+import python_qt_binding
+if LooseVersion(python_qt_binding.QT_BINDING_VERSION).version[0] >= 5:
+    from python_qt_binding.QtWidgets import QApplication, QMessageBox
+else:
+    from python_qt_binding.QtGui import QApplication, QMessageBox
+
 from moveit_commander import MoveGroupCommander, RobotCommander
 from geometry_msgs.msg import Pose, PoseStamped
 
