@@ -41,12 +41,14 @@ test:
     - sudo apt-get install -y -q doxygen pandoc python-catkin-sphinx
     - sudo apt-get install -y -q texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
     - sudo apt-get install -y -q texlive-lang-cjk
+    - sudo apt-get install -y -q gpp
     ##
     ## not sure why but we need this hack only for 14.04
     - sudo sed -i 's@role(name@role("download"@' /usr/local/lib/python2.7/dist-packages/recommonmark/states.py
     - sudo sed -i 's@str(content)@content@' /usr/local/lib/python2.7/dist-packages/recommonmark/states.py
     ##
-    - . /opt/ros/$ROS_DISTRO/setup.bash && cd ~/catkin_ws && catkin_make --pkg $CIRCLE_PROJECT_REPONAME --make-args docbuild_$CIRCLE_PROJECT_REPONAME
+    - . /opt/ros/$ROS_DISTRO/setup.bash && cd ~/catkin_ws && catkin_make --pkg $CIRCLE_PROJECT_REPONAME --make-args docbuild_${CIRCLE_PROJECT_REPONAME}_indigo
+    - . /opt/ros/$ROS_DISTRO/setup.bash && cd ~/catkin_ws && catkin_make --pkg $CIRCLE_PROJECT_REPONAME --make-args docbuild_${CIRCLE_PROJECT_REPONAME}_kinetic
     - find -L ~/catkin_ws/ -iname '*.pdf' -exec cp {} $CIRCLE_ARTIFACTS \;
     ## deb build
     - docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:indigo-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python-bloom debhelper; cd src; bloom-generate rosdebian --os-name ubuntu --os-version trusty --ros-distro indigo; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
