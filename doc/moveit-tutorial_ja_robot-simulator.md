@@ -39,12 +39,17 @@
 また，システム構成は次のとおりです．
 
 <$ifeq <$ROS_DISTRO>|indigo>
+
 - Ubuntu 14.04
 - ROS Indigo
+
 <$endif>
+
 <$ifeq <$ROS_DISTRO>|kinetic>
+
 - Ubuntu 16.04
 - ROS Kinetic
+
 <$endif>
 
 
