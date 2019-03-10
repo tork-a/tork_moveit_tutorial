@@ -858,7 +858,7 @@ Gazebo シミュレータを起動します．
 
 **ターミナル-1**
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch nextage_gazebo nextage_world.launch
 ```
 
@@ -868,7 +868,7 @@ ARマーカ認識プログラムを起動します．2つ目のターミナル�
 
 **ターミナル-2**
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch nextage_ros_bridge ar_headcamera.launch sim:=true
 ```
 
@@ -881,7 +881,7 @@ $ roslaunch nextage_ros_bridge ar_headcamera.launch sim:=true
 
 **ターミナル-3**
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch nextage_moveit_config moveit_planning_execution.launch
 ```
 
@@ -904,7 +904,7 @@ RViz の設定ファイルを読み込みます．
 
 **ターミナル-4**
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_ar.py
 ```
 

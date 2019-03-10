@@ -31,7 +31,7 @@ MoveIt! は GUI での操作を提供していますが，それだけではな�
 MoveIt! Commander のプログラミングインタフェースには Python や C++ があります．
 
 - MoveIt! : [http://moveit.ros.org/](http://moveit.ros.org/)
-- MoveIt! Tutorials : [http://docs.ros.org/indigo/api/moveit_tutorials/html/](http://docs.ros.org/indigo/api/moveit_tutorials/html/)
+- MoveIt! Tutorials : [http://docs.ros.org/<$ROS_DISTRO>/api/moveit_tutorials/html/](http://docs.ros.org/<$ROS_DISTRO>/api/moveit_tutorials/html/)
 
 
 ## チュートリアルの構成
