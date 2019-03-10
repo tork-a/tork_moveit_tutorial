@@ -1,7 +1,7 @@
 
 # ロボットシミュレータを使う
 
-シミュレータ上のロボットを動かしてみます．<br>
+シミュレータ上のロボットを動かしてみます．  
 本チュートリアルでは下記のロボットのシミュレータの利用方法を紹介します．
 
 - NEXTAGE OPEN
@@ -35,7 +35,7 @@
   - Baxter ソフトウェア
   - MINAS TRA1 ソフトウェア
 
-ロボットソフトウェアは全てインストールしても，どれか1つでも大丈夫です．<br>
+ロボットソフトウェアは全てインストールしても，どれか1つでも大丈夫です．  
 また，システム構成は次のとおりです．
 
 <$ifeq <$ROS_DISTRO>|indigo>
@@ -60,12 +60,32 @@
 します．
 既に ROS がインストールされていれば，次のチュートリアルパッケージのインストールに進んでください．
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ```
 $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list'
 $ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key0xB01FA116
 $ sudo apt-get update
-$ sudo apt-get install ros-<$ROS_DISTRO>-desktop-full
+$ sudo apt-get install ros-indigo-desktop-full
 ```
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+```
+$ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+sudo apt-get update
+sudo apt-get install ros-kinetic-desktop-full
+```
+
+<$endif>
+
+- 参考 :
+  - [Ubuntu install of ROS <$ROS_DISTRO>](http://wiki.ros.org/<$ROS_DISTRO>/Installation/Ubuntu)
+  - [ROS <$ROS_DISTRO> の Ubuntu へのインストール](http://wiki.ros.org/ja/<$ROS_DISTRO>/Installation/Ubuntu)
+
 
 ### チュートリアルパッケージのインストール
 
@@ -92,6 +112,8 @@ $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-rtmros-nextage r
 ターミナルから次のコマンドを実行して
 Baxter Research Robot のソフトウェアをインストールします．
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ```
 $ sudo apt-get update
 $ sudo apt-get install git-core python-argparse python-wstool python-vcstools python-rosdep ros-<$ROS_DISTRO>-control-msgs ros-<$ROS_DISTRO>-joystick-drivers
@@ -102,7 +124,22 @@ $ sudo apt-get install ros-<$ROS_DISTRO>-baxter-simulator
 
 　インストール方法については以下の公式ページにも説明があるので参照ください．このページから該当部分をコピーペーストすると上記のコマンドを打たなくても良くなります．
  - [http://sdk.rethinkrobotics.com/wiki/Workstation_Setup](http://sdk.rethinkrobotics.com/wiki/Workstation_Setup)
- - [http://sdk.rethinkrobotics.com/wiki/Simulator_Installation](http://sdk.rethinkrobotics.com/wiki/Simulator_Installation) 
+ - [http://sdk.rethinkrobotics.com/wiki/Simulator_Installation](http://sdk.rethinkrobotics.com/wiki/Simulator_Installation)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+```
+$ sudo apt-get update
+$ sudo apt-get install git-core python-argparse python-wstool python-vcstools python-rosdep ros-kinetic-control-msgs ros-kinetic-joystick-drivers
+$ sudo apt-get install ros-kinetic-baxter-sdk ros-kinetic-baxter-moveit-config
+$ sudo apt-get install gazebo7 ros-kinetic-qt-build ros-kinetic-gazebo-ros-control ros-kinetic-gazebo-ros-pkgs ros-kinetic-ros-control ros-kinetic-control-toolbox ros-kinetic-realtime-tools ros-kinetic-ros-controllers ros-kinetic-xacro python-wstool ros-kinetic-tf-conversions ros-kinetic-kdl-parser
+$ sudo apt-get install ros-kinetic-baxter-simulator
+```
+
+<$endif>
+
 
 ### MINAS TRA1 シミュレータのインストール
 

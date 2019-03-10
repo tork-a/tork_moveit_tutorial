@@ -9,11 +9,12 @@ GUI（グラフィカル・ユーザ・インタフェース）から
 そして発展的に様々なロボット動作プログラミングができるようになること
 を目標としています．
 
-本チュートリアルのPDF形式いのファイル，およびMarkDown形式のソースコー
-ドは以下の場所で公開されています．コマンド等の文字列は，ここからコピー
-＆ペーストすると便利です．
+本チュートリアルの PDF 形式のファイル，および Markdown 形式のソースコードは
+以下の場所で公開されています．
+コマンド等の文字列は，ここからコピー＆ペーストすると便利です．
 
 - tork-a/tork_moveit_tutorial : [https://github.com/tork-a/tork_moveit_tutorial](https://github.com/tork-a/tork_moveit_tutorial)
+
 
 ## ROS と MoveIt!
 
