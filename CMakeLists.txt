@@ -45,7 +45,7 @@ macro(build_doc _rosdistro)
   #COMMAND cmake -E chdir output sh -c 'ls *.png | xargs extractbb'
   COMMAND cd output \\; ls *.png | xargs extractbb
   COMMAND sed -i 's@\\\\setcounter{tocdepth}{0}@@' output/${PROJECT_NAME}.tex
-  COMMAND sed -i 's@\\\\end{document}@\\\\newpage\\\\input{../doc/cc.tex}\\\\end{document}@' output/${PROJECT_NAME}.tex
+  COMMAND sed -i 's@\\\\end{document}@\\\\newpage\\\\fancyfoot{}\\\\input{../doc/cc.tex}\\\\end{document}@' output/${PROJECT_NAME}.tex
   COMMAND cmake -E chdir output platex ${PROJECT_NAME}.tex
   COMMAND cmake -E chdir output platex ${PROJECT_NAME}.tex
   COMMAND cmake -E chdir output dvipdfmx ${PROJECT_NAME}
