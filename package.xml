@@ -10,6 +10,7 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   
+  <run_depend>gazebo_ros</run_depend>
   <run_depend>moveit_commander</run_depend>
   <run_depend>moveit_ros_planning</run_depend>
   <run_depend>moveit_ros_planning_interface</run_depend>
@@ -19,5 +20,5 @@
   
   <export>
   </export>
-  
+
 </package>

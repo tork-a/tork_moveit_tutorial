@@ -8,7 +8,13 @@ import pyassimp
 import sys, math, copy
 import rospy, tf, geometry_msgs.msg
 
-from PyQt4 import QtGui
+from distutils.version import LooseVersion
+import python_qt_binding
+if LooseVersion(python_qt_binding.QT_BINDING_VERSION).version[0] >= 5:
+    from python_qt_binding.QtWidgets import QApplication, QMessageBox
+else:
+    from python_qt_binding.QtGui import QApplication, QMessageBox
+
 from moveit_commander import MoveGroupCommander, RobotCommander
 from geometry_msgs.msg import Pose, PoseStamped
 
@@ -22,7 +28,7 @@ def init_node( node_name = "commander_example" ):
     '''
     
     global qtapp
-    qtapp = QtGui.QApplication(sys.argv)
+    qtapp = QApplication(sys.argv)
     rospy.init_node( node_name, anonymous=True )
     
     robot = RobotCommander()
@@ -48,7 +54,7 @@ def question_yn( qmsg='Message', title='Question' ):
     @return : Return when 'Yes' is chosen.
     '''
     
-    msgbox = QtGui.QMessageBox()
+    msgbox = QMessageBox()
     result = msgbox.question( msgbox, title, qmsg, msgbox.Yes | msgbox.No, msgbox.No )
     
     if result == msgbox.Yes:
