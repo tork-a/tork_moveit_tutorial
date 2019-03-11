@@ -591,7 +591,7 @@
   - `joints` - bool, JointState, Pose : グループの動作目標
 	  （ bool の場合は wait に代入 )
 		 / デフォルト None
-	- `wait` - bool : 動作の終了をまつか否か / デフォルト True
+	- `wait` - bool : 動作の終了を待つか否か / デフォルト True
 - 戻り値
   - MoveItErroeCode : MoveIt! エラーコード
 
@@ -948,7 +948,7 @@
   - なし
 
 ---
-#### def def name(self):
+#### def name(self):
 
 - 機能
   - リンク名の取得
@@ -1109,7 +1109,7 @@
 
 - 機能
   - 箱オブジェクトをロボットリンクに接続
-    - 指定があれば箱ブジェクトを作成
+    - 指定があれば箱オブジェクトを作成
 - 引数
   - `link` - str : 接続するロボットリンク名
   - `name` - str : 接続するオブジェクトの名前

@@ -460,7 +460,9 @@ Out[95]: True
 ```python
 In [96]: exit
 ```
+
 <$ifeq <$ROS_DISTRO>|indigo>
+
 - 注意: Indigoでは
 ```
 terminate called after throwing an instance of 'boost::exception_detail::clone_impl<boost::exception_detail::error_info_injector<boost::lock_error> >'
@@ -473,6 +475,7 @@ In [97]: import moveit_commander
 In [98]: moveit_commander.roscpp_shutdown()
 In [99]: moveit_commander.os._exit(0)
 ```
+
 <$endif>
 
 ### 直線補間軌道でロボットを動かす
@@ -588,7 +591,7 @@ $ roslaunch baxter_gazebo baxter_world.launch
 **ターミナル-2**
 ```
 $ source /opt/ros/<$ROS_DISTRO>/setup.bash
-$ rosrun baxtetools enable_robot.py -e
+$ rosrun baxter_tools enable_robot.py -e
 $ rosrun baxter_tools tuck_arms.py -u
 $ rosrun baxter_interface joint_trajectory_action_server.py
 ```

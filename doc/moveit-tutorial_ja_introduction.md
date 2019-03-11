@@ -5,9 +5,15 @@
 GUI（グラフィカル・ユーザ・インタフェース）から
 ロボットやロボットシミュレーションを動かしたことはあるものの
 それをプログラムから動かすことは行ったことがない人が
-プログラミングを初められる，
+プログラミングを始められる，
 そして発展的に様々なロボット動作プログラミングができるようになること
 を目標としています．
+
+本チュートリアルの PDF 形式のファイル，および Markdown 形式のソースコードは
+以下の場所で公開されています．
+コマンド等の文字列は，ここからコピー＆ペーストすると便利です．
+
+- tork-a/tork_moveit_tutorial : [https://github.com/tork-a/tork_moveit_tutorial](https://github.com/tork-a/tork_moveit_tutorial)
 
 
 ## ROS と MoveIt!
@@ -42,8 +48,7 @@ MoveIt! Commander のプログラミングインタフェースには Python や
 - [発展的なロボットプログラミング](moveit-tutorial_ja_robot-python_advanced.md)
 - [トラブルシューティング](moveit-tutorial_ja_trouble-shooting.md)
 - [クラス・関数リファレンス](moveit-tutorial_ja_reference-class-functions.md)
-- [Python チュートリアル - その1](moveit-tutorial_ja_python-basic.md)
-- [Python チュートリアル - その2](moveit-tutorial_ja_python-advanced.md)
+- [Python チュートリアル](moveit-tutorial_ja_python.md)
 
 本チュートリアルのロボットプログラミングではプログラム言語 Python を使いますが，
 Python の知識がなくてもコマンドやプログラムを実行できるように構成されています．

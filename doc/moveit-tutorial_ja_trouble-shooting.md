@@ -84,7 +84,7 @@ tf の同期に問題が出ることはほぼありませんが，
 NTP サーバとの同期をとる作業を数回行ってください．
 
 ```
-$ ntpdate -q <ntp_server_address>
+$ sudo ntpdate -bv <ntp_server_address>
 ```
 
 目安として時間のずれが 10 [msec] 以下になるようにします．
