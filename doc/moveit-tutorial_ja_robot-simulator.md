@@ -38,14 +38,20 @@
 ロボットソフトウェアは全てインストールしても，どれか1つでも大丈夫です．<br>
 また，システム構成は次のとおりです．
 
+<$ifeq <$ROS_DISTRO>|indigo>
 - Ubuntu 14.04
 - ROS Indigo
+<$endif>
+<$ifeq <$ROS_DISTRO>|kinetic>
+- Ubuntu 16.04
+- ROS Kinetic
+<$endif>
 
 
 ### ROS のインストール
 
 ターミナルから次のコマンドを実行して
-[ROS ソフトウェアをインストール](http://wiki.ros.org/indigo/Installation/Ubuntu)
+[ROS ソフトウェアをインストール](http://wiki.ros.org/<$ROS_DISTRO>/Installation/Ubuntu)
 します．
 既に ROS がインストールされていれば，次のチュートリアルパッケージのインストールに進んでください．
 
@@ -53,7 +59,7 @@
 $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list'
 $ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key0xB01FA116
 $ sudo apt-get update
-$ sudo apt-get install ros-indigo-desktop-full
+$ sudo apt-get install ros-<$ROS_DISTRO>-desktop-full
 ```
 
 ### チュートリアルパッケージのインストール
@@ -62,7 +68,7 @@ $ sudo apt-get install ros-indigo-desktop-full
 チュートリアルパッケージのソフトウェアをインストールします．
 
 ```
-$ sudo apt-get install ros-indigo-tork-moveit-tutorial
+$ sudo apt-get install ros-<$ROS_DISTRO>-tork-moveit-tutorial
 ```
 
 
@@ -72,7 +78,7 @@ $ sudo apt-get install ros-indigo-tork-moveit-tutorial
 NEXTAGE OPEN のソフトウェアをインストールします．
 
 ```
-$ sudo apt-get update && sudo apt-get install ros-indigo-rtmros-nextage ros-indigo-rtmros-hironx
+$ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-rtmros-nextage ros-<$ROS_DISTRO>-rtmros-hironx
 ```
 
 
@@ -83,10 +89,10 @@ Baxter Research Robot のソフトウェアをインストールします．
 
 ```
 $ sudo apt-get update
-$ sudo apt-get install git-core python-argparse python-wstool python-vcstools python-rosdep ros-indigo-control-msgs ros-indigo-joystick-drivers
-$ sudo apt-get install ros-indigo-baxter-sdk ros-indigo-baxter-moveit-config
-$ sudo apt-get install gazebo2 ros-indigo-qt-build ros-indigo-driver-common ros-indigo-gazebo-ros-control ros-indigo-gazebo-ros-pkgs ros-indigo-ros-control ros-indigo-control-toolbox ros-indigo-realtime-tools ros-indigo-ros-controllers ros-indigo-xacro python-wstool ros-indigo-tf-conversions ros-indigo-kdl-parser
-$ sudo apt-get install ros-indigo-baxter-simulator
+$ sudo apt-get install git-core python-argparse python-wstool python-vcstools python-rosdep ros-<$ROS_DISTRO>-control-msgs ros-<$ROS_DISTRO>-joystick-drivers
+$ sudo apt-get install ros-<$ROS_DISTRO>-baxter-sdk ros-<$ROS_DISTRO>-baxter-moveit-config
+$ sudo apt-get install gazebo2 ros-<$ROS_DISTRO>-qt-build ros-<$ROS_DISTRO>-driver-common ros-<$ROS_DISTRO>-gazebo-ros-control ros-<$ROS_DISTRO>-gazebo-ros-pkgs ros-<$ROS_DISTRO>-ros-control ros-<$ROS_DISTRO>-control-toolbox ros-<$ROS_DISTRO>-realtime-tools ros-<$ROS_DISTRO>-ros-controllers ros-<$ROS_DISTRO>-xacro python-wstool ros-<$ROS_DISTRO>-tf-conversions ros-<$ROS_DISTRO>-kdl-parser
+$ sudo apt-get install ros-<$ROS_DISTRO>-baxter-simulator
 ```
 
 　インストール方法については以下の公式ページにも説明があるので参照ください．このページから該当部分をコピーペーストすると上記のコマンドを打たなくても良くなります．
@@ -99,7 +105,7 @@ $ sudo apt-get install ros-indigo-baxter-simulator
 MINAS TRA1 のソフトウェアをインストールします．
 
 ```
-$ sudo apt-get update && sudo apt-get install ros-indigo-minas
+$ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-minas
 ```
 
 
@@ -108,7 +114,7 @@ $ sudo apt-get update && sudo apt-get install ros-indigo-minas
 インストールの最後に setup.bash を読み込み，ROS の環境を設定します．
 
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 ```
 
 これは新しくターミナルを立ち上げて ROS を使用する前に毎回必要になります．
@@ -116,13 +122,13 @@ $ source /opt/ros/indigo/setup.bash
 ターミナル起動時に setup.bash を自動で実行し ROS 環境になるようにしておくと便利です．
 
 ```
-$ echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
+$ echo "source /opt/ros/<$ROS_DISTRO>/setup.bash" >> ~/.bashrc
 ```
 
 - 注意: 上記コマンドの `>>` を `>` にしてしまうと元々あった .bashrc 内の設定が消えてしまうので気をつけてください．
 
 .bashrc の設定ができていると以後のターミナルを起動するたびに行う
-`source /opt/ros/indigo/setup.bash` は不要です．
+`source /opt/ros/<$ROS_DISTRO>/setup.bash` は不要です．
 
 
 ## シミュレータと MoveIt! の起動
@@ -137,7 +143,7 @@ NEXTAGE OPEN hrpsys(RTM) シミュレータを起動します．
 ターミナルを開いて次のコマンドを実行してください．
 
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ rtmlaunch nextage_moveit_config nextage_demo.launch
 ```
 
@@ -172,7 +178,7 @@ NEXTAGE OPEN Gazebo シミュレータを起動します．
 
 **ターミナル-1** : Gazebo シミュレータの起動
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch nextage_gazebo nextage_world.launch
 :
 :
@@ -198,7 +204,7 @@ NEXTAGE OPEN ロボットの準備が完了しています．
 
 **ターミナル-2** : MoveIt! の起動
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch nextage_moveit_config moveit_planning_execution.launch
 ```
 
@@ -219,7 +225,7 @@ $ roslaunch nextage_moveit_config moveit_planning_execution.launch
 
 **ターミナル-1** : Baxter シミュレータの起動
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch baxter_gazebo baxter_world.launch  
 ```
 
@@ -242,7 +248,7 @@ $ roslaunch baxter_gazebo baxter_world.launch
 
 **ターミナル-2** : ロボットの準備
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ rosrun baxter_tools enable_robot.py -e
 
 [INFO] [WallTime: 1509004993.657452] [192.385000] Robot Enabled
@@ -271,7 +277,7 @@ Running. Ctrl-c to quit
 
 **ターミナル-3** : MoveIt! の起動
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch baxter_moveit_config baxter_grippers.launch
 ```
 
@@ -294,7 +300,7 @@ $ roslaunch baxter_moveit_config baxter_grippers.launch
 
 **ターミナル-1**
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch tra1_bringup tra1_bringup.launch simulation:=true
 ```
 
@@ -302,7 +308,7 @@ $ roslaunch tra1_bringup tra1_bringup.launch simulation:=true
 
 **ターミナル-2**
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch tra1_bringup tra1_moveit.launch
 ```
 

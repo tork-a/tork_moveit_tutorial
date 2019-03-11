@@ -116,18 +116,18 @@ $ env | grep ROS
 正常な場合の出力例
 
 ```
-ROS_ROOT=/opt/ros/indigo/share/ros
-ROS_PACKAGE_PATH=/opt/ros/indigo/share:/opt/ros/indigo/stacks
+ROS_ROOT=/opt/ros/<$ROS_DISTRO>/share/ros
+ROS_PACKAGE_PATH=/opt/ros/<$ROS_DISTRO>/share:/opt/ros/<$ROS_DISTRO>/stacks
 ROS_MASTER_URI=http://localhost:11311
 ROSLISP_PACKAGE_DIRECTORIES=
-ROS_DISTRO=indigo
-ROS_ETC_DIR=/opt/ros/indigo/etc/ros
+ROS_DISTRO=<$ROS_DISTRO>
+ROS_ETC_DIR=/opt/ros/<$ROS_DISTRO>/etc/ros
 ```
 
 ROS の環境設定に問題がある場合は設定し直します．
 
 ```
-$ source /opt/ros/indigo/setup.bash
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
 ```
 
 #### 【対策】全ての ROS ノードを終了して再起動
