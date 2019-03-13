@@ -2,8 +2,8 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.6 (2019-03-13)
+------------------
 * Enable to run both indigo and kinetic (`#27 <https://github.com/tork-a/tork_moveit_tutorial/issues/27>`_)
 
   * mod for PyQt4/PyQt5 compatible codes
