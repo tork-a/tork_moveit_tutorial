@@ -19,7 +19,6 @@
 本文中の `if` 文の条件部分で関数 `question_yn()` を呼び出して
 返ってきた `True`/`False` により「動作の実行」と「スキップ」の分岐を行っています．
 
-<!-- 要確認 : tork_moveit_tutorial -->
 ```
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_ifqyn.py
 ```
@@ -86,7 +85,6 @@ if __name__ == '__main__':
 `for` 文で動作計画と実行を5回繰り返し，
 繰り返すごとに右腕の目標姿勢のY座標を `step` 変数で指定した長さ横に移動します．
 
-<!-- 要確認 : tork_moveit_tutorial -->
 ```
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_for.py
 ```
@@ -251,7 +249,6 @@ rospy.spin()
   - 目標姿勢の位置のY座標が -0.4 [m] よりも小さくなったら 0.0 [m] を代入
   - `rate.sleep()` で次のタイミングが来るまで休止
 
-<!-- 要確認 : tork_moveit_tutorial -->
 ```
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_rate.py
 ```
@@ -332,7 +329,6 @@ group = MoveGroupCommander("left_arm")     # 変更後（左腕）
 右腕のターゲット姿勢のままでは左腕の動作にはきつくなるので
 ターゲット位置のY座標の正負（左右）を反転しています．
 
-<!-- 要確認 : tork_moveit_tutorial -->
 ```
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_left_arm.py
 ```
@@ -398,7 +394,6 @@ if __name__ == '__main__':
 下の出力例は NEXTAGE OPEN の場合のもので `right_arm` や `left_arm` の他に
 `botharms` や `head` , `torso` などがあるのが分かります．
 
-<!-- 要確認 : tork_moveit_tutorial -->
 ```
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_left_arm.py
 [ INFO] [1511612715.981903861]: Loading robot model 'NextageOpen'...
@@ -448,7 +443,6 @@ group.go()
 
 両腕を同時に動作させるプログラム例を下に示します．
 
-<!-- 要確認 : tork_moveit_tutorial -->
 ```
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_ifqyn.py
 ```
@@ -743,7 +737,6 @@ ROS の **tf** は常にこれらのフレームを追跡・記憶して
 `get_current_target_pose()` で取得します．
 取得したターゲット姿勢のZ座標を 0.4 [m] 高くして動作計画をして実行しています．
 
-<!-- 要確認 : tork_moveit_tutorial -->
 ```
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_tf.py
 ```
@@ -1183,7 +1176,6 @@ scene.add_box( 'box_object', box_pose, ( 0.3, 0.1, 0.5 ) )
 - 設置する障害物の位置・姿勢を `PoseStamped` 型で定義
 - `scene` の `add_box()` で動作計画空間に「箱」を設置
 
-<!-- 要確認 : tork_moveit_tutorial -->
 ```
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_object.py
 ```
@@ -1327,7 +1319,6 @@ if result_p:
     result_o = group.go()
 ```
 
-<!-- 要確認 : tork_moveit_tutorial -->
 ```
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_object_constraint.py
 ```
