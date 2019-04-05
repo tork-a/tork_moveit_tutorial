@@ -589,11 +589,30 @@ if __name__ == '__main__':
 `get_current_pose()` を利用して
 `initial_pose = group.get_current_pose()` として姿勢の取得をしています．
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![Nextage - Gazebo / Poses Relative](images/nextage_gazebo_poses_relative.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![Nextage - Gazebo / Poses Relative](images/kinetic/nextage_gazebo_poses_relative.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|indigo>
 
 ![Nextage - MoveIt! / Poses Relative](images/nextage_moveit_poses_relative.png)
 
-<!-- 要確認 : tork_moveit_tutorial -->
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![Nextage - MoveIt! / Poses Relative](images/kinetic/nextage_moveit_poses_relative.png)
+
+<$endif>
+
 ```
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_relative.py
 ```
@@ -875,7 +894,17 @@ $ roslaunch nextage_ros_bridge ar_headcamera.launch sim:=true
 `roslaunch nextage_ros_bridge ar_headcamera.launch sim:=true`
 が正常に起動すると Gazebo は次のような状態になります．
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![Nextage - Gazebo / AR Marker Preparation](images/nextage_gazebo_armarker_prepare.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![Nextage - Gazebo / AR Marker Preparation](images/kinetic/nextage_gazebo_armarker_prepare.png)
+
+<$endif>
 
 次に MoveIt! を起動します．
 
@@ -890,15 +919,46 @@ RViz の設定ファイルを読み込みます．
 
 画面左上の File から Open Config をクリックします．
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![MoveIt! - Open Config](images/nextage_moveit_openconfig.png)
 
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![MoveIt! - Open Config](images/kinetic/nextage_moveit_openconfig.png)
+
+<$endif>
+
 設定ファイル moveit_armarker.rviz を選択して開きます．
+`/opt/ros/<$ROS_DISTRO>/share/nextage_moveit_config/launch/moveit_armarker.rviz`
+
+<$ifeq <$ROS_DISTRO>|indigo>
 
 ![MoveIt! - Choose moveit_armarker.rviz](images/nextage_moveit_openconfig_armarker.png)
 
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![MoveIt! - Choose moveit_armarker.rviz](images/kinetic/nextage_moveit_openconfig_armarker.png)
+
+<$endif>
+
 設定ファイルが読み込まれると MoveIt! は次のように表示されます．
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![Nextage - MoveIt! / AR Marker Config Prepared](images/nextage_moveit_armarker_prepare.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![Nextage - MoveIt! / AR Marker Config Prepared](images/kinetic/nextage_moveit_armarker_prepare.png)
+
+<$endif>
 
 準備が整いましたので ARマーカ の上に右手を動かすプログラムを実行します．
 
@@ -911,9 +971,29 @@ $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_ar.py
 正常にこのプログラムが動作すると
 次の画像のように ARマーカ の上に右手が位置していると思います．
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![Nextage - Gazebo / AR Marker Done](images/nextage_gazebo_armarker_done.png)
 
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![Nextage - Gazebo / AR Marker Done](images/kinetic/nextage_gazebo_armarker_done.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![Nextage - MoveIt! / AR Marker Done](images/nextage_moveit_armarker_done.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![Nextage - MoveIt! / AR Marker Done](images/kinetic/nextage_moveit_armarker_done.png)
+
+<$endif>
 
 この ARマーカ の上に右手を動かすプログラムは下記のようになっています．
 その主要な部分について続いて説明します．
@@ -1065,7 +1145,17 @@ rospy.loginfo( "Executed ... {}".format( ret ) )
 障害物が無い場合の動作計画と全く同じ手順で
 MoveIt! が自動で障害物を回避する動作計画を作成します．
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![MoveIt! - Add Object and Plan](images/nextage_moveit_add-object_plan.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![MoveIt! - Add Object and Plan](images/kinetic/nextage_moveit_add-object_plan.png)
+
+<$endif>
 
 動作計画空間への障害物を設置して回避動作計画をするプログラムを下方に掲載します．
 そのうち動作計画空間への障害物を設置する部分は次の箇所です．
