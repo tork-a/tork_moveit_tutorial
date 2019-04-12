@@ -517,7 +517,6 @@ $ roslaunch nextage_moveit_config moveit_planning_execution.launch
 
 動作プログラムファイルを実行します．
 
-<!-- パッケージ名を実際のものと要整合 tork_moveit_tutorial -->
 **ターミナル-3**
 ```
 $ source /opt/ros/<$ROS_DISTRO>/setup.bash
@@ -604,7 +603,6 @@ $ roslaunch baxter_moveit_config baxter_grippers.launch
 
 動作プログラムファイルを実行します．
 
-<!-- パッケージ名を実際のものと要整合 tork_moveit_tutorial -->
 **ターミナル-4**
 ```
 $ source /opt/ros/<$ROS_DISTRO>/setup.bash
@@ -679,7 +677,6 @@ $ roslaunch tra1_bringup tra1_moveit.launch
 
 動作プログラムファイルを実行します．
 
-<!-- パッケージ名を実際のものと要整合 tork_moveit_tutorial -->
 **ターミナル-3**
 ```
 $ source /opt/ros/<$ROS_DISTRO>/setup.bash

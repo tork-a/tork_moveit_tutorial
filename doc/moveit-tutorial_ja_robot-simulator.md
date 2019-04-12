@@ -196,7 +196,17 @@ $ rtmlaunch nextage_moveit_config nextage_demo.launch
 - MoveIt! / RViz
 - Hironx Dashboard (Command Panel for Hironx / NEXTAGE Open)
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![NextageROS_Demo - Starts](images/nextageros-demo_starts.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![NextageROS_Demo - Starts](images/kinetic/nextage_moveit-demo_starts.png)
+
+<$endif>
 
 これで MoveIt! の動作計画機能が利用できる状態になっています．
 
@@ -232,7 +242,17 @@ log file: /home/robotuser/.ros/log/5d4ac8aa-baeb-11e7-af06-001c4284b313/go_initi
 Gazebo が起動して上記のターミナルの出力が得られたら Gazebo シミュレータ内の
 NEXTAGE OPEN ロボットの準備が完了しています．
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![NEXTAGE - Gazebo Starts](images/nextage_gazebo-starts.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![NEXTAGE - Gazebo Starts](images/kinetic/nextage_gazebo-starts.png)
+
+<$endif>
 
 - 注意: 最初にgazeboを立ち上げる際にはモデルデータをダウンロードするために
   以下のようにWarningやErrorが表示され数秒から数分の時間がかかる場合が有ります．
@@ -249,8 +269,17 @@ NEXTAGE OPEN ロボットの準備が完了しています．
 $ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch nextage_moveit_config moveit_planning_execution.launch
 ```
+<$ifeq <$ROS_DISTRO>|indigo>
 
 ![NEXTAGE - MoveIt! Starts](images/nextage_moveit-starts.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![NEXTAGE - MoveIt! Starts](images/kinetic/nextage_moveit-starts.png)
+
+<$endif>
 
 これで MoveIt! の動作計画機能が利用できる状態になっています．
 
@@ -271,7 +300,17 @@ $ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch baxter_gazebo baxter_world.launch  
 ```
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![Baxter Simulator - Starts](images/baxter-simulator_starts.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![Baxter Simulator - Starts](images/kinetic/baxter-simulator_starts.png)
+
+<$endif>
 
 しばらくすると次のようなメッセージが **ターミナル-1** に表示されます．
 
@@ -309,7 +348,17 @@ Initializing joint trajectory action server...
 Running. Ctrl-c to quit
 ```
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![Baxter Simulator - Ready for MoveIt!](images/baxter-simulator_ready-for-moveit.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![Baxter Simulator - Ready for MoveIt!](images/kinetic/baxter-simulator_ready-for-moveit.png)
+
+<$endif>
 
 これでロボットの準備は終了です．
 
@@ -323,7 +372,17 @@ $ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch baxter_moveit_config baxter_grippers.launch
 ```
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![Baxter MoveIt! - Starts](images/baxter-moveIt_starts.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![Baxter MoveIt! - Starts](images/kinetic/baxter-moveit_starts.png)
+
+<$endif>
 
 これで MoveIt! の動作計画機能が利用できる状態になっています．
 
@@ -354,7 +413,17 @@ $ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch tra1_bringup tra1_moveit.launch
 ```
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![MINAS TRA1 - MoveIt! Starts](images/minas-tra1_moveit_starts.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![MINAS TRA1 - MoveIt! Starts](images/kinetic/minas-tra1_moveit_starts.png)
+
+<$endif>
 
 シミュレータを終了するには各ターミナルで Ctrl-C を入力してください．
 
@@ -377,7 +446,17 @@ MoveIt! が動作計画を行い，シミュレータのロボットが動作し
 
 動作計画だけを行いたい場合は `Plan` ボタンをクリックします．
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ![MoveIt! - RViz Plan and Execute](images/nextage_moveit_plan-execute.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+![MoveIt! - RViz Plan and Execute](images/kinetic/nextage_moveit_plan-execute.png)
+
+<$endif>
 
 このように MoveIt! の GUI 上で
 InteractiveMarker を動かして目標値を設定し，動作計画を行い実行する
