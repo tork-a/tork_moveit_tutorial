@@ -736,9 +736,89 @@ NEXTAGE OPEN や Baxter Research Robot
 - ターゲットポーズの位置・姿勢を MINAS TRA1 の機構に適したものに変更
 
 
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+### KHI duaro の場合
+
+**ターミナル-1**
+```
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
+$ roslaunch khi_duaro_gazebo duaro_world.launch
+```
+
+**ターミナル-2**
+```
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
+$ roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
+```
+
+動作プログラムファイルを実行します．
+
+**ターミナル-3**
+```
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
+$ rosrun tork_moveit_tutorial duaro_moveit_tutorial_poses.py
+```
+
+**tra1_moveit_tutorial_poses.py**
+
+```python
+#!/usr/bin/env python
+
+from tork_moveit_tutorial import *
+
+
+if __name__ == '__main__':
+
+    init_node()
+
+    group = MoveGroupCommander("upper_arm")
+
+    # Pose Target 1
+    rospy.loginfo( "Start Pose Target 1")
+    pose_target_1 = Pose()
+
+    pose_target_1.position.x =  0.0
+    pose_target_1.position.y =  0.55
+    pose_target_1.position.z =  1.0
+    pose_target_1.orientation.x =  0.0
+    pose_target_1.orientation.y =  0.0
+    pose_target_1.orientation.z =  0.0
+    pose_target_1.orientation.w =  0.0
+
+    rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_1 ) )
+    group.set_pose_target( pose_target_1 )
+    group.go()
+
+    # Pose Target 2
+    rospy.loginfo( "Start Pose Target 2")
+    pose_target_2 = Pose()
+
+    pose_target_2.position.x = -0.55
+    pose_target_2.position.y = -0.0
+    pose_target_2.position.z =  1.05
+    pose_target_2.orientation.x =  0.0
+    pose_target_2.orientation.y =  0.0
+    pose_target_2.orientation.z =  0.707
+    pose_target_2.orientation.w =  0.707
+
+    rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_2 ) )
+    group.set_pose_target( pose_target_2 )
+    group.go()
+
+```
+
+他のロボットの動作計画・動作の実行ファイルとの相違点は次のとおりです．
+
+- `group = MoveGroupCommander()` に渡すグループ名を `"upper_arm"` に変更
+- ターゲットポーズの位置・姿勢を KHI duaro の機構に適したものに変更
+
+<$endif>
+
+
 ### ROS や MoveIt! のメリット
 
-NEXTAGE OPEN や Baxter Research Robot，MINAS TRA1
+NEXTAGE OPEN や Baxter Research Robot，MINAS TRA1，KHI duaro
 の動作計画・動作プログラムの相違点を見ると下記の2ヶ所だけが
 各ロボットに対応しただけだということが分かります．
 

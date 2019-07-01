@@ -4,22 +4,51 @@
 シミュレータ上のロボットを動かしてみます．  
 本チュートリアルでは下記のロボットのシミュレータの利用方法を紹介します．
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 - NEXTAGE OPEN
 - Baxter Research Robot
 - MINAS TRA1
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+- NEXTAGE OPEN
+- Baxter Research Robot
+- MINAS TRA1
+- KHI duaro
+
+<$endif>
 
 
 ## シミュレータの種類
 
 本チュートリアルで扱うシミュレータには次のような種類があります．
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 - ROS のシミュレータ
-  - NEXTAGE OPEN / Baxter Research Robot / MINAS
+  - NEXTAGE OPEN / Baxter Research Robot / MINAS TRA1
     - MoveIt! シミュレータ : 運動学のみの動作計画シミュレータ
     - Gazebo シミュレータ : 動力学を含む環境・物理シミュレータ
 - hrpsys(RTM) シミュレータ
   - NEXTAGE OPEN のみ
     - 動力学を含む物理シミュレータ
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+- ROS のシミュレータ
+  - NEXTAGE OPEN / Baxter Research Robot / MINAS TRA1 / KHI duaro
+    - MoveIt! シミュレータ : 運動学のみの動作計画シミュレータ
+    - Gazebo シミュレータ : 動力学を含む環境・物理シミュレータ
+- hrpsys(RTM) シミュレータ
+  - NEXTAGE OPEN のみ
+    - 動力学を含む物理シミュレータ
+
+<$endif>
 
 本チュートリアルではどのシミュレータを使っても最終的には
 動作計画ソフトウェアの MoveIt! を起動してその動作計画機能を利用します．
@@ -29,13 +58,31 @@
 
 次のソフトウェアのインストールをします．
 
+<$ifeq <$ROS_DISTRO>|kinetic>
+
 - ROS とチュートリアルパッケージ
 - ロボットソフトウェア
   - NEXTAGE OPEN ソフトウェア
   - Baxter ソフトウェア
   - MINAS TRA1 ソフトウェア
 
-ロボットソフトウェアは全てインストールしても，どれか1つでも大丈夫です．  
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+- ROS とチュートリアルパッケージ
+- ロボットソフトウェア
+  - NEXTAGE OPEN ソフトウェア
+  - Baxter ソフトウェア
+  - MINAS TRA1 ソフトウェア
+  - KHI duaro ソフトウェア
+
+<$endif>
+
+各ロボットソフトウェアは全てインストールしても，どれか1つでも大丈夫ですが，
+本チュートリアルは NEXTAGE OPEN を中心的な例として記述していますので
+少なくとも NEXTAGE OPEN ソフトウェアのインストールは推奨します．
+
 また，システム構成は次のとおりです．
 
 <$ifeq <$ROS_DISTRO>|indigo>
@@ -141,7 +188,7 @@ $ sudo apt-get install ros-kinetic-baxter-simulator
 <$endif>
 
 
-### MINAS TRA1 シミュレータのインストール
+### MINAS TRA1 ソフトウェアのインストール
 
 ターミナルから次のコマンドを実行して
 MINAS TRA1 のソフトウェアをインストールします．
@@ -149,6 +196,20 @@ MINAS TRA1 のソフトウェアをインストールします．
 ```
 $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-minas
 ```
+
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+### KHI duaro ソフトウェアのインストール
+
+ターミナルから次のコマンドを実行して
+MINAS TRA1 のソフトウェアをインストールします．
+
+```
+$ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-khi-duaro-gazebo ros-<$ROS_DISTRO>-khi-duaro-description ros-<$ROS_DISTRO>-khi-duaro-ikfast-plugin ros-<$ROS_DISTRO>-khi-duaro-moveit-config
+```
+
+<$endif>
 
 
 ### インストールの最後に
@@ -426,6 +487,56 @@ $ roslaunch tra1_bringup tra1_moveit.launch
 <$endif>
 
 シミュレータを終了するには各ターミナルで Ctrl-C を入力してください．
+
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+### KHI duaro - Gazebo シミュレータ
+
+#### Gazebo シミュレータの起動
+
+ターミナルを2つ開きます．
+
+**ターミナル-1** : KHI duaro Gazebo シミュレータの起動
+```
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
+$ roslaunch khi_duaro_gazebo duaro_world.launch  
+```
+
+![duaro Simulator - Starts](images/kinetic/duaro-simulator_starts.png)
+
+しばらくすると次のようなメッセージが **ターミナル-1** に表示されます．
+
+```
+[INFO] [1557303124.764122, 0.426000]: Started controllers: joint_state_controller, duaro_lower_arm_controller, duaro_upper_arm_controller
+[go_initial-8] process has finished cleanly
+log file: /home/robotuser/.ros/log/f5391a42-7168-11e9-931c-1c1bb5f26084/go_initial-8*.log
+```
+
+これで Gazebo シミュレータの準備は終了です．
+
+
+#### MoveIt! の起動
+
+2つ目のターミナルで次のコマンドを実行して MoveIt! を起動します．
+
+**ターミナル-2** : MoveIt! の起動
+```
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
+$ roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
+```
+
+![duaro MoveIt! - Starts](images/kinetic/duaro-moveit_starts.png)
+
+これで MoveIt! の動作計画機能が利用できる状態になっています．
+
+
+#### シミュレータの終了
+
+シミュレータでの作業が終わりましたら
+全てのターミナルで Ctrl-C を入力することでシミュレータを終了します．
+
+<$endif>
 
 
 ### MoveIt! GUI での動作計画
