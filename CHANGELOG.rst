@@ -2,8 +2,8 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.7 (2019-07-01)
+------------------
 * add KHI duaro tutorial (ROS Kinetic only) (`#34 <https://github.com/tork-a/tork_moveit_tutorial/issues/34>`_)
 * Add kinetic images (`#30 <https://github.com/tork-a/tork_moveit_tutorial/issues/30>`_)
 
