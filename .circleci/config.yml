@@ -15,7 +15,7 @@ commands:
             apt install -y --force-yes -q -qq dpkg # https://github.com/travis-ci/travis-ci/issues/9361#issuecomment-408431262 dpkg-deb: error: archive has premature member 'control.tar.xz' before 'control.tar.gz' #9361
             apt install -y -q python-catkin-pkg python-rosdep ros-${ROS_DISTRO}-catkin
             apt install -y -q mongodb # to install ros-i${ROS_DISTRO}-warehouse-ros
-            rosdep init && rosdep update
+            rosdep init && rosdep update --include-eol-distros
             mkdir -p ~/catkin_ws/src
             cd ~/catkin_ws/src && ln -sf ~/project ${CIRCLE_PROJECT_REPONAME}
       - run:
