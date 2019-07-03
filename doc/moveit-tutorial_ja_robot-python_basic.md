@@ -33,6 +33,10 @@ $ rosrun tork_moveit_tutorial demo.py
 ### 特定の関節を動かす
 
 プログラムから関節を動かすなどをするために「右腕」の `group` を作成します．
+次の `In[1]:` 以下につづくプログラムを入力して [Enter/Return] キーを押して
+1行ずつ実行してください．
+
+- 補足 : `In [1]:` の `[ ]` の中の数字はプログラム入力するたびに更新されます．本チュートリアルにある入力例にある数字と一致しない場合がありますがそれは問題ありませんので，そのままチュートリアルを進めてください．
 
 ```python
 In [1]: group = MoveGroupCommander("right_arm")
@@ -579,6 +583,8 @@ nextage_moveit_tutorial_poses.py で実行している内容は
 - `rospy.loginfo()` の表示内容もどの箇所の実行ログかわかるように変更
 
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ### Baxter Research Robot の場合
 
 **ターミナル-1**
@@ -658,6 +664,8 @@ if __name__ == '__main__':
 NEXTAGE OPEN の動作計画・動作の実行ファイルとの相違点は次のとおりです．
 
 - ターゲットポーズの位置・姿勢を Baxter の機構に適したものに変更
+
+<$endif>
 
 
 ### MINAS TRA1 の場合

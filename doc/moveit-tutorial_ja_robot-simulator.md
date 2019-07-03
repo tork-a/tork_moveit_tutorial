@@ -6,18 +6,18 @@
 
 <$ifeq <$ROS_DISTRO>|indigo>
 
-- NEXTAGE OPEN
-- Baxter Research Robot
-- MINAS TRA1
+- NEXTAGE OPEN : 人型双腕ロボット
+- Baxter Research Robot : 人型双腕ロボット
+- MINAS TRA1 : 単腕マニピュレータ
 
 <$endif>
 
 <$ifeq <$ROS_DISTRO>|kinetic>
 
-- NEXTAGE OPEN
-- Baxter Research Robot
-- MINAS TRA1
-- KHI duaro
+- NEXTAGE OPEN : 人型双腕ロボット
+- MINAS TRA1 : 単腕マニピュレータ
+- KHI duaro : スカラ型双腕ロボット
+- Baxter Research Robot : 人型双腕ロボット（「ワークスペースの作成」の章にて）
 
 <$endif>
 
@@ -53,12 +53,27 @@
 本チュートリアルではどのシミュレータを使っても最終的には
 動作計画ソフトウェアの MoveIt! を起動してその動作計画機能を利用します．
 
+また，本チュートリアルの構成として，
+NEXTAGE OPEN の Gazebo シミュレータと MoveIt! の組み合わせを基本として
+各ロボットへの応用を展開する形を採っています．
+
 
 ## ソフトウェアのインストール
 
-次のソフトウェアのインストールをします．
+ソフトウェアのインストールでは主に次のインストール項目があります．
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+- ROS のインストール
+- ロボットシミュレータなどのインストール
+
+次のソフトウェアのインストールをします．
+各ロボットソフトウェアは全てインストールしても，どれか1つでも大丈夫ですが，
+本チュートリアルは NEXTAGE OPEN を中心的な例として記述していますので
+少なくとも NEXTAGE OPEN ソフトウェアのインストールをお願いします．
+
+NEXTAGE OPEN に加えて他のロボットのソフトウェアもインストールすると
+他のロボットへのプログラム応用方法についての理解が進みます．
+
+<$ifeq <$ROS_DISTRO>|indigo>
 
 - ROS とチュートリアルパッケージ
 - ロボットソフトウェア
@@ -73,15 +88,10 @@
 - ROS とチュートリアルパッケージ
 - ロボットソフトウェア
   - NEXTAGE OPEN ソフトウェア
-  - Baxter ソフトウェア
   - MINAS TRA1 ソフトウェア
   - KHI duaro ソフトウェア
 
 <$endif>
-
-各ロボットソフトウェアは全てインストールしても，どれか1つでも大丈夫ですが，
-本チュートリアルは NEXTAGE OPEN を中心的な例として記述していますので
-少なくとも NEXTAGE OPEN ソフトウェアのインストールは推奨します．
 
 また，システム構成は次のとおりです．
 
@@ -99,6 +109,20 @@
 
 <$endif>
 
+> ROS は Ubuntu の各バージョンに対応したものがあります．
+> それぞれに対応した Ubuntu と ROS の組み合わせで利用する必要があります．
+> 
+>  Ubuntu バージョン | ROS バージョン | サポート終了
+>  --- | --- | ---
+>  18.04 (Bionic) | Melodic Morenia| 2023年5月
+>  16.04 (Xenial) | Kinetic Kame | 2021年4月
+>  14.04 (Trusty) | Indigo Igloo | 2019年4月
+> 
+> 詳しくは下記の ROS Wiki で確認してください．
+> 
+> - ROS Wiki - Distributions
+>     - http://wiki.ros.org/Distributions
+
 
 ### ROS のインストール
 
@@ -110,8 +134,8 @@
 <$ifeq <$ROS_DISTRO>|indigo>
 
 ```
-$ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list'
-$ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key0xB01FA116
+$ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+$ sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 $ sudo apt-get update
 $ sudo apt-get install ros-indigo-desktop-full
 ```
@@ -122,7 +146,7 @@ $ sudo apt-get install ros-indigo-desktop-full
 
 ```
 $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+$ sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 sudo apt-get update
 sudo apt-get install ros-kinetic-desktop-full
 ```
@@ -154,12 +178,12 @@ $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-rtmros-nextage r
 ```
 
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ### Baxter ソフトウェアのインストール
 
 ターミナルから次のコマンドを実行して
 Baxter Research Robot のソフトウェアをインストールします．
-
-<$ifeq <$ROS_DISTRO>|indigo>
 
 ```
 $ sudo apt-get update
@@ -169,21 +193,10 @@ $ sudo apt-get install gazebo2 ros-<$ROS_DISTRO>-qt-build ros-<$ROS_DISTRO>-driv
 $ sudo apt-get install ros-<$ROS_DISTRO>-baxter-simulator
 ```
 
-　インストール方法については以下の公式ページにも説明があるので参照ください．このページから該当部分をコピーペーストすると上記のコマンドを打たなくても良くなります．
+インストール方法については以下の公式ページにも説明があるので参照ください．
+
  - [http://sdk.rethinkrobotics.com/wiki/Workstation_Setup](http://sdk.rethinkrobotics.com/wiki/Workstation_Setup)
  - [http://sdk.rethinkrobotics.com/wiki/Simulator_Installation](http://sdk.rethinkrobotics.com/wiki/Simulator_Installation)
-
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|kinetic>
-
-```
-$ sudo apt-get update
-$ sudo apt-get install git-core python-argparse python-wstool python-vcstools python-rosdep ros-kinetic-control-msgs ros-kinetic-joystick-drivers
-$ sudo apt-get install ros-kinetic-baxter-sdk ros-kinetic-baxter-moveit-config
-$ sudo apt-get install gazebo7 ros-kinetic-qt-build ros-kinetic-gazebo-ros-control ros-kinetic-gazebo-ros-pkgs ros-kinetic-ros-control ros-kinetic-control-toolbox ros-kinetic-realtime-tools ros-kinetic-ros-controllers ros-kinetic-xacro python-wstool ros-kinetic-tf-conversions ros-kinetic-kdl-parser
-$ sudo apt-get install ros-kinetic-baxter-simulator
-```
 
 <$endif>
 
@@ -228,7 +241,7 @@ $ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ echo "source /opt/ros/<$ROS_DISTRO>/setup.bash" >> ~/.bashrc
 ```
 
-- 注意: 上記コマンドの `>>` を `>` にしてしまうと元々あった .bashrc 内の設定が消えてしまうので気をつけてください．
+- **注意**: 上記コマンドの `>>` を `>` にしてしまうと元々あった .bashrc 内の設定が消えてしまうので気をつけてください．
 
 .bashrc の設定ができていると以後のターミナルを起動するたびに行う
 `source /opt/ros/<$ROS_DISTRO>/setup.bash` は不要です．
@@ -349,6 +362,8 @@ $ roslaunch nextage_moveit_config moveit_planning_execution.launch
 シミュレータを終了するには各ターミナルで Ctrl-C を入力してください．
 
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 ### Baxter Research Robot - Gazebo シミュレータ
 
 #### Gazebo シミュレータの起動
@@ -361,17 +376,7 @@ $ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch baxter_gazebo baxter_world.launch  
 ```
 
-<$ifeq <$ROS_DISTRO>|indigo>
-
 ![Baxter Simulator - Starts](images/baxter-simulator_starts.png)
-
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|kinetic>
-
-![Baxter Simulator - Starts](images/kinetic/baxter-simulator_starts.png)
-
-<$endif>
 
 しばらくすると次のようなメッセージが **ターミナル-1** に表示されます．
 
@@ -409,17 +414,7 @@ Initializing joint trajectory action server...
 Running. Ctrl-c to quit
 ```
 
-<$ifeq <$ROS_DISTRO>|indigo>
-
 ![Baxter Simulator - Ready for MoveIt!](images/baxter-simulator_ready-for-moveit.png)
-
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|kinetic>
-
-![Baxter Simulator - Ready for MoveIt!](images/kinetic/baxter-simulator_ready-for-moveit.png)
-
-<$endif>
 
 これでロボットの準備は終了です．
 
@@ -433,17 +428,7 @@ $ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch baxter_moveit_config baxter_grippers.launch
 ```
 
-<$ifeq <$ROS_DISTRO>|indigo>
-
 ![Baxter MoveIt! - Starts](images/baxter-moveIt_starts.png)
-
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|kinetic>
-
-![Baxter MoveIt! - Starts](images/kinetic/baxter-moveit_starts.png)
-
-<$endif>
 
 これで MoveIt! の動作計画機能が利用できる状態になっています．
 
@@ -452,6 +437,8 @@ $ roslaunch baxter_moveit_config baxter_grippers.launch
 
 シミュレータでの作業が終わりましたら
 全てのターミナルで Ctrl-C を入力することでシミュレータを終了します．
+
+<$endif>
 
 
 ### MINAS TRA1 - MoveIt! シミュレータ
