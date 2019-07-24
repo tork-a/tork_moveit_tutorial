@@ -270,7 +270,7 @@ $ roslaunch baxter_moveit_config baxter_grippers.launch
 
 ## ユーザ独自プログラム作成と実行
 
-ユーザがプログラムに変更を加えたり
+これまでは
 
 ### チュートリアルソースコードの取得とビルド
 
