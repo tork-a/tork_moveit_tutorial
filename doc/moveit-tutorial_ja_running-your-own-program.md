@@ -670,7 +670,7 @@ $ ls -l | grep baxter
 **ターミナル-4** : 新規作成したロボット動作プログラムファイルの実行
 ```
 $ source ~/catkin_ws/devel/setup.bash
-$ rosrun tork_moveit_tutorial baxter_moveit_tutorial_poses_4.py
+$ rosrun tork_moveit_tutorial baxter_moveit_tutorial_poses_3.py
 ```
 
 `baxter_moveit_tutorial_poses_3.py` が 
