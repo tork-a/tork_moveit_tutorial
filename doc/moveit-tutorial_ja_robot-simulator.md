@@ -153,6 +153,19 @@ sudo apt-get install ros-kinetic-desktop-full
 
 <$endif>
 
+rosdep の初期化を行います．
+
+```
+$ sudo rosdep init
+$ rosdep update
+```
+
+rosinstall をインストールします．
+
+```
+sudo apt-get install python-rosinstall
+```
+
 - 参考 :
   - [Ubuntu install of ROS <$ROS_DISTRO>](http://wiki.ros.org/<$ROS_DISTRO>/Installation/Ubuntu)
   - [ROS <$ROS_DISTRO> の Ubuntu へのインストール](http://wiki.ros.org/ja/<$ROS_DISTRO>/Installation/Ubuntu)

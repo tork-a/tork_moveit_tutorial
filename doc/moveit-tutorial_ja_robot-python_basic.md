@@ -326,7 +326,8 @@ Out[70]: True
 ロボットの複数の異なる姿勢を指示して動作計画と実行を行います．
 
 複数の姿勢を指定した動作計画を行うには `compute_cartesian_path()` を用います．
- `compute_cartesian_path()` には次のものを渡します．
+`compute_cartesian_path( self, waypoints, eef_step, jump_threshold, avoid_collisions = True )` 
+には次のものを渡します．
 
 - `waypoints` : エンドエフェクタが経由する姿勢のリスト
 - `eef_step` : エンドエフェクタの姿勢を計算する間隔の距離
