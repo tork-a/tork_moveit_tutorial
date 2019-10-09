@@ -248,7 +248,10 @@ Out[48]: True
 >         - 短所
 >             - 直感的に分かりにくい
 >     - 比較的理解しやすい Roll/Pitch/Yaw からクォータニオンに変換することも可能
->         - http://wiki.ros.org/tf2/Tutorials/Quaternions
+>         - 3D Rotation Converter
+>             - https://www.andre-gaschler.com/rotationconverter/
+>         - ROS Wiki - Quaternion Basics
+>             - http://wiki.ros.org/tf2/Tutorials/Quaternions
 >     - ロボット以外では航空宇宙や 3D グラフィックスなどの分野で用いられる
 
 更に `Pose` 型を `set_pose_target()` に渡して腕を動かしてみます．
