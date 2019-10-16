@@ -2,6 +2,16 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.7 (2019-07-01)
+------------------
+* add KHI duaro tutorial (ROS Kinetic only) (`#34 <https://github.com/tork-a/tork_moveit_tutorial/issues/34>`_)
+* Add kinetic images (`#30 <https://github.com/tork-a/tork_moveit_tutorial/issues/30>`_)
+
+  * remove html comment lines
+  * add ros kinetic screen capture images
+
+* Contributors: Yosuke Yamamoto
+
 0.0.6 (2019-03-13)
 ------------------
 * Enable to run both indigo and kinetic (`#27 <https://github.com/tork-a/tork_moveit_tutorial/issues/27>`_)
