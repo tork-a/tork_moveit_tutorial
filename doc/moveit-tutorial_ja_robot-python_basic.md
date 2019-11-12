@@ -786,7 +786,7 @@ $ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ rosrun tork_moveit_tutorial duaro_moveit_tutorial_poses.py
 ```
 
-**tra1_moveit_tutorial_poses.py**
+**duaro_moveit_tutorial_poses.py**
 
 ```python
 #!/usr/bin/env python
