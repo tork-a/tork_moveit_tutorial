@@ -338,11 +338,39 @@ Out[70]: True
 にて説明します．
 
 
+### 直線補間軌道でロボットを動かす
+
+`group.plan()` や `group.go()` を用いた動作計画では動作開始姿勢と目標姿勢の間の動作は
+各関節の開始角度と目標角度の間を補間した動作として計画されます．
+このことは開始姿勢や目標姿勢として指定した姿勢以外の動作途中におけるエンドエフェクタの姿勢は
+保証されないことを意味します．
+
+エンドエフェクタを目標姿勢間で直線的に動作させたい場合は
+`group.compute_cartesian_path()` を用いて動作計画をします．
+`compute_cartesian_path()` はその名前のとおり，
+直行座標（=デカルト座標: Cartesian Coordinates）における補間軌道（Path）を作成します．
+
+`group.plan()` や `group.go()` で作成された動作計画（画像:左）と
+`group.compute_cartesian_path()` で作成された動作計画（画像:右）を比較すると
+次のようになります．
+
+![MoveIt! - Trajectory Comparison / compute_cartesian_path()](images/nextage_moveit_cartesian-path_linear-trajectory_comparison.png)
+
+`compute_cartesian_path()` の具体的な使用方法は本項に続く項目の
+
+- 連続した指令をロボットに送る
+- 四角形や円に沿ってエンドエフェクタを動かす
+
+を通して学習します．
+
+
 ### 連続した指令をロボットに送る
 
 ロボットの複数の異なる姿勢を指示して動作計画と実行を行います．
 
-複数の姿勢を指定した動作計画を行うには `compute_cartesian_path()` を用います．
+複数の姿勢を指定した動作計画を行う場合も直線補間軌道でロボットを動かす場合と同じ 
+`compute_cartesian_path()` を用います．
+
 `compute_cartesian_path( self, waypoints, eef_step, jump_threshold, avoid_collisions = True )` 
 には次のものを渡します．
 
@@ -499,18 +527,6 @@ In [99]: moveit_commander.os._exit(0)
 ```
 
 <$endif>
-
-### 直線補間軌道でロボットを動かす
-
-目標姿勢間を直線的に動作させたい場合も
-`group.compute_cartesian_path()` で動作計画をすると
-パラメータに従って直線補間軌道が作成されます．
-
-`group.plan()` や `group.go()` で作成された動作計画（画像:左）と
-`group.compute_cartesian_path()` で作成された動作計画（画像:右）を比較すると
-次のようになります．
-
-![MoveIt! - Trajectory Comparison / compute_cartesian_path()](images/nextage_moveit_cartesian-path_linear-trajectory_comparison.png)
 
 
 ## プログラムファイルを実行する
@@ -755,8 +771,7 @@ if __name__ == '__main__':
 
 ```
 
-NEXTAGE OPEN や Baxter Research Robot
-の動作計画・動作の実行ファイルとの相違点は次のとおりです．
+他のロボットの動作計画・動作の実行ファイルとの相違点は次のとおりです．
 
 - `group = MoveGroupCommander()` に渡すグループ名を `"manipulator"` に変更
 - ターゲットポーズの位置・姿勢を MINAS TRA1 の機構に適したものに変更
@@ -844,9 +859,21 @@ if __name__ == '__main__':
 
 ### ROS や MoveIt! のメリット
 
-NEXTAGE OPEN や Baxter Research Robot，MINAS TRA1，KHI duaro
+<$ifeq <$ROS_DISTRO>|indigo>
+
+NEXTAGE OPEN や Baxter Research Robot, MINAS TRA1
 の動作計画・動作プログラムの相違点を見ると下記の2ヶ所だけが
 各ロボットに対応しただけだということが分かります．
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+NEXTAGE OPEN や MINAS TRA1，KHI duaro
+の動作計画・動作プログラムの相違点を見ると下記の2ヶ所だけが
+各ロボットに対応しただけだということが分かります．
+
+<$endif>
 
 - group = MoveGroupCommander() に渡すグループ名を各ロボットアームに対応したものにする
 - ターゲットポーズの位置・姿勢を各ロボットの機構に適したものにする
