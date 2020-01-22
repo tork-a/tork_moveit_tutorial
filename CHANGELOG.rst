@@ -2,8 +2,8 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.8 (2020-01-22)
+------------------
 * Move kinetic baxter (`#36 <https://github.com/tork-a/tork_moveit_tutorial/issues/36>`_)
 
   * move compute_cartesian_path() descriptions before the waypoints plan descriptions
