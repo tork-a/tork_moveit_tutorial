@@ -2,6 +2,12 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix documents within 110 pages (`#42 <https://github.com/tork-a/tork_moveit_tutorial/issues/42>`_)
+* add a chapter of running your own program for ROS kinetic (`#41 <https://github.com/tork-a/tork_moveit_tutorial/issues/41>`_)
+* Contributors: Tokyo Opensource Robotics Developer 534, Yosuke Yamamoto
+
 0.0.8 (2020-01-22)
 ------------------
 * Move kinetic baxter (`#36 <https://github.com/tork-a/tork_moveit_tutorial/issues/36>`_)
