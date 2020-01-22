@@ -58,7 +58,7 @@ project = u'MoveitTutoriaL'
 copyright = u'2017, Tokyo Opensource Robotics Kyokai Association'
 author = u'Yosuke Yamamoto, and contributors'
 
-github_doc_root = 'https://github.com/tork-a/tork_moveit_tutorial/tree/indigo-devel/doc/'
+github_doc_root = 'https://github.com/tork-a/tork_moveit_tutorial/tree/master/doc/'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
