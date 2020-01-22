@@ -345,7 +345,7 @@ NEXTAGE OPEN ロボットの準備が完了しています．
   以下のようにWarningやErrorが表示され数秒から数分の時間がかかる場合が有ります．
   「[トラブルシューティング (Gazebo を起動してもロボットが表示されない)](moveit-tutorial_ja_trouble-shooting.md#gazebo-start-not-show-robot)」もご参照ください．
 
-![Gazebo Initial Error](images/gazebo_startup_error.png)
+![Gazebo Initial Error](images/gazebo_startup_error_small.png)
 
 #### MoveIt! の起動
 
