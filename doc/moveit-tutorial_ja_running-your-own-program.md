@@ -76,21 +76,21 @@ ROS_DISTRO=kinetic
 ROS_ETC_DIR=/opt/ros/kinetic/etc/ros
 ```
 
-> **ワークスペース名について**  
-> 
-> ワークスペース名は基本的に半角英数字であれば何でも大丈夫です．
-> 
-> 本チュートリアルに限らず多くのチュートリアルでは 
-> `catkin_ws` や `ros_ws` といったワークスペース名が多く使われています．
-> しかし，いろいろな種類のロボットやセンサなどのプログラムを書いていると
-> ワークスペースを分けたくなることもあります．
-> 
-> 発展的に独自プログラムを作成する際に新たにワークペースを追加する場合は
-> 他のワークスペース名と重複しないワークスペース名をつけてください．
-> 
-> 例えば，上で `catkin_ws` としたところを 
-> Baxter Research Robot を扱うということで
-> `baxter_ws` や `brr_ws` といったワークスペース名としてみるのも良いでしょう．
+**ワークスペース名について**  
+
+ワークスペース名は基本的に半角英数字であれば何でも大丈夫です．
+
+本チュートリアルに限らず多くのチュートリアルでは 
+`catkin_ws` や `ros_ws` といったワークスペース名が多く使われています．
+しかし，いろいろな種類のロボットやセンサなどのプログラムを書いていると
+ワークスペースを分けたくなることもあります．
+
+発展的に独自プログラムを作成する際に新たにワークペースを追加する場合は
+他のワークスペース名と重複しないワークスペース名をつけてください．
+
+例えば，上で `catkin_ws` としたところを 
+Baxter Research Robot を扱うということで
+`baxter_ws` や `brr_ws` といったワークスペース名としてみるのも良いでしょう．
 
 
 ## ソースコードの取得とビルド
@@ -308,15 +308,12 @@ $ rospack find tork_movieit_tutorial
 
 1. ワークスペース内の `tork_moveit_tutorial` が **参照されている** 場合
     （パッケージの取得とビルドを行った方を参照）
-
     ```
     robotuser@robotuser-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
     /home/robotuser/catkin_ws/src/tork_moveit_tutorial
     ```
-
 1. ワークスペース内の `tork_moveit_tutorial` が **参照されていない** 場合
     （元々インストールされているパッケージの方を参照）
-
     ```
     robotuser@robotuser-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
     /opt/ros/<$ROS_DISTRO>/share/tork_moveit_tutorial
@@ -414,7 +411,7 @@ $ gedit baxter_moveit_tutorial_poses_2.py
 ```
 
 **baxter_moveit_tutorial_poses_2.py** （コピー直後）
-``` python
+```python
 #!/usr/bin/env python
 
 from tork_moveit_tutorial import *
@@ -469,7 +466,7 @@ if __name__ == '__main__':
 
 動作 3 と 4 の部分をプログラムに置き換えると次のようになります．
 
-``` python
+```python
     # Pose Target 3
     group.set_pose_target( pose_target_1 )
     group.go()
@@ -498,7 +495,7 @@ if __name__ == '__main__':
 動作 3 と 4 の部分を元の `baxter_moveit_tutorial_poses_2.py` に加えた
 全体のプログラムは次のようになります．
 
-``` python
+```python
 #!/usr/bin/env python
 
 from tork_moveit_tutorial import *
