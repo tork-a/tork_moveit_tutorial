@@ -2,6 +2,20 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Move kinetic baxter (`#36 <https://github.com/tork-a/tork_moveit_tutorial/issues/36>`_)
+
+  * move compute_cartesian_path() descriptions before the waypoints plan descriptions
+  * mod docs for ROS kinetic with KHI duaro robot instead of Baxter Research Robot
+  * add info about quaternion
+  * add notes of EEF and Quarternion
+  * mod. a wrong filename
+  * wrote running-your-own-program to the end
+  * remove baxter robot in kinetic tutorial
+
+* Contributors: Yosuke Yamamoto
+
 0.0.7 (2019-07-01)
 ------------------
 * add KHI duaro tutorial (ROS Kinetic only) (`#34 <https://github.com/tork-a/tork_moveit_tutorial/issues/34>`_)
