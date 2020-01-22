@@ -1,6 +1,14 @@
 
 # 発展的なロボットプログラミング
 
+本章は NEXTAGE OPEN ロボットシミュレータを対象にしてチュートリアルを進めてゆきます．
+
+NEXTAGE OPEN の下記ソフトウェアを既に起動した状態で
+本章の各プログラムを実行してください．
+
+- NEXTAGE OPEN の Gazebo シミュレータもしくは hypsys(RTM) シミュレータ
+- NEXTAGE OPEN の MoveIt!
+
 
 ## プログラム制御フローツールとロボットプログラミング
 
@@ -310,9 +318,25 @@ if __name__ == '__main__':
 
 ### 動作アームを指定する
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 これまで NEXTAGE OPEN や Baxter Research Robot の動作プログラムの例では
 「右腕」を動かしていました．
 これらのロボットは双腕ですから「右腕」だけでなく「左腕」や「両腕」を動かすこともできます．
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+これまで NEXTAGE OPEN や duaro の動作プログラムの例では
+NEXTAGE OPEN では「右腕」( right_arm ) を，
+duaro では「上側の腕」(upper_arm) を動かしていました．
+これらのロボットは双腕ですから「右腕」や「上側の腕」だけでなく
+「左腕」や「下側の腕」，「両腕」を動かすこともできます．
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|indigo>
 
 #### 左腕を動かす
 
@@ -324,6 +348,32 @@ group = MoveGroupCommander("right_arm")    # 変更前（右腕）
 ↓
 group = MoveGroupCommander("left_arm")     # 変更後（左腕）
 ```
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|indigo>
+
+#### もう一方の腕を動かす
+
+NEXTAGE OPEN の「左腕」を動かすには次の変更を行います．
+
+- 動作グループを `left_arm` に変更
+```python
+group = MoveGroupCommander("right_arm")    # 変更前（右腕）
+↓
+group = MoveGroupCommander("left_arm")     # 変更後（左腕）
+```
+
+KHI duaro の「下側の腕」を動かすには次の変更を行います．
+
+- 動作グループを `lower_arm` に変更
+```python
+group = MoveGroupCommander("upper_arm")    # 変更前（上側の腕）
+↓
+group = MoveGroupCommander("lower_arm")    # 変更後（下側の腕）
+```
+
+<$endif>
 
 下記プログラムは NEXTAGE OPEN の左腕を動かすプログラムの例です．
 右腕のターゲット姿勢のままでは左腕の動作にはきつくなるので
@@ -415,6 +465,8 @@ upperbody
 双腕のロボットで「両腕」を動かすには「両腕のグループ」を使います．
 上記の出力結果から NEXTAGE OPEN では `botharms` の動作グループがあります．
 
+<$ifeq <$ROS_DISTRO>|indigo>
+
 両腕のグループの名称は各ロボットで次のようになっていて
 `_` の有無の違いがあるので各ロボットで気をつけて指定します．
 
@@ -426,6 +478,20 @@ group = MoveGroupCommander("botharms")
 ```python
 group = MoveGroupCommander("both_arms")
 ```
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|kinetic>
+
+両腕のグループの名称は NEXTAGE OPEN と KHI duaro は同じ `botharms` です．
+他のロボットではこの名称は異なっている場合もあるのでロボットごとに名称を確認して適切な名称を指定します．
+
+- NEXTAGE OPEN / KHI duaro : `botharms`
+```python
+group = MoveGroupCommander("botharms")
+```
+
+<$endif>
 
 また，`group` が両腕になるので `set_pose_target()` にターゲットポーズに加えて
 エンドエフェクタのリンク名を渡して明示的に「右腕」と「左腕」を区別します．
@@ -1286,9 +1352,9 @@ constraints.orientation_constraints.append( orientation_constraint )
 group.set_path_constraints( constraints )
 ```
 
-エンドエフェクタを現在の状態での水平を維持しながら動くように，エンドエ
-フェクタ座標系で Y軸 と Z軸 の動作範囲を 0.05 [rad] 以内とし，X軸 は
-`3.1415` として無視されるように拘束条件を設定しています．
+エンドエフェクタを現在の状態での水平を維持しながら動くように，
+エンドエフェクタ座標系で Y軸 と Z軸 の動作範囲を 0.05 [rad] 以内とし，
+X軸 は `3.1415` として無視されるように拘束条件を設定しています．
 
 また，拘束条件を付加した動作計画では
 デフォルトのプランナのままだと動作計画の算出に時間がかかるので
@@ -1441,9 +1507,3 @@ if __name__ == '__main__':
 
 ```
 
-
-
-
-
-
-<!-- EOF -->
