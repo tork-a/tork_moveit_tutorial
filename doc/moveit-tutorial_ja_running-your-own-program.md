@@ -37,8 +37,6 @@ $ source devel/setup.bash
 
 上記の `$ source devel/setup.bash` のコマンドは
 ROS からワークスペースへの参照パスを設定しています．
-これはターミナルを開くたびに
-
 これはワークスペースを利用する場合は新しくターミナルを立ち上げて 
 ROS を使用する前に毎回必要になります．
 下記のように .bashrc ファイルに設定を加えて
@@ -199,11 +197,7 @@ $ source ~/catkin_ws/devel/setup.bash
 $ roslaunch baxter_gazebo baxter_world.launch  
 ```
 
-<$ifeq <$ROS_DISTRO>|kinetic>
-
 ![Baxter Simulator - Starts](images/kinetic/baxter-simulator_starts.png)
-
-<$endif>
 
 しばらくすると次のようなメッセージが **ターミナル-1** に表示されます．
 
@@ -241,11 +235,7 @@ Initializing joint trajectory action server...
 Running. Ctrl-c to quit
 ```
 
-<$ifeq <$ROS_DISTRO>|kinetic>
-
 ![Baxter Simulator - Ready for MoveIt!](images/kinetic/baxter-simulator_ready-for-moveit.png)
-
-<$endif>
 
 これでロボットの準備は完了です．
 
@@ -259,11 +249,7 @@ $ source ~/catkin_ws/devel/setup.bash
 $ roslaunch baxter_moveit_config baxter_grippers.launch
 ```
 
-<$ifeq <$ROS_DISTRO>|kinetic>
-
 ![Baxter MoveIt! - Starts](images/kinetic/baxter-moveit_starts.png)
-
-<$endif>
 
 これで MoveIt! の動作計画機能が利用できる状態になっています．
 
