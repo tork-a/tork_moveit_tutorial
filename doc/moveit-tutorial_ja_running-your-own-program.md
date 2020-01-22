@@ -427,7 +427,7 @@ $ rosrun tork_moveit_tutorial baxter_moveit_tutorial_poses_2.py
 $ gedit baxter_moveit_tutorial_poses_2.py
 ```
 
-baxter_moveit_tutorial_poses_2.py （コピー直後）
+**baxter_moveit_tutorial_poses_2.py** （コピー直後）
 ``` python
 #!/usr/bin/env python
 
@@ -509,7 +509,7 @@ if __name__ == '__main__':
 プログラムが何を行っているのかを自分が後から読んだり，
 他の人が読んだりしたときに分かりやすいように適宜書き入れると良いでしょう．
 
-動作 3 と 4 の部分を元の baxter_moveit_tutorial_poses_2.py に加えた
+動作 3 と 4 の部分を元の `baxter_moveit_tutorial_poses_2.py` に加えた
 全体のプログラムは次のようになります．
 
 ``` python
@@ -580,7 +580,7 @@ Python はプログラムのまとまりをインデントの揃いで判断し�
 インデント字数とプログラムのまとまりの関係を適切に設定しないと
 意図と違った動作をプログラムが行ってしまうことがあります．
 
-動作 3 と 4 を加えた baxter_moveit_tutorial_poses_2.py を保存してください．
+動作 3 と 4 を加えた `baxter_moveit_tutorial_poses_2.py` を保存してください．
 保存したらプログラムを実行します．
 
 **ターミナル-4** : 改造したロボット動作プログラムの実行
