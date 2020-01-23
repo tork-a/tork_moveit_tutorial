@@ -5,10 +5,9 @@
 
 ### MoveGroupCommander クラス
 
-- GitHub - ros_planning/moveit_commander/src/moveit_commander/move_group.py
-  - [https://github.com/ros-planning/moveit_commander/blob/<$ROS_DISTRO>-devel/src/moveit_commander/move_group.py][67977aee]
-- GitHub -  ros_planning/moveit/moveit_ros/planning_interface/move_group_interface/src/wrap_python_move_group.cpp
-  -  [https://github.com/ros-planning/moveit/blob/<$ROS_DISTRO>-devel/moveit_ros/planning_interface/move_group_interface/src/wrap_python_move_group.cpp][7a957dfd]
+GitHub - [moveit_commander/src/moveit_commander/move_group.py][67977aee]
+
+GitHub - [moveit/moveit_ros/planning_interface/move_group_interface/src/wrap_python_move_group.cpp][7a957dfd]
 
   [67977aee]: https://github.com/ros-planning/moveit_commander/blob/<$ROS_DISTRO>-devel/src/moveit_commander/move_group.py "move_group.py"
   [7a957dfd]: https://github.com/ros-planning/moveit/blob/<$ROS_DISTRO>-devel/moveit_ros/planning_interface/move_group_interface/src/wrap_python_move_group.cpp "wrap_python_move_group.cpp"
@@ -707,11 +706,9 @@
 
 ### RobotCommander クラス
 
-- GitHub -  ros-planning/moveit_commander/src/moveit_commander/robot.py
-  - [https://github.com/ros-planning/moveit_commander/blob/<$ROS_DISTRO>-devel/src/moveit_commander/robot.py][ad535b3a]
-- GitHub - ros-planning/moveit/moveit_ros/planning_interface/robot_interface/src/wrap_python_robot_interface.cpp
+GitHub - [moveit_commander/src/moveit_commander/robot.py][ad535b3a]
 
-  - [https://github.com/ros-planning/moveit/blob/<$ROS_DISTRO>-devel/moveit_ros/planning_interface/robot_interface/src/wrap_python_robot_interface.cpp][4cfc3b2d]
+GitHub - [moveit/moveit_ros/planning_interface/robot_interface/src/wrap_python_robot_interface.cpp][4cfc3b2d]
 
   [ad535b3a]: https://github.com/ros-planning/moveit_commander/blob/<$ROS_DISTRO>-devel/src/moveit_commander/robot.py "RobotCommander Class"
 
@@ -972,11 +969,10 @@
 
 ### PlanningSceneInterface クラス
 
-- GitHub - ros-planning/moveit_commander/src/moveit_commander/planning_scene_interface.py
-  - [https://github.com/ros-planning/moveit_commander/blob/<$ROS_DISTRO>-devel/src/moveit_commander/planning_scene_interface.py][844eea07]
-- GitHub -  ros-planning/moveit/moveit_ros/planning_interface/planning_scene_interface/src/wrap_python_planning_scene_interface.cpp
+GitHub - [moveit_commander/src/moveit_commander/planning_scene_interface.py][844eea07]
 
-  - [https://github.com/ros-planning/moveit/blob/<$ROS_DISTRO>-devel/moveit_ros/planning_interface/planning_scene_interface/src/wrap_python_planning_scene_interface.cpp][86935f4f]
+GitHub - [moveit/moveit_ros/planning_interface/planning_scene_interface/src/wrap_python_planning_scene_interface.cpp][86935f4f]
+
   [844eea07]: https://github.com/ros-planning/moveit_commander/blob/<$ROS_DISTRO>-devel/src/moveit_commander/planning_scene_interface.py "GitHub - PlanningSceneInterface クラス"
 
   [86935f4f]: https://github.com/ros-planning/moveit/blob/<$ROS_DISTRO>-devel/moveit_ros/planning_interface/planning_scene_interface/src/wrap_python_planning_scene_interface.cpp "wrap_python_planning_scene_interface.cpp"
@@ -1194,8 +1190,7 @@
 
 ### conversions の関数
 
-- GitHub - ros-planning/moveit_commander/src/moveit_commander/conversions.py
-  - [https://github.com/ros-planning/moveit_commander/blob/<$ROS_DISTRO>-devel/src/moveit_commander/conversions.py][0aa62cbe]
+- GitHub - [moveit_commander/src/moveit_commander/conversions.py][0aa62cbe]
 
   [0aa62cbe]: https://github.com/ros-planning/moveit_commander/blob/<$ROS_DISTRO>-devel/src/moveit_commander/conversions.py "conversions functions"
 
@@ -1277,8 +1272,7 @@
 
 ### roscpp_initializer の関数
 
-- GitHub - ros-planning/moveit_commander/src/moveit_commander/roscpp_initializer.py
-  - [https://github.com/ros-planning/moveit_commander/blob/<$ROS_DISTRO>-devel/src/moveit_commander/roscpp_initializer.py][f6bf1bd0]
+- GitHub - [moveit_commander/src/moveit_commander/roscpp_initializer.py][f6bf1bd0]
 
   [f6bf1bd0]: https://github.com/ros-planning/moveit_commander/blob/<$ROS_DISTRO>-devel/src/moveit_commander/roscpp_initializer.py "roscpp_initializer functions"
 

@@ -203,9 +203,10 @@ Out[32]: True
 どれを渡しても `set_pose_target()` 内で判断して適切な処理がなされます．
 
 - 参考 : GitHub - move_group.py 内の `set_pose_target()` の定義
-  - [https://github.com/ros-planning/moveit/blob/35a94c96ab21e8c8c2994adbf47cc7e39e30cfe7/moveit_commander/src/moveit_commander/move_group.py#L252][6cf69e4b]
 
-  [6cf69e4b]: https://github.com/ros-planning/moveit/blob/35a94c96ab21e8c8c2994adbf47cc7e39e30cfe7/moveit_commander/src/moveit_commander/move_group.py#L252 "set_pose_target()"
+[https://github.com/ros-planning/moveit/blob/1.0.2/moveit_commander/src/moveit_commander/move_group.py#L252][6cf69e4b]
+
+  [6cf69e4b]: https://github.com/ros-planning/moveit/blob/1.0.2/moveit_commander/src/moveit_commander/move_group.py#L252 "set_pose_target()"
 
 それでは右手先の位置と姿勢を指定して腕を動かしてみます．
 まずは 位置とRPY角 を `set_pose_target()` に渡して動作させます．
