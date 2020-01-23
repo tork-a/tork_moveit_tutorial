@@ -37,8 +37,6 @@ $ source devel/setup.bash
 
 上記の `$ source devel/setup.bash` のコマンドは
 ROS からワークスペースへの参照パスを設定しています．
-これはターミナルを開くたびに
-
 これはワークスペースを利用する場合は新しくターミナルを立ち上げて 
 ROS を使用する前に毎回必要になります．
 下記のように .bashrc ファイルに設定を加えて
@@ -78,21 +76,21 @@ ROS_DISTRO=kinetic
 ROS_ETC_DIR=/opt/ros/kinetic/etc/ros
 ```
 
-> **ワークスペース名について**  
-> 
-> ワークスペース名は基本的に半角英数字であれば何でも大丈夫です．
-> 
-> 本チュートリアルに限らず多くのチュートリアルでは 
-> `catkin_ws` や `ros_ws` といったワークスペース名が多く使われています．
-> しかし，いろいろな種類のロボットやセンサなどのプログラムを書いていると
-> ワークスペースを分けたくなることもあります．
-> 
-> 発展的に独自プログラムを作成する際に新たにワークペースを追加する場合は
-> 他のワークスペース名と重複しないワークスペース名をつけてください．
-> 
-> 例えば，上で `catkin_ws` としたところを 
-> Baxter Research Robot を扱うということで
-> `baxter_ws` や `brr_ws` といったワークスペース名としてみるのも良いでしょう．
+**ワークスペース名について**  
+
+ワークスペース名は基本的に半角英数字であれば何でも大丈夫です．
+
+本チュートリアルに限らず多くのチュートリアルでは 
+`catkin_ws` や `ros_ws` といったワークスペース名が多く使われています．
+しかし，いろいろな種類のロボットやセンサなどのプログラムを書いていると
+ワークスペースを分けたくなることもあります．
+
+発展的に独自プログラムを作成する際に新たにワークペースを追加する場合は
+他のワークスペース名と重複しないワークスペース名をつけてください．
+
+例えば，上で `catkin_ws` としたところを 
+Baxter Research Robot を扱うということで
+`baxter_ws` や `brr_ws` といったワークスペース名としてみるのも良いでしょう．
 
 
 ## ソースコードの取得とビルド
@@ -199,11 +197,7 @@ $ source ~/catkin_ws/devel/setup.bash
 $ roslaunch baxter_gazebo baxter_world.launch  
 ```
 
-<$ifeq <$ROS_DISTRO>|kinetic>
-
 ![Baxter Simulator - Starts](images/kinetic/baxter-simulator_starts.png)
-
-<$endif>
 
 しばらくすると次のようなメッセージが **ターミナル-1** に表示されます．
 
@@ -241,11 +235,7 @@ Initializing joint trajectory action server...
 Running. Ctrl-c to quit
 ```
 
-<$ifeq <$ROS_DISTRO>|kinetic>
-
 ![Baxter Simulator - Ready for MoveIt!](images/kinetic/baxter-simulator_ready-for-moveit.png)
-
-<$endif>
 
 これでロボットの準備は完了です．
 
@@ -259,11 +249,7 @@ $ source ~/catkin_ws/devel/setup.bash
 $ roslaunch baxter_moveit_config baxter_grippers.launch
 ```
 
-<$ifeq <$ROS_DISTRO>|kinetic>
-
 ![Baxter MoveIt! - Starts](images/kinetic/baxter-moveit_starts.png)
-
-<$endif>
 
 これで MoveIt! の動作計画機能が利用できる状態になっています．
 
@@ -320,17 +306,14 @@ TORK MoveIt! Tutorial パッケージを最初にインストールしている�
 $ rospack find tork_movieit_tutorial
 ```
 
-1. ワークスペース内の `tork_moveit_tutorial` が **参照されている** 場合
+- ワークスペース内の `tork_moveit_tutorial` が **参照されている** 場合
     （パッケージの取得とビルドを行った方を参照）
-
     ```
     robotuser@robotuser-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
     /home/robotuser/catkin_ws/src/tork_moveit_tutorial
     ```
-
-1. ワークスペース内の `tork_moveit_tutorial` が **参照されていない** 場合
+- ワークスペース内の `tork_moveit_tutorial` が **参照されていない** 場合
     （元々インストールされているパッケージの方を参照）
-
     ```
     robotuser@robotuser-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
     /opt/ros/<$ROS_DISTRO>/share/tork_moveit_tutorial
@@ -427,8 +410,8 @@ $ rosrun tork_moveit_tutorial baxter_moveit_tutorial_poses_2.py
 $ gedit baxter_moveit_tutorial_poses_2.py
 ```
 
-baxter_moveit_tutorial_poses_2.py （コピー直後）
-``` python
+**baxter_moveit_tutorial_poses_2.py** （コピー直後）
+```python
 #!/usr/bin/env python
 
 from tork_moveit_tutorial import *
@@ -483,7 +466,7 @@ if __name__ == '__main__':
 
 動作 3 と 4 の部分をプログラムに置き換えると次のようになります．
 
-``` python
+```python
     # Pose Target 3
     group.set_pose_target( pose_target_1 )
     group.go()
@@ -509,10 +492,10 @@ if __name__ == '__main__':
 プログラムが何を行っているのかを自分が後から読んだり，
 他の人が読んだりしたときに分かりやすいように適宜書き入れると良いでしょう．
 
-動作 3 と 4 の部分を元の baxter_moveit_tutorial_poses_2.py に加えた
+動作 3 と 4 の部分を元の `baxter_moveit_tutorial_poses_2.py` に加えた
 全体のプログラムは次のようになります．
 
-``` python
+```python
 #!/usr/bin/env python
 
 from tork_moveit_tutorial import *
@@ -580,7 +563,7 @@ Python はプログラムのまとまりをインデントの揃いで判断し�
 インデント字数とプログラムのまとまりの関係を適切に設定しないと
 意図と違った動作をプログラムが行ってしまうことがあります．
 
-動作 3 と 4 を加えた baxter_moveit_tutorial_poses_2.py を保存してください．
+動作 3 と 4 を加えた `baxter_moveit_tutorial_poses_2.py` を保存してください．
 保存したらプログラムを実行します．
 
 **ターミナル-4** : 改造したロボット動作プログラムの実行
