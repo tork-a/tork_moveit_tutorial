@@ -2,8 +2,8 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.10 (2020-01-23)
+-------------------
 * mod a file name of the additional chapter (`#43 <https://github.com/tork-a/tork_moveit_tutorial/issues/43>`_)
 
   * fix long line to fit page size
