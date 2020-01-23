@@ -2,6 +2,18 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* mod a file name of the additional chapter (`#43 <https://github.com/tork-a/tork_moveit_tutorial/issues/43>`_)
+
+  * fix long line to fit page size
+  * fix to pass 'prefix' error
+  * mod markdown of the additional chapter
+  * remove ifeq-endif in the additional chapter
+  * mod a file name of the additional chapter
+
+* Contributors: Tokyo Opensource Robotics Developer 534, Yosuke Yamamoto
+
 0.0.9 (2020-01-22)
 ------------------
 * fix documents within 110 pages (`#42 <https://github.com/tork-a/tork_moveit_tutorial/issues/42>`_)
