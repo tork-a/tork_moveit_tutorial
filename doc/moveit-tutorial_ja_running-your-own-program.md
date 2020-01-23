@@ -306,13 +306,13 @@ TORK MoveIt! Tutorial パッケージを最初にインストールしている�
 $ rospack find tork_movieit_tutorial
 ```
 
-1. ワークスペース内の `tork_moveit_tutorial` が **参照されている** 場合
+- ワークスペース内の `tork_moveit_tutorial` が **参照されている** 場合
     （パッケージの取得とビルドを行った方を参照）
     ```
     robotuser@robotuser-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
     /home/robotuser/catkin_ws/src/tork_moveit_tutorial
     ```
-1. ワークスペース内の `tork_moveit_tutorial` が **参照されていない** 場合
+- ワークスペース内の `tork_moveit_tutorial` が **参照されていない** 場合
     （元々インストールされているパッケージの方を参照）
     ```
     robotuser@robotuser-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
