@@ -303,7 +303,7 @@ TORK MoveIt! Tutorial パッケージを最初にインストールしている�
 `rospack find` を使う方法があります．
 
 ```
-$ rospack find tork_movieit_tutorial
+$ rospack find tork_moveit_tutorial
 ```
 
 - ワークスペース内の `tork_moveit_tutorial` が **参照されている** 場合
