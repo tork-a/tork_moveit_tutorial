@@ -24,6 +24,15 @@
 - myCobot : 教育用単腕マニピュレータ
 <$endif>
 
+<$ifeq <$ROS_DISTRO>|melodic>
+
+- NEXTAGE OPEN : 人型双腕ロボット
+- MINAS TRA1 : 単腕マニピュレータ（「ソースインストール」の章にて）
+- KHI duaro : スカラ型双腕ロボット（「ソースインストール」の章にて）
+- Baxter Research Robot : 人型双腕ロボット（「ワークスペースの作成」の章にて）
+
+<$endif>
+
 
 ## シミュレータの種類
 
@@ -159,7 +168,7 @@ $ sudo apt-get install ros-indigo-desktop-full
 $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 $ sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 sudo apt-get update
-sudo apt-get install ros-kinetic-desktop-full
+sudo apt-get install ros-<$ROS_DISTRO>-desktop-full
 ```
 
 <$endif>
@@ -302,6 +311,65 @@ $ echo "source /opt/ros/<$ROS_DISTRO>/setup.bash" >> ~/.bashrc
 .bashrc の設定ができていると以後のターミナルを起動するたびに行う
 `source /opt/ros/<$ROS_DISTRO>/setup.bash` は不要です．
 
+
+<$ifeq <$ROS_DISTRO>|melodic>
+
+## ソースインストール
+
+aptでインストールできるようにバイナリ／リリースされていないロボットパッケージはワークスペース経由でインストールすることができます．標準では推奨されていな方法ですので十分に注意して実行してください．
+
+まず，`/tmp/catkin_ws` という名前のワークスペースを作成する手順は次のとおりです．
+
+```
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
+$ mkdir -p /tmp/catkin_ws/src
+$ cd /tmp/catkin_ws/src
+$ catkin_init_workspace
+```
+
+### MINAS TRA1 ソフトウェアの取得とビルド
+
+次の手順で MINAS TRA1 のクローンと
+それに必要なソフトウェアパッケージの取得，ビルドを行います．
+
+```
+$ cd /tmp/catkin_ws/src
+$ git clone https://github.com/tork-a/minas.git
+$ rosdep install --from-path . --ignore-src -y
+$ cd /tmp/catkin_ws
+$ catkin_make
+```
+
+### KHI duaro ソフトウェアの取得とビルド
+
+次の手順で KHI Duaro のクローンと
+それに必要なソフトウェアパッケージの取得，ビルドを行います．
+
+```
+$ cd /tmp/catkin_ws/src
+$ git clone https://github.com/Kawasaki-Robotics/khi_robot.git
+$ rosdep install --from-path . --ignore-src -y
+$ cd /tmp/catkin_ws
+$ catkin_make
+```
+
+### ワークスペースでビルドしたソフトウェアのインストール
+
+ここまでの手順がエラー無く進んでいることを再度確認したら
+次の手順によりワークスペースでビルドしたパッケージを
+`/opt/ros/<$ROS_DISTRO>/`へとインストールします．
+
+繰り返しになりますが標準では推奨されない方法ですので
+もしここまでの手順でエラーが出ていれば作業を中止してください．
+
+```
+$ cd /tmp/catkin_ws
+$ sudo su
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
+$ catkin_make_isolated --install --install-space /opt/ros/<$ROS_DISTRO> -DCMAKE_BUILD_TYPE=Release
+```
+
+<$endif>
 
 ## シミュレータと MoveIt! の起動
 

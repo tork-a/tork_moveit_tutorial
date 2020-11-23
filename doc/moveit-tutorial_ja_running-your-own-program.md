@@ -67,13 +67,13 @@ ROS のシステムからワークスペース内のパッケージにある実�
 
 ```
 robotuser@robotuser-PC:~/catkin_ws$ env | grep ROS
-ROS_ROOT=/opt/ros/kinetic/share/ros
-ROS_PACKAGE_PATH=/home/robotuser/catkin_ws/src:/opt/ros/kinetic/share
+ROS_ROOT=/opt/ros/<$ROS_DISTRO>/share/ros
+ROS_PACKAGE_PATH=/home/robotuser/catkin_ws/src:/opt/ros/<$ROS_DISTRO>/share
 ROS_MASTER_URI=http://localhost:11311
 ROS_VERSION=1
 ROSLISP_PACKAGE_DIRECTORIES=/home/robotuser/catkin_ws/devel/share/common-lisp
-ROS_DISTRO=kinetic
-ROS_ETC_DIR=/opt/ros/kinetic/etc/ros
+ROS_DISTRO=<$ROS_DISTRO>
+ROS_ETC_DIR=/opt/ros/<$ROS_DISTRO>/etc/ros
 ```
 
 **ワークスペース名について**  
@@ -148,7 +148,7 @@ $ source devel/setup.bash
 それに必要なソフトウェアパッケージの取得，ビルドを行います．
 
 ```
-$ sudo apt-get install gazebo7 ros-kinetic-qt-build ros-kinetic-gazebo-ros-control ros-kinetic-gazebo-ros-pkgs ros-kinetic-ros-control ros-kinetic-control-toolbox ros-kinetic-realtime-tools ros-kinetic-ros-controllers ros-kinetic-xacro python-wstool ros-kinetic-tf-conversions ros-kinetic-kdl-parser
+$ sudo apt-get install gazebo7 ros-<$ROS_DISTRO>-qt-build ros-<$ROS_DISTRO>-gazebo-ros-control ros-<$ROS_DISTRO>-gazebo-ros-pkgs ros-<$ROS_DISTRO>-ros-control ros-<$ROS_DISTRO>-control-toolbox ros-<$ROS_DISTRO>-realtime-tools ros-<$ROS_DISTRO>-ros-controllers ros-<$ROS_DISTRO>-xacro python-wstool ros-<$ROS_DISTRO>-tf-conversions ros-<$ROS_DISTRO>-kdl-parser
 $ cd ~/catkin_ws
 $ wstool merge -t src https://raw.githubusercontent.com/RethinkRobotics/baxter_simulator/kinetic-devel/baxter_simulator.rosinstall
 $ wstool update -t src
