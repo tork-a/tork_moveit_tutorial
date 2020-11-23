@@ -5,8 +5,8 @@ import sys
 sys.modules["pyassimp"] = sys
 import pyassimp
    
-import sys, math, copy
-import rospy, tf, geometry_msgs.msg
+import sys, math, copy, subprocess, numpy
+import rospy, tf, geometry_msgs.msg, rospkg
 
 from distutils.version import LooseVersion
 import python_qt_binding
@@ -248,3 +248,25 @@ def make_waypoints_circular( center=[0.3, -0.2, 0.1], radius=0.1 ,steps=12, rpy=
     
     return wpts
 
+
+def get_ros_version():
+    
+    new_proc = subprocess.Popen(["rosversion", "-d"], stdout=subprocess.PIPE)
+    ros_version = new_proc.communicate()[0]
+    
+    return ros_version.rstrip('\n')
+    
+
+def normalize_orientation( pose ):
+    
+    q_orig = [ pose.orientation.x, pose.orientation.y, pose.orientation.z, pose.orientation.w ]
+    q_norm = q_orig / numpy.linalg.norm( q_orig )
+    pose.orientation.x = q_norm[0]
+    pose.orientation.y = q_norm[1]
+    pose.orientation.z = q_norm[2]
+    pose.orientation.w = q_norm[3]
+    
+    rospy.loginfo( "Orientation Normalized" )
+    
+    return pose
+    
