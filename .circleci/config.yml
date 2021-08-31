@@ -60,8 +60,7 @@ jobs:
           command : |-
             apt update
             apt install -y -q python-pip
-            pip install sphinx==1.8.1
-            pip install recommonmark==0.4.0
+            pip install -r .circleci/requirements.txt
             apt install -y -q cmake catkin
             apt install -y -q doxygen pandoc # python-catkin-sphinx
             apt install -y -q texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
@@ -93,8 +92,8 @@ jobs:
       - run:
           name: Build deb packages
           command: |-
-            docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:indigo-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python-bloom debhelper; rosdep init; rosdep update --include-eol-distros; cd src; bloom-generate rosdebian --os-name ubuntu --os-version trusty --ros-distro indigo; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
-            docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:kinetic-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python-bloom debhelper; rosdep init; rosdep update --include-eol-distros; cd src; bloom-generate rosdebian --os-name ubuntu --os-version xenial --ros-distro kinetic; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
+            docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:indigo-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python-bloom fakeroot debhelper; rosdep init; rosdep update --include-eol-distros; cd src; bloom-generate rosdebian --os-name ubuntu --os-version trusty --ros-distro indigo; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
+            docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:kinetic-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python-bloom fakeroot debhelper; rosdep init; rosdep update --include-eol-distros; cd src; bloom-generate rosdebian --os-name ubuntu --os-version xenial --ros-distro kinetic; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
             mkdir ~/artifacts && find -L . -iname '*.deb' -exec cp {} ~/artifacts/ \;
       - persist_to_workspace:
           root: /home/circleci
