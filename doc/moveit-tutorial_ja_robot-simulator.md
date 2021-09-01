@@ -109,11 +109,19 @@ NEXTAGE OPEN に加えて他のロボットのソフトウェアもインスト�
 
 <$endif>
 
+<$ifeq <$ROS_DISTRO>|melodic>
+
+- Ubuntu 18.04
+- ROS Melodic
+
+<$endif>
+
 > ROS は Ubuntu の各バージョンに対応したものがあります．
 > それぞれに対応した Ubuntu と ROS の組み合わせで利用する必要があります．
 > 
 >  Ubuntu バージョン | ROS バージョン | サポート終了
 >  --- | --- | ---
+>  20.04 (Focal)  | Noetic Ninjemys | 2025年5月
 >  18.04 (Bionic) | Melodic Morenia| 2023年5月
 >  16.04 (Xenial) | Kinetic Kame | 2021年4月
 >  14.04 (Trusty) | Indigo Igloo | 2019年4月
