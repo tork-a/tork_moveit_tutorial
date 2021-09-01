@@ -12,7 +12,7 @@
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 - NEXTAGE OPEN : 人型双腕ロボット
 - MINAS TRA1 : 単腕マニピュレータ
@@ -38,7 +38,7 @@
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 - ROS のシミュレータ
   - NEXTAGE OPEN / Baxter Research Robot / MINAS TRA1 / KHI duaro
@@ -83,7 +83,7 @@ NEXTAGE OPEN に加えて他のロボットのソフトウェアもインスト�
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 - ROS とチュートリアルパッケージ
 - ロボットソフトウェア
@@ -142,7 +142,7 @@ $ sudo apt-get install ros-indigo-desktop-full
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ```
 $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -224,7 +224,7 @@ $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-minas
 ```
 
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ### KHI duaro ソフトウェアのインストール
 
@@ -289,7 +289,7 @@ $ rtmlaunch nextage_moveit_config nextage_demo.launch
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ![NextageROS_Demo - Starts](images/kinetic/nextage_moveit-demo_starts.png)
 
@@ -335,7 +335,7 @@ NEXTAGE OPEN ロボットの準備が完了しています．
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ![NEXTAGE - Gazebo Starts](images/kinetic/nextage_gazebo-starts.png)
 
@@ -362,7 +362,7 @@ $ roslaunch nextage_moveit_config moveit_planning_execution.launch
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ![NEXTAGE - MoveIt! Starts](images/kinetic/nextage_moveit-starts.png)
 
@@ -480,7 +480,7 @@ $ roslaunch tra1_bringup tra1_moveit.launch
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ![MINAS TRA1 - MoveIt! Starts](images/kinetic/minas-tra1_moveit_starts.png)
 
@@ -489,7 +489,7 @@ $ roslaunch tra1_bringup tra1_moveit.launch
 シミュレータを終了するには各ターミナルで Ctrl-C を入力してください．
 
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ### KHI duaro - Gazebo シミュレータ
 
@@ -566,7 +566,7 @@ MoveIt! が動作計画を行い，シミュレータのロボットが動作し
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ![MoveIt! - RViz Plan and Execute](images/kinetic/nextage_moveit_plan-execute.png)
 

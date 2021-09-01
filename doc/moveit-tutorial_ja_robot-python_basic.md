@@ -778,7 +778,7 @@ if __name__ == '__main__':
 - ターゲットポーズの位置・姿勢を MINAS TRA1 の機構に適したものに変更
 
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ### KHI duaro の場合
 
@@ -868,7 +868,7 @@ NEXTAGE OPEN や Baxter Research Robot, MINAS TRA1
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 NEXTAGE OPEN や MINAS TRA1，KHI duaro
 の動作計画・動作プログラムの相違点を見ると下記の2ヶ所だけが
