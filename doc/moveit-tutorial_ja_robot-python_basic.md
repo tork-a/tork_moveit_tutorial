@@ -55,8 +55,16 @@ In [1]: group = MoveGroupCommander("right_arm")
 
 - 注意 : MINAS TRA1 の場合はグループ名が異なります．
 ```python
-In [4]: group = MoveGroupCommander("manipulator")
+In [1]: group = MoveGroupCommander("manipulator")
 ```
+
+<$ifeq <$ROS_DISTRO>|melodic>
+
+- 注意 : myCobot の場合はグループ名が異なります．
+```python
+In [1]: group = MoveGroupCommander("arm_group")
+```
+<$endif>
 
 グループ `group` に含まれる関節の名前を `get_joints()` で調べます．
 
@@ -854,6 +862,97 @@ if __name__ == '__main__':
 
 - `group = MoveGroupCommander()` に渡すグループ名を `"upper_arm"` に変更
 - ターゲットポーズの位置・姿勢を KHI duaro の機構に適したものに変更
+
+<$endif>
+
+
+<$ifeq <$ROS_DISTRO>|melodic>
+
+### myCobot の場合
+
+**ターミナル-1**
+```
+$ source ~/catkin_ws/devel/setup.bash
+$ roslaunch roslaunch mycobot_320_moveit demo.launch
+```
+
+動作プログラムファイルを実行します．
+
+**ターミナル-2**
+```
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
+$ rosrun tork_moveit_tutorial mycobot_moveit_tutorial_poses.py
+```
+
+`set_pose_target` を用いて手先位置姿勢を指定し，腕を動かすプログラムの例が以下になります．
+
+**mycobot_moveit_tutorial_poses.py**
+
+```python
+#!/usr/bin/env python
+
+from tork_moveit_tutorial import *
+
+if __name__ == '__main__':
+    init_node()
+
+    group = MoveGroupCommander("arm_group")
+    # Pose Target 1
+    rospy.loginfo( "Start Pose Target 1")
+    pose_target_1 = Pose()
+
+    pose_target_1.position.x = 0.3
+    pose_target_1.position.y = 0.0
+    pose_target_1.position.z = 0.3
+    pose_target_1.orientation.x = 0.0
+    pose_target_1.orientation.y = 0.0
+    pose_target_1.orientation.z = -0.7071
+    pose_target_1.orientation.w =  0.7071
+
+    rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_1 ) )
+    group.set_pose_target( pose_target_1 )
+    group.go()
+
+    # Pose Target 2
+    rospy.loginfo( "Start Pose Target 2")
+    pose_target_2 = Pose()
+
+    pose_target_2.position.x = 0.0
+    pose_target_2.position.y =-0.3
+    pose_target_2.position.z = 0.3
+    pose_target_2.orientation.z = -0.7071
+    pose_target_2.orientation.w =  0.7071
+
+    rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_2 ) )
+    group.set_pose_target( pose_target_2 )
+    group.go()
+```
+
+![myCobot MoveIt! - cartesian path](images/melodic/mycobot-moveit_pose.png)
+
+他のロボットの動作計画・動作の実行ファイルとの相違点は次のとおりです．
+
+- `group = MoveGroupCommander()` に渡すグループ名を `"arm_group"` に変更
+- ターゲットポーズの位置・姿勢を myCobot の機構に適したものに変更
+
+`Pose()` に指定する姿勢情報のクオータニオン情報は，
+`from tf.transformations import quaternion_from_euler`
+で得られる，`quaternion_from_euler(0, 0, -1.57079)` 関数を用いて取得します．
+
+また，このプログラムに続けて
+以下のようにうに，`pose_target_1`, `pose_target_2`を用いて
+`group.compute_cartesian_path([pose_target_1, pose_target_2], 0.01, 0.0)`
+として直線補間軌道を計画し，`group.execute( plan )` で実行します．
+
+```
+    # Compute Cartesian path
+    (plan, fraction) = group.compute_cartesian_path([pose_target_1, pose_target_2], 0.01, 0.0)
+    group.execute( plan )
+```
+
+
+
+![myCobot MoveIt! - cartesian path](images/melodic/mycobot-moveit_cartesian_path.png)
 
 <$endif>
 

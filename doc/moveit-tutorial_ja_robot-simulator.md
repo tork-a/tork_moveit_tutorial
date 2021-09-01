@@ -20,6 +20,9 @@
 - Baxter Research Robot : 人型双腕ロボット（「ワークスペースの作成」の章にて）
 
 <$endif>
+<$ifeq <$ROS_DISTRO>|melodic>
+- myCobot : 教育用単腕マニピュレータ
+<$endif>
 
 
 ## シミュレータの種類
@@ -241,6 +244,38 @@ MINAS TRA1 のソフトウェアをインストールします．
 
 ```
 $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-khi-duaro-gazebo ros-<$ROS_DISTRO>-khi-duaro-description ros-<$ROS_DISTRO>-khi-duaro-ikfast-plugin ros-<$ROS_DISTRO>-khi-duaro-moveit-config
+```
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|melodic>
+
+### myCobot ソフトウェアのインストール
+
+myCobotのソフトウェアのインストールにはワークスペースの作成が必要です．
+
+- catkin の workspace を作る
+  - http://wiki.ros.org/ja/catkin/Tutorials/create_a_workspace
+
+`catkin_ws` という名前のワークスペースを作成する手順は次のとおりです．
+
+```
+$ mkdir -p ~/catkin_ws/src
+$ cd ~/catkin_ws/src
+$ catkin_init_workspace
+$ cd ~/catkin_ws/
+$ catkin_make
+$ source devel/setup.bash
+```
+
+次に，myCobot のソースコードの取得とビルドを行います．
+
+```
+$ cd ~/catkin_ws/src
+$ git clone https://github.com/elephantrobotics/mycobot_ros
+$ cd ~/catkin_ws
+$ catkin_make
+$ source devel/setup.bash
 ```
 
 <$endif>
@@ -535,6 +570,32 @@ $ roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
 ```
 
 ![duaro MoveIt! - Starts](images/kinetic/duaro-moveit_starts.png)
+
+これで MoveIt! の動作計画機能が利用できる状態になっています．
+
+
+#### シミュレータの終了
+
+シミュレータでの作業が終わりましたら
+全てのターミナルで Ctrl-C を入力することでシミュレータを終了します．
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|melodic>
+
+### myCobot - シミュレータ
+
+#### MoveIt! の起動
+
+ーミナルで次のコマンドを実行して MoveIt! を起動します．
+
+**ターミナル-2** : MoveIt! の起動
+```
+$ source ~/catkin_ws/devel/setup.bash
+$ roslaunch roslaunch mycobot_320_moveit demo.launch
+```
+
+![myCobot MoveIt! - Starts](images/melodic/mycobot-moveit_starts.png)
 
 これで MoveIt! の動作計画機能が利用できる状態になっています．
 
