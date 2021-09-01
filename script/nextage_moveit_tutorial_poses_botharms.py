@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-import sys, copy
+import sys, copy, os
 import rospy
 
 from moveit_commander import MoveGroupCommander
 from geometry_msgs.msg import Pose
 
-from tork_moveit_tutorial import init_node, question_yn
+from tork_moveit_tutorial import init_node, question_yn, get_ros_version, normalize_orientation
 
 
 if __name__ == '__main__':
@@ -25,8 +25,16 @@ if __name__ == '__main__':
     pose_target_rarm_1.orientation.z = 0.0
     pose_target_rarm_1.orientation.w = 0.707
     
+#    ros_version = get_ros_version()
+    ros_version = rospy.get_param('/rosdistro')
+    ros_version = ros_version.rstrip('\n')
+#    ros_version = os.environ["ROS_DISTRO"]
+    
+    if ros_version == 'kinetic':
+        pose_target_rarm_1 = normalize_orientation( pose_target_rarm_1 )
+    
     rospy.loginfo( "Right Arm Pose Target 1:\n{}".format( pose_target_rarm_1 ) )
-
+    
     pose_target_larm_1 = Pose()
     pose_target_larm_1.position.x = pose_target_rarm_1.position.x
     pose_target_larm_1.position.y = pose_target_rarm_1.position.y * -1.0
@@ -36,8 +44,11 @@ if __name__ == '__main__':
     pose_target_larm_1.orientation.z = pose_target_rarm_1.orientation.z
     pose_target_larm_1.orientation.w = pose_target_rarm_1.orientation.w
     
+    if ros_version == 'kinetic':
+        pose_target_larm_1 = normalize_orientation( pose_target_larm_1 )
+    
     rospy.loginfo( "Left Arm Pose Target 1:\n{}".format( pose_target_larm_1 ) )
-
+    
     group.set_pose_target( pose_target_rarm_1, 'RARM_JOINT5_Link' )
     group.set_pose_target( pose_target_larm_1, 'LARM_JOINT5_Link' )
     group.plan()
@@ -50,6 +61,9 @@ if __name__ == '__main__':
     pose_target_rarm_2.position.z = 0.5
     pose_target_rarm_2.orientation.y = -1.0
     
+    if ros_version == 'kinetic':
+        pose_target_rarm_2 = normalize_orientation( pose_target_rarm_2 )
+    
     rospy.loginfo( "Right Arm Pose Target 2:\n{}".format( pose_target_rarm_2 ) )
     
     pose_target_larm_2 = Pose()
@@ -60,6 +74,9 @@ if __name__ == '__main__':
     pose_target_larm_2.orientation.y = pose_target_rarm_2.orientation.y
     pose_target_larm_2.orientation.z = pose_target_rarm_2.orientation.z
     pose_target_larm_2.orientation.w = pose_target_rarm_2.orientation.w
+    
+    if ros_version == 'kinetic':
+        pose_target_larm_2 = normalize_orientation( pose_target_larm_2 )
     
     rospy.loginfo( "Left Arm Pose Target 2:\n{}".format( pose_target_larm_2 ) )    
     
