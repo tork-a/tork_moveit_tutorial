@@ -229,7 +229,7 @@ $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-minas
 ### KHI duaro ソフトウェアのインストール
 
 ターミナルから次のコマンドを実行して
-MINAS TRA1 のソフトウェアをインストールします．
+KHI duaro のソフトウェアをインストールします．
 
 ```
 $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-khi-duaro-gazebo ros-<$ROS_DISTRO>-khi-duaro-description ros-<$ROS_DISTRO>-khi-duaro-ikfast-plugin ros-<$ROS_DISTRO>-khi-duaro-moveit-config
