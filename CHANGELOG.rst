@@ -2,6 +2,11 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* more fix for melodic .circleci (`#57 <https://github.com/tork-a/tork_moveit_tutorial/issues/57>`_)
+* Contributors: Tokyo Opensource Robotics Developer 534
+
 0.1.0 (2022-01-11)
 ------------------
 * add melodic sections (`#55 <https://github.com/tork-a/tork_moveit_tutorial/issues/55>`_)
