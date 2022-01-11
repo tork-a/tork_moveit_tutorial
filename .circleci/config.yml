@@ -8,6 +8,7 @@ commands:
           name: Setup ROS catkin workspace
           command : |-
             apt update
+            echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections # fix for tzdata
             apt install -y -q lsb-release wget apt gnupg
             sh -c "echo \"deb $ROS_REPOSITORY_PATH `lsb_release -cs` main\" > /etc/apt/sources.list.d/ros-latest.list"
             wget http://packages.ros.org/ros.key -O - | apt-key add -
