@@ -2,8 +2,8 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.0 (2022-01-11)
+------------------
 * add melodic sections (`#55 <https://github.com/tork-a/tork_moveit_tutorial/issues/55>`_)
 * add example with myCobot (`#54 <https://github.com/tork-a/tork_moveit_tutorial/issues/54>`_)
 * fix typo MINAS-TRA1 -> KHI Duaro (`#53 <https://github.com/tork-a/tork_moveit_tutorial/issues/53>`_)
