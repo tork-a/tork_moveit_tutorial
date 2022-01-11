@@ -85,6 +85,7 @@ jobs:
             cmake ..
             make docbuild_${CIRCLE_PROJECT_REPONAME}_indigo
             make docbuild_${CIRCLE_PROJECT_REPONAME}_kinetic
+            make docbuild_${CIRCLE_PROJECT_REPONAME}_melodic
             mkdir ~/artifacts && find -L .. -iname '*.pdf' -exec cp {} ~/artifacts/ \;
       - persist_to_workspace:
           root: /root
