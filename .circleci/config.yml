@@ -8,7 +8,7 @@ commands:
           name: Setup ROS catkin workspace
           command : |-
             apt update
-            apt install -y -q lsb-release wget apt
+            apt install -y -q lsb-release wget apt gnupg
             sh -c "echo \"deb $ROS_REPOSITORY_PATH `lsb_release -cs` main\" > /etc/apt/sources.list.d/ros-latest.list"
             wget http://packages.ros.org/ros.key -O - | apt-key add -
             apt update
