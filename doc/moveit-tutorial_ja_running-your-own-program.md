@@ -61,17 +61,17 @@ $ env | grep ROS
 
 下記は ROS 環境を表示した例です．
 `ROS_PACKAGE_PATH` にワークスペースのディレクトリ 
-`/home/robotuser/catkin_ws/src` があることで，
+`/home/user/catkin_ws/src` があることで，
 ROS のシステムからワークスペース内のパッケージにある実行ファイルなどを
 参照することができるようになっています．
 
 ```
-robotuser@robotuser-PC:~/catkin_ws$ env | grep ROS
+user@user-PC:~/catkin_ws$ env | grep ROS
 ROS_ROOT=/opt/ros/<$ROS_DISTRO>/share/ros
-ROS_PACKAGE_PATH=/home/robotuser/catkin_ws/src:/opt/ros/<$ROS_DISTRO>/share
+ROS_PACKAGE_PATH=/home/user/catkin_ws/src:/opt/ros/<$ROS_DISTRO>/share
 ROS_MASTER_URI=http://localhost:11311
 ROS_VERSION=1
-ROSLISP_PACKAGE_DIRECTORIES=/home/robotuser/catkin_ws/devel/share/common-lisp
+ROSLISP_PACKAGE_DIRECTORIES=/home/user/catkin_ws/devel/share/common-lisp
 ROS_DISTRO=<$ROS_DISTRO>
 ROS_ETC_DIR=/opt/ros/<$ROS_DISTRO>/etc/ros
 ```
@@ -309,13 +309,13 @@ $ rospack find tork_moveit_tutorial
 - ワークスペース内の `tork_moveit_tutorial` が **参照されている** 場合
     （パッケージの取得とビルドを行った方を参照）
     ```
-    robotuser@robotuser-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
-    /home/robotuser/catkin_ws/src/tork_moveit_tutorial
+    user@user-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
+    /home/user/catkin_ws/src/tork_moveit_tutorial
     ```
 - ワークスペース内の `tork_moveit_tutorial` が **参照されていない** 場合
     （元々インストールされているパッケージの方を参照）
     ```
-    robotuser@robotuser-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
+    user@user-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
     /opt/ros/<$ROS_DISTRO>/share/tork_moveit_tutorial
     ```
 
@@ -339,7 +339,7 @@ ROS 環境設定を実行しましたら再度 `rospack find tork_moveit_tutoria
 `/script` フォルダ内にあります．
 
 ```
-robotuser@robotuser-PC:~/catkin_ws$ ls ~/catkin_ws/src/tork_moveit_tutorial/script
+user@user-PC:~/catkin_ws$ ls ~/catkin_ws/src/tork_moveit_tutorial/script
 baxter_moveit_tutorial_poses.py                     nextage_moveit_tutorial_poses_object.py
 demo.py                                             nextage_moveit_tutorial_poses.py
 duaro_moveit_tutorial_poses.py                      nextage_moveit_tutorial_poses_rate.py
@@ -612,9 +612,9 @@ New Document → Empty Document といったメニューがありますのでそ
 ```
 $ cd ~/catkin_ws/src/tork_moveit_tutorial/script/
 $ ls -l | grep baxter
--rwxrwxr-x 1 robotuser robotuser 1631  8月 28 16:33 baxter_moveit_tutorial_poses_2.py
--rw-rw-r-- 1 robotuser robotuser    0  9月  4 14:42 baxter_moveit_tutorial_poses_3.py
--rwxrwxr-x 1 robotuser robotuser 1081  4月  8 16:34 baxter_moveit_tutorial_poses.py
+-rwxrwxr-x 1 user user 1631  8月 28 16:33 baxter_moveit_tutorial_poses_2.py
+-rw-rw-r-- 1 user user    0  9月  4 14:42 baxter_moveit_tutorial_poses_3.py
+-rwxrwxr-x 1 user user 1081  4月  8 16:34 baxter_moveit_tutorial_poses.py
 ```
 
 `ls -l` の出力の一番左にある `-rwxrwxr-x ` のように 
@@ -640,9 +640,9 @@ $ chmod a+x baxter_moveit_tutorial_poses_3.py
 
 ```
 $ ls -l | grep baxter
--rwxrwxr-x 1 robotuser robotuser 1631  8月 28 16:33 baxter_moveit_tutorial_poses_2.py
--rwxrwxr-x 1 robotuser robotuser    0  9月  4 14:42 baxter_moveit_tutorial_poses_3.py
--rwxrwxr-x 1 robotuser robotuser 1081  4月  8 16:34 baxter_moveit_tutorial_poses.py
+-rwxrwxr-x 1 user user 1631  8月 28 16:33 baxter_moveit_tutorial_poses_2.py
+-rwxrwxr-x 1 user user    0  9月  4 14:42 baxter_moveit_tutorial_poses_3.py
+-rwxrwxr-x 1 user user 1081  4月  8 16:34 baxter_moveit_tutorial_poses.py
 ```
 
 `baxter_moveit_tutorial_poses_3.py` に他のプログラムファイルと同様の

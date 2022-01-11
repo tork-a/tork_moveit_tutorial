@@ -12,7 +12,7 @@
 
 <$endif>
 
-<$ifneq <$ROS_DISTRO>|indigo>
+<$ifeq <$ROS_DISTRO>|kinetic>
 
 - NEXTAGE OPEN : 人型双腕ロボット
 - MINAS TRA1 : 単腕マニピュレータ
