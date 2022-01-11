@@ -61,19 +61,19 @@ $ env | grep ROS
 
 下記は ROS 環境を表示した例です．
 `ROS_PACKAGE_PATH` にワークスペースのディレクトリ 
-`/home/robotuser/catkin_ws/src` があることで，
+`/home/user/catkin_ws/src` があることで，
 ROS のシステムからワークスペース内のパッケージにある実行ファイルなどを
 参照することができるようになっています．
 
 ```
-robotuser@robotuser-PC:~/catkin_ws$ env | grep ROS
-ROS_ROOT=/opt/ros/kinetic/share/ros
-ROS_PACKAGE_PATH=/home/robotuser/catkin_ws/src:/opt/ros/kinetic/share
+user@user-PC:~/catkin_ws$ env | grep ROS
+ROS_ROOT=/opt/ros/<$ROS_DISTRO>/share/ros
+ROS_PACKAGE_PATH=/home/user/catkin_ws/src:/opt/ros/<$ROS_DISTRO>/share
 ROS_MASTER_URI=http://localhost:11311
 ROS_VERSION=1
-ROSLISP_PACKAGE_DIRECTORIES=/home/robotuser/catkin_ws/devel/share/common-lisp
-ROS_DISTRO=kinetic
-ROS_ETC_DIR=/opt/ros/kinetic/etc/ros
+ROSLISP_PACKAGE_DIRECTORIES=/home/user/catkin_ws/devel/share/common-lisp
+ROS_DISTRO=<$ROS_DISTRO>
+ROS_ETC_DIR=/opt/ros/<$ROS_DISTRO>/etc/ros
 ```
 
 **ワークスペース名について**  
@@ -148,7 +148,7 @@ $ source devel/setup.bash
 それに必要なソフトウェアパッケージの取得，ビルドを行います．
 
 ```
-$ sudo apt-get install gazebo7 ros-kinetic-qt-build ros-kinetic-gazebo-ros-control ros-kinetic-gazebo-ros-pkgs ros-kinetic-ros-control ros-kinetic-control-toolbox ros-kinetic-realtime-tools ros-kinetic-ros-controllers ros-kinetic-xacro python-wstool ros-kinetic-tf-conversions ros-kinetic-kdl-parser
+$ sudo apt-get install gazebo7 ros-<$ROS_DISTRO>-qt-build ros-<$ROS_DISTRO>-gazebo-ros-control ros-<$ROS_DISTRO>-gazebo-ros-pkgs ros-<$ROS_DISTRO>-ros-control ros-<$ROS_DISTRO>-control-toolbox ros-<$ROS_DISTRO>-realtime-tools ros-<$ROS_DISTRO>-ros-controllers ros-<$ROS_DISTRO>-xacro python-wstool ros-<$ROS_DISTRO>-tf-conversions ros-<$ROS_DISTRO>-kdl-parser
 $ cd ~/catkin_ws
 $ wstool merge -t src https://raw.githubusercontent.com/RethinkRobotics/baxter_simulator/kinetic-devel/baxter_simulator.rosinstall
 $ wstool update -t src
@@ -309,13 +309,13 @@ $ rospack find tork_moveit_tutorial
 - ワークスペース内の `tork_moveit_tutorial` が **参照されている** 場合
     （パッケージの取得とビルドを行った方を参照）
     ```
-    robotuser@robotuser-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
-    /home/robotuser/catkin_ws/src/tork_moveit_tutorial
+    user@user-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
+    /home/user/catkin_ws/src/tork_moveit_tutorial
     ```
 - ワークスペース内の `tork_moveit_tutorial` が **参照されていない** 場合
     （元々インストールされているパッケージの方を参照）
     ```
-    robotuser@robotuser-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
+    user@user-PC:~/catkin_ws$ rospack find tork_moveit_tutorial 
     /opt/ros/<$ROS_DISTRO>/share/tork_moveit_tutorial
     ```
 
@@ -339,7 +339,7 @@ ROS 環境設定を実行しましたら再度 `rospack find tork_moveit_tutoria
 `/script` フォルダ内にあります．
 
 ```
-robotuser@robotuser-PC:~/catkin_ws$ ls ~/catkin_ws/src/tork_moveit_tutorial/script
+user@user-PC:~/catkin_ws$ ls ~/catkin_ws/src/tork_moveit_tutorial/script
 baxter_moveit_tutorial_poses.py                     nextage_moveit_tutorial_poses_object.py
 demo.py                                             nextage_moveit_tutorial_poses.py
 duaro_moveit_tutorial_poses.py                      nextage_moveit_tutorial_poses_rate.py
@@ -612,9 +612,9 @@ New Document → Empty Document といったメニューがありますのでそ
 ```
 $ cd ~/catkin_ws/src/tork_moveit_tutorial/script/
 $ ls -l | grep baxter
--rwxrwxr-x 1 robotuser robotuser 1631  8月 28 16:33 baxter_moveit_tutorial_poses_2.py
--rw-rw-r-- 1 robotuser robotuser    0  9月  4 14:42 baxter_moveit_tutorial_poses_3.py
--rwxrwxr-x 1 robotuser robotuser 1081  4月  8 16:34 baxter_moveit_tutorial_poses.py
+-rwxrwxr-x 1 user user 1631  8月 28 16:33 baxter_moveit_tutorial_poses_2.py
+-rw-rw-r-- 1 user user    0  9月  4 14:42 baxter_moveit_tutorial_poses_3.py
+-rwxrwxr-x 1 user user 1081  4月  8 16:34 baxter_moveit_tutorial_poses.py
 ```
 
 `ls -l` の出力の一番左にある `-rwxrwxr-x ` のように 
@@ -640,9 +640,9 @@ $ chmod a+x baxter_moveit_tutorial_poses_3.py
 
 ```
 $ ls -l | grep baxter
--rwxrwxr-x 1 robotuser robotuser 1631  8月 28 16:33 baxter_moveit_tutorial_poses_2.py
--rwxrwxr-x 1 robotuser robotuser    0  9月  4 14:42 baxter_moveit_tutorial_poses_3.py
--rwxrwxr-x 1 robotuser robotuser 1081  4月  8 16:34 baxter_moveit_tutorial_poses.py
+-rwxrwxr-x 1 user user 1631  8月 28 16:33 baxter_moveit_tutorial_poses_2.py
+-rwxrwxr-x 1 user user    0  9月  4 14:42 baxter_moveit_tutorial_poses_3.py
+-rwxrwxr-x 1 user user 1081  4月  8 16:34 baxter_moveit_tutorial_poses.py
 ```
 
 `baxter_moveit_tutorial_poses_3.py` に他のプログラムファイルと同様の
