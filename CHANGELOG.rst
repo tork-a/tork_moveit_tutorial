@@ -2,6 +2,20 @@
 Changelog for package tork_moveit_tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* add melodic sections (`#55 <https://github.com/tork-a/tork_moveit_tutorial/issues/55>`_)
+* add example with myCobot (`#54 <https://github.com/tork-a/tork_moveit_tutorial/issues/54>`_)
+* fix typo MINAS-TRA1 -> KHI Duaro (`#53 <https://github.com/tork-a/tork_moveit_tutorial/issues/53>`_)
+* mod for kinetic with checking ROS version and normalizing orientation (`#47 <https://github.com/tork-a/tork_moveit_tutorial/issues/47>`_)
+* fix CI (`#49 <https://github.com/tork-a/tork_moveit_tutorial/issues/49>`_)
+* fix a typo 'movieit' to 'moveit' (`#44 <https://github.com/tork-a/tork_moveit_tutorial/issues/44>`_)
+* Bump jinja2 from 2.11.1 to 2.11.3 in /.circleci (`#52 <https://github.com/tork-a/tork_moveit_tutorial/issues/52>`_)
+* Bump urllib3 from 1.25.8 to 1.26.5 in /.circleci (`#50 <https://github.com/tork-a/tork_moveit_tutorial/issues/50>`_)
+* Bump babel from 2.8.0 to 2.9.1 in /.circleci (`#56 <https://github.com/tork-a/tork_moveit_tutorial/issues/56>`_)
+
+* Contributors: Kei Okada, Tokyo Opensource Robotics Developer 534, Yosuke Yamamoto, dependabot[bot]
+
 0.0.10 (2020-01-23)
 -------------------
 * mod a file name of the additional chapter (`#43 <https://github.com/tork-a/tork_moveit_tutorial/issues/43>`_)
