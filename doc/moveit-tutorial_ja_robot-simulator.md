@@ -12,13 +12,16 @@
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 - NEXTAGE OPEN : 人型双腕ロボット
 - MINAS TRA1 : 単腕マニピュレータ
 - KHI duaro : スカラ型双腕ロボット
 - Baxter Research Robot : 人型双腕ロボット（「ワークスペースの作成」の章にて）
 
+<$endif>
+<$ifeq <$ROS_DISTRO>|melodic>
+- myCobot : 教育用単腕マニピュレータ
 <$endif>
 
 
@@ -38,7 +41,7 @@
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 - ROS のシミュレータ
   - NEXTAGE OPEN / Baxter Research Robot / MINAS TRA1 / KHI duaro
@@ -83,7 +86,7 @@ NEXTAGE OPEN に加えて他のロボットのソフトウェアもインスト�
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 - ROS とチュートリアルパッケージ
 - ロボットソフトウェア
@@ -109,11 +112,19 @@ NEXTAGE OPEN に加えて他のロボットのソフトウェアもインスト�
 
 <$endif>
 
+<$ifeq <$ROS_DISTRO>|melodic>
+
+- Ubuntu 18.04
+- ROS Melodic
+
+<$endif>
+
 > ROS は Ubuntu の各バージョンに対応したものがあります．
 > それぞれに対応した Ubuntu と ROS の組み合わせで利用する必要があります．
 > 
 >  Ubuntu バージョン | ROS バージョン | サポート終了
 >  --- | --- | ---
+>  20.04 (Focal)  | Noetic Ninjemys | 2025年5月
 >  18.04 (Bionic) | Melodic Morenia| 2023年5月
 >  16.04 (Xenial) | Kinetic Kame | 2021年4月
 >  14.04 (Trusty) | Indigo Igloo | 2019年4月
@@ -142,7 +153,7 @@ $ sudo apt-get install ros-indigo-desktop-full
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ```
 $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -224,7 +235,7 @@ $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-minas
 ```
 
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ### KHI duaro ソフトウェアのインストール
 
@@ -233,6 +244,38 @@ KHI duaro のソフトウェアをインストールします．
 
 ```
 $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-khi-duaro-gazebo ros-<$ROS_DISTRO>-khi-duaro-description ros-<$ROS_DISTRO>-khi-duaro-ikfast-plugin ros-<$ROS_DISTRO>-khi-duaro-moveit-config
+```
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|melodic>
+
+### myCobot ソフトウェアのインストール
+
+myCobotのソフトウェアのインストールにはワークスペースの作成が必要です．
+
+- catkin の workspace を作る
+  - http://wiki.ros.org/ja/catkin/Tutorials/create_a_workspace
+
+`catkin_ws` という名前のワークスペースを作成する手順は次のとおりです．
+
+```
+$ mkdir -p ~/catkin_ws/src
+$ cd ~/catkin_ws/src
+$ catkin_init_workspace
+$ cd ~/catkin_ws/
+$ catkin_make
+$ source devel/setup.bash
+```
+
+次に，myCobot のソースコードの取得とビルドを行います．
+
+```
+$ cd ~/catkin_ws/src
+$ git clone https://github.com/elephantrobotics/mycobot_ros
+$ cd ~/catkin_ws
+$ catkin_make
+$ source devel/setup.bash
 ```
 
 <$endif>
@@ -289,7 +332,7 @@ $ rtmlaunch nextage_moveit_config nextage_demo.launch
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ![NextageROS_Demo - Starts](images/kinetic/nextage_moveit-demo_starts.png)
 
@@ -335,7 +378,7 @@ NEXTAGE OPEN ロボットの準備が完了しています．
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ![NEXTAGE - Gazebo Starts](images/kinetic/nextage_gazebo-starts.png)
 
@@ -362,7 +405,7 @@ $ roslaunch nextage_moveit_config moveit_planning_execution.launch
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ![NEXTAGE - MoveIt! Starts](images/kinetic/nextage_moveit-starts.png)
 
@@ -480,7 +523,7 @@ $ roslaunch tra1_bringup tra1_moveit.launch
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ![MINAS TRA1 - MoveIt! Starts](images/kinetic/minas-tra1_moveit_starts.png)
 
@@ -489,7 +532,7 @@ $ roslaunch tra1_bringup tra1_moveit.launch
 シミュレータを終了するには各ターミナルで Ctrl-C を入力してください．
 
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ### KHI duaro - Gazebo シミュレータ
 
@@ -538,6 +581,32 @@ $ roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
 
 <$endif>
 
+<$ifeq <$ROS_DISTRO>|melodic>
+
+### myCobot - シミュレータ
+
+#### MoveIt! の起動
+
+ーミナルで次のコマンドを実行して MoveIt! を起動します．
+
+**ターミナル-2** : MoveIt! の起動
+```
+$ source ~/catkin_ws/devel/setup.bash
+$ roslaunch roslaunch mycobot_320_moveit demo.launch
+```
+
+![myCobot MoveIt! - Starts](images/melodic/mycobot-moveit_starts.png)
+
+これで MoveIt! の動作計画機能が利用できる状態になっています．
+
+
+#### シミュレータの終了
+
+シミュレータでの作業が終わりましたら
+全てのターミナルで Ctrl-C を入力することでシミュレータを終了します．
+
+<$endif>
+
 
 ### MoveIt! GUI での動作計画
 
@@ -566,7 +635,7 @@ MoveIt! が動作計画を行い，シミュレータのロボットが動作し
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$ifneq <$ROS_DISTRO>|indigo>
 
 ![MoveIt! - RViz Plan and Execute](images/kinetic/nextage_moveit_plan-execute.png)
 

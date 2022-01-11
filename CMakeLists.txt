@@ -31,7 +31,10 @@ install(DIRECTORY script
 #############
 
 # make docs
-# ROS_PARALLEL_JOBS='' catkin_make --pkg tork_moveit_tutorial -- docbuild
+# ROS_PARALLEL_JOBS='' catkin_make --pkg tork_moveit_tutorial -- docbuild_tork_moveit_tutorial_indigo
+#   OR
+# catkin b tork_moveit_tutorial --make-args docbuild_tork_moveit_tutorial_indigo
+
 macro(build_doc _rosdistro)
  add_custom_target(docbuild_${PROJECT_NAME}_${_rosdistro}
   COMMAND cmake -E remove_directory output
@@ -50,9 +53,11 @@ macro(build_doc _rosdistro)
   COMMAND cmake -E chdir output platex ${PROJECT_NAME}.tex
   COMMAND cmake -E chdir output dvipdfmx ${PROJECT_NAME}
   COMMAND cmake -E rename output/${PROJECT_NAME}.pdf ${PROJECT_NAME}-${_rosdistro}-${${PROJECT_NAME}_VERSION}.pdf
+  COMMAND echo "Generated ${PROJECT_SOURCE_DIR}/${PROJECT_NAME}-${_rosdistro}-${${PROJECT_NAME}_VERSION}.pdf" 1>&2
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
   )
 endmacro()
 
 build_doc(indigo)
 build_doc(kinetic)
+build_doc(melodic)
