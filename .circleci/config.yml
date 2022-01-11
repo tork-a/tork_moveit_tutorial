@@ -8,7 +8,8 @@ commands:
           name: Setup ROS catkin workspace
           command : |-
             apt update
-            apt install -y -q lsb-release wget apt
+            echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections # fix for tzdata
+            apt install -y -q lsb-release wget apt gnupg
             sh -c "echo \"deb $ROS_REPOSITORY_PATH `lsb_release -cs` main\" > /etc/apt/sources.list.d/ros-latest.list"
             wget http://packages.ros.org/ros.key -O - | apt-key add -
             apt update
@@ -49,6 +50,14 @@ jobs:
       - ROS_REPOSITORY_PATH: http://packages.ros.org/ros/ubuntu
     steps:
       - build
+  build_melodic:
+    docker:
+      - image: ubuntu:bionic
+    environment:
+      - ROS_DISTRO: melodic
+      - ROS_REPOSITORY_PATH: http://packages.ros.org/ros/ubuntu
+    steps:
+      - build
 
   build_doc:
     docker:
@@ -77,6 +86,7 @@ jobs:
             cmake ..
             make docbuild_${CIRCLE_PROJECT_REPONAME}_indigo
             make docbuild_${CIRCLE_PROJECT_REPONAME}_kinetic
+            make docbuild_${CIRCLE_PROJECT_REPONAME}_melodic
             mkdir ~/artifacts && find -L .. -iname '*.pdf' -exec cp {} ~/artifacts/ \;
       - persist_to_workspace:
           root: /root
@@ -94,6 +104,7 @@ jobs:
           command: |-
             docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:indigo-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python-bloom fakeroot debhelper; rosdep init; rosdep update --include-eol-distros; cd src; bloom-generate rosdebian --os-name ubuntu --os-version trusty --ros-distro indigo; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
             docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:kinetic-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python-bloom fakeroot debhelper; rosdep init; rosdep update --include-eol-distros; cd src; bloom-generate rosdebian --os-name ubuntu --os-version xenial --ros-distro kinetic; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
+            docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:melodic-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python-bloom fakeroot debhelper; rosdep init; rosdep update --include-eol-distros; cd src; bloom-generate rosdebian --os-name ubuntu --os-version bionic --ros-distro melodic; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
             mkdir ~/artifacts && find -L . -iname '*.deb' -exec cp {} ~/artifacts/ \;
       - persist_to_workspace:
           root: /home/circleci
@@ -121,6 +132,7 @@ workflows:
     jobs:
       - build_indigo
       - build_kinetic
+      - build_melodic
       - build_doc:
           filters:
             tags:
