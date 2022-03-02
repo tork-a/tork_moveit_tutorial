@@ -5,6 +5,8 @@
 プログラムからロボットを操作します．
 
 
+<$if <$ROS_DISTRO>==indigo||<$ROS_DISTRO>==kinetic||<$ROS_DISTRO>==melodic>
+
 ## プログラムを入力して実行する
 
 1行もしくは数行ごとにプログラムを入力して実行し，各コマンドで何をしているのかを見てみます．
@@ -13,7 +15,7 @@
 それらを起動したターミナルとは別に新たにターミナルを起動して
 ROS の環境設定と対話的にプログラミングを行えるように準備します．
 
-#### NEXTAGE OPEN の場合
+### NEXTAGE OPEN の場合
 
 「シミュレータと MoveIt! の起動」の
 「[NEXTAGE OPEN - hrpsys シミュレータ](moveit-tutorial_ja_robot-simulator.md#start-nextage-hrpsys-simulator)」もしくは
@@ -30,7 +32,7 @@ $ rosrun tork_moveit_tutorial demo.py
 ```
 
 
-### 特定の関節を動かす
+#### 特定の関節を動かす
 
 プログラムから関節を動かすなどをするために「右腕」の `group` を作成します．
 次の `In[1]:` 以下につづくプログラムを入力して [Enter/Return] キーを押して
@@ -121,7 +123,7 @@ Out[10]: True
 ```
 
 
-### 腕全体の関節を動かす
+#### 腕全体の関節を動かす
 
 `set_joint_value_target()` は1つの関節だけでなく
 腕全体の関節角度目標値のリストを渡すことで複数の関節を同時に動かすこともできます．
@@ -137,7 +139,7 @@ Out[12]: True
 NEXTAGE OPEN ロボットは初期姿勢に戻っていることと思います．
 
 
-### 手先の位置を指定して動かす
+#### 手先の位置を指定して動かす
 
 手先（エンドエフェクタリンク）の位置を指定して腕を動かしてみます．
 
@@ -169,7 +171,7 @@ Out[22]: True
 手先の「姿勢」は思わぬ方を向いていることもあります．
 
 
-### 手先の姿勢を指定して動かす
+#### 手先の姿勢を指定して動かす
 
 手先の姿勢を指定してロボットを動かしてみます．
 
@@ -196,7 +198,7 @@ Out[32]: True
 [ INFO] [1515668193.145149146, 166.319999999]: ABORTED: Solution found but controller failed during execution
 ```
 
-### 手先の位置と姿勢を指定して動かす
+#### 手先の位置と姿勢を指定して動かす
 
 手先の位置と姿勢を同時に指定して腕を動かすことができます．
 
@@ -347,7 +349,7 @@ Out[70]: True
 にて説明します．
 
 
-### 直線補間軌道でロボットを動かす
+#### 直線補間軌道でロボットを動かす
 
 `group.plan()` や `group.go()` を用いた動作計画では動作開始姿勢と目標姿勢の間の動作は
 各関節の開始角度と目標角度の間を補間した動作として計画されます．
@@ -373,7 +375,7 @@ Out[70]: True
 を通して学習します．
 
 
-### 連続した指令をロボットに送る
+#### 連続した指令をロボットに送る
 
 ロボットの複数の異なる姿勢を指示して動作計画と実行を行います．
 
@@ -446,7 +448,7 @@ Out[83]: True
 ```
 
 
-### 四角形や円に沿ってエンドエフェクタを動かす
+#### 四角形や円に沿ってエンドエフェクタを動かす
 
 エンドエフェクタを四角形や円に沿って動かすような場合も
 複数の異なる姿勢を指示して動作計画と実行を行います．
@@ -537,6 +539,8 @@ In [99]: moveit_commander.os._exit(0)
 
 <$endif>
 
+<$endif>
+
 
 ## プログラムファイルを実行する
 
@@ -545,6 +549,8 @@ In [99]: moveit_commander.os._exit(0)
 
 プログラムファイルを実行する前に物理シミュレータと MoveIt! を起動しておきます．
 
+
+<$if <$ROS_DISTRO>==indigo||<$ROS_DISTRO>==kinetic||<$ROS_DISTRO>==melodic>
 
 ### NEXTAGE OPEN の場合
 
@@ -625,6 +631,7 @@ nextage_moveit_tutorial_poses.py で実行している内容は
 - `print()` を ROS のログに出力する `rospy.loginfo()` に変更
 - `rospy.loginfo()` の表示内容もどの箇所の実行ログかわかるように変更
 
+<$endif>
 
 <$ifeq <$ROS_DISTRO>|indigo>
 
@@ -711,6 +718,8 @@ NEXTAGE OPEN の動作計画・動作の実行ファイルとの相違点は次�
 <$endif>
 
 
+<$if <$ROS_DISTRO>==indigo||<$ROS_DISTRO>==kinetic||<$ROS_DISTRO>==melodic>
+
 ### MINAS TRA1 の場合
 
 
@@ -785,8 +794,10 @@ if __name__ == '__main__':
 - `group = MoveGroupCommander()` に渡すグループ名を `"manipulator"` に変更
 - ターゲットポーズの位置・姿勢を MINAS TRA1 の機構に適したものに変更
 
+<$endif>
 
-<$ifneq <$ROS_DISTRO>|indigo>
+
+<$if <$ROS_DISTRO>==kinetic||<$ROS_DISTRO>==melodic||<$ROS_DISTRO>==noetic>
 
 ### KHI duaro の場合
 
