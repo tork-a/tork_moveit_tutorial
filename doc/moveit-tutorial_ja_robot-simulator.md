@@ -4,32 +4,30 @@
 シミュレータ上のロボットを動かしてみます．  
 本チュートリアルでは下記のロボットのシミュレータの利用方法を紹介します．
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 - NEXTAGE OPEN : 人型双腕ロボット
 - Baxter Research Robot : 人型双腕ロボット
 - MINAS TRA1 : 単腕マニピュレータ
 
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$elif <$ROS_DISTRO>==kinetic>
 
 - NEXTAGE OPEN : 人型双腕ロボット
 - MINAS TRA1 : 単腕マニピュレータ
 - KHI duaro : スカラ型双腕ロボット
 - Baxter Research Robot : 人型双腕ロボット（「ワークスペースの作成」の章にて）
 
-<$endif>
-<$ifeq <$ROS_DISTRO>|melodic>
+<$elif <$ROS_DISTRO>==melodic>
+
 - myCobot : 教育用単腕マニピュレータ
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|melodic>
-
 - NEXTAGE OPEN : 人型双腕ロボット
 - MINAS TRA1 : 単腕マニピュレータ（「ソースインストール」の章にて）
-- KHI duaro : スカラ型双腕ロボット（「ソースインストール」の章にて）
+- KHI duaro : スカラ型双腕ロボット
 - Baxter Research Robot : 人型双腕ロボット（「ワークスペースの作成」の章にて）
+
+<$elif <$ROS_DISTRO>==noetic>
+
+- KHI duaro : スカラ型双腕ロボット（「ソースインストール」の章にて）
 
 <$endif>
 
@@ -38,7 +36,7 @@
 
 本チュートリアルで扱うシミュレータには次のような種類があります．
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 - ROS のシミュレータ
   - NEXTAGE OPEN / Baxter Research Robot / MINAS TRA1
@@ -48,9 +46,7 @@
   - NEXTAGE OPEN のみ
     - 動力学を含む物理シミュレータ
 
-<$endif>
-
-<$ifneq <$ROS_DISTRO>|indigo>
+<$elif <$ROS_DISTRO>==kinetic>
 
 - ROS のシミュレータ
   - NEXTAGE OPEN / Baxter Research Robot / MINAS TRA1 / KHI duaro
@@ -59,6 +55,23 @@
 - hrpsys(RTM) シミュレータ
   - NEXTAGE OPEN のみ
     - 動力学を含む物理シミュレータ
+
+<$elif <$ROS_DISTRO>==melodic>
+
+- ROS のシミュレータ
+  - myCobot / NEXTAGE OPEN / MINAS TRA1 / KHI duaro
+    - MoveIt! シミュレータ : 運動学のみの動作計画シミュレータ
+    - Gazebo シミュレータ : 動力学を含む環境・物理シミュレータ
+- hrpsys(RTM) シミュレータ
+  - NEXTAGE OPEN のみ
+    - 動力学を含む物理シミュレータ
+
+<$elif <$ROS_DISTRO>==noetic>
+
+- ROS のシミュレータ
+  - KHI duaro
+    - MoveIt! シミュレータ : 運動学のみの動作計画シミュレータ
+    - Gazebo シミュレータ : 動力学を含む環境・物理シミュレータ
 
 <$endif>
 
@@ -85,7 +98,7 @@ NEXTAGE OPEN の Gazebo シミュレータと MoveIt! の組み合わせを基�
 NEXTAGE OPEN に加えて他のロボットのソフトウェアもインストールすると
 他のロボットへのプログラム応用方法についての理解が進みます．
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 - ROS とチュートリアルパッケージ
 - ロボットソフトウェア
@@ -93,15 +106,25 @@ NEXTAGE OPEN に加えて他のロボットのソフトウェアもインスト�
   - Baxter ソフトウェア
   - MINAS TRA1 ソフトウェア
 
-<$endif>
-
-<$ifneq <$ROS_DISTRO>|indigo>
+<$elif <$ROS_DISTRO>==kinetic>
 
 - ROS とチュートリアルパッケージ
 - ロボットソフトウェア
   - NEXTAGE OPEN ソフトウェア
   - MINAS TRA1 ソフトウェア
   - KHI duaro ソフトウェア
+
+<$elif <$ROS_DISTRO>==melodic>
+
+- ROS とチュートリアルパッケージ
+- ロボットソフトウェア
+  - NEXTAGE OPEN ソフトウェア
+  - KHI duaro ソフトウェア
+
+<$elif <$ROS_DISTRO>==noetic>
+
+- ROS とチュートリアルパッケージ
+- ロボットソフトウェア
 
 <$endif>
 
@@ -112,19 +135,20 @@ NEXTAGE OPEN に加えて他のロボットのソフトウェアもインスト�
 - Ubuntu 14.04
 - ROS Indigo
 
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$elif <$ROS_DISTRO>==kinetic>
 
 - Ubuntu 16.04
 - ROS Kinetic
 
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|melodic>
+<$elif <$ROS_DISTRO>==melodic>
 
 - Ubuntu 18.04
 - ROS Melodic
+
+<$elif <$ROS_DISTRO>==noetic>
+
+- Ubuntu 20.04
+- ROS Noetic
 
 <$endif>
 
@@ -189,6 +213,8 @@ $ sudo apt-get install ros-<$ROS_DISTRO>-tork-moveit-tutorial
 ```
 
 
+<$if <$ROS_DISTRO>==indigo||<$ROS_DISTRO>==kinetic||<$ROS_DISTRO>==melodic>
+
 ### NEXTAGE OPEN ソフトウェアのインストール
 
 ターミナルから次のコマンドを実行して
@@ -197,6 +223,8 @@ NEXTAGE OPEN のソフトウェアをインストールします．
 ```
 $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-rtmros-nextage ros-<$ROS_DISTRO>-rtmros-hironx
 ```
+
+<$endif>
 
 
 <$ifeq <$ROS_DISTRO>|indigo>
@@ -221,6 +249,7 @@ $ sudo apt-get install ros-<$ROS_DISTRO>-baxter-simulator
 
 <$endif>
 
+<$if <$ROS_DISTRO>==indigo||<$ROS_DISTRO>==kinetic>
 
 ### MINAS TRA1 ソフトウェアのインストール
 
@@ -231,8 +260,10 @@ MINAS TRA1 のソフトウェアをインストールします．
 $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-minas
 ```
 
+<$endif>
 
-<$ifneq <$ROS_DISTRO>|indigo>
+
+<$if <$ROS_DISTRO>==kinetic||<$ROS_DISTRO>==melodic>
 
 ### KHI duaro ソフトウェアのインストール
 
@@ -300,7 +331,7 @@ $ echo "source /opt/ros/<$ROS_DISTRO>/setup.bash" >> ~/.bashrc
 `source /opt/ros/<$ROS_DISTRO>/setup.bash` は不要です．
 
 
-<$ifeq <$ROS_DISTRO>|melodic>
+<$if <$ROS_DISTRO>==melodic||$<ROS_DISTRO>==noetic>
 
 ## ソースインストール
 
@@ -315,6 +346,8 @@ $ cd /tmp/catkin_ws/src
 $ catkin_init_workspace
 ```
 
+<$if <$ROS_DISTRO>==melodic>
+
 ### MINAS TRA1 ソフトウェアの取得とビルド
 
 次の手順で MINAS TRA1 のクローンと
@@ -328,6 +361,10 @@ $ cd /tmp/catkin_ws
 $ catkin_make
 ```
 
+<$endif>
+
+<$if <$ROS_DISTRO>==noetic>
+
 ### KHI duaro ソフトウェアの取得とビルド
 
 次の手順で KHI Duaro のクローンと
@@ -340,6 +377,8 @@ $ rosdep install --from-paths . --ignore-src -y
 $ cd /tmp/catkin_ws
 $ catkin_make
 ```
+
+<$endif>
 
 ### ワークスペースでビルドしたソフトウェアのインストール
 
@@ -486,7 +525,7 @@ $ roslaunch nextage_moveit_config moveit_planning_execution.launch
 シミュレータを終了するには各ターミナルで Ctrl-C を入力してください．
 
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 ### Baxter Research Robot - Gazebo シミュレータ
 
@@ -565,6 +604,8 @@ $ roslaunch baxter_moveit_config baxter_grippers.launch
 <$endif>
 
 
+<$if <$ROS_DISTRO>==indigo||<$ROS_DISTRO>==kinetic||<$ROS_DISTRO>==melodic>
+
 ### MINAS TRA1 - MoveIt! シミュレータ
 
 ターミナルを2つ起動します．
@@ -605,8 +646,10 @@ $ roslaunch tra1_bringup tra1_moveit.launch
 
 シミュレータを終了するには各ターミナルで Ctrl-C を入力してください．
 
+<$endif>
 
-<$ifneq <$ROS_DISTRO>|indigo>
+
+<$if <$ROS_DISTRO>==kinetic||<$ROS_DISTRO>==melodic||<$ROS_DISTRO>==noetic>
 
 ### KHI duaro - Gazebo シミュレータ
 
