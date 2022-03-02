@@ -331,7 +331,7 @@ $ echo "source /opt/ros/<$ROS_DISTRO>/setup.bash" >> ~/.bashrc
 `source /opt/ros/<$ROS_DISTRO>/setup.bash` は不要です．
 
 
-<$if <$ROS_DISTRO>==melodic||$<ROS_DISTRO>==noetic>
+<$if <$ROS_DISTRO>==melodic||<$ROS_DISTRO>==noetic>
 
 ## ソースインストール
 
