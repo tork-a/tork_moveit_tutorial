@@ -151,7 +151,6 @@ NEXTAGE OPEN に加えて他のロボットのソフトウェアもインスト�
 します．
 既に ROS がインストールされていれば，次のチュートリアルパッケージのインストールに進んでください．
 
-<$ifeq <$ROS_DISTRO>|indigo>
 
 ```
 $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -161,19 +160,6 @@ $ sudo apt-get update
 $ sudo apt-get install ros-indigo-desktop-full
 ```
 
-<$endif>
-
-<$ifneq <$ROS_DISTRO>|indigo>
-
-```
-$ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-$ sudo apt install curl
-$ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-sudo apt update
-sudo apt install ros-<$ROS_DISTRO>-desktop-full
-```
-
-<$endif>
 
 rosdep の初期化を行います．
 
