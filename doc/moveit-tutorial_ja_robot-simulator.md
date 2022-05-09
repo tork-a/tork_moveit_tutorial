@@ -155,7 +155,8 @@ NEXTAGE OPEN に加えて他のロボットのソフトウェアもインスト�
 
 ```
 $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-$ sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+$ sudo apt-get install curl
+$ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 $ sudo apt-get update
 $ sudo apt-get install ros-indigo-desktop-full
 ```
@@ -166,9 +167,10 @@ $ sudo apt-get install ros-indigo-desktop-full
 
 ```
 $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-$ sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
-sudo apt-get update
-sudo apt-get install ros-<$ROS_DISTRO>-desktop-full
+$ sudo apt install curl
+$ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+sudo apt update
+sudo apt install ros-<$ROS_DISTRO>-desktop-full
 ```
 
 <$endif>
@@ -261,7 +263,7 @@ $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-khi-duaro-gazebo
 
 ### myCobot ソフトウェアのインストール
 
-myCobotのソフトウェアのインストールにはワークスペースの作成が必要です．
+myCobot のソフトウェアのインストールにはワークスペースの作成が必要です．
 
 - catkin の workspace を作る
   - http://wiki.ros.org/ja/catkin/Tutorials/create_a_workspace
@@ -316,7 +318,7 @@ $ echo "source /opt/ros/<$ROS_DISTRO>/setup.bash" >> ~/.bashrc
 
 ## ソースインストール
 
-aptでインストールできるようにバイナリ／リリースされていないロボットパッケージはワークスペース経由でインストールすることができます．標準では推奨されていな方法ですので十分に注意して実行してください．
+apt でインストールできるようにバイナリ／リリースされていないロボットパッケージはワークスペース経由でインストールすることができます．標準では推奨されていな方法ですので十分に注意して実行してください．
 
 まず，`/tmp/catkin_ws` という名前のワークスペースを作成する手順は次のとおりです．
 
@@ -335,7 +337,7 @@ $ catkin_init_workspace
 ```
 $ cd /tmp/catkin_ws/src
 $ git clone https://github.com/tork-a/minas.git
-$ rosdep install --from-path . --ignore-src -y
+$ rosdep install --from-paths . --ignore-src -y
 $ cd /tmp/catkin_ws
 $ catkin_make
 ```
@@ -348,7 +350,7 @@ $ catkin_make
 ```
 $ cd /tmp/catkin_ws/src
 $ git clone https://github.com/Kawasaki-Robotics/khi_robot.git
-$ rosdep install --from-path . --ignore-src -y
+$ rosdep install --from-paths . --ignore-src -y
 $ cd /tmp/catkin_ws
 $ catkin_make
 ```
@@ -446,9 +448,15 @@ NEXTAGE OPEN ロボットの準備が完了しています．
 
 <$endif>
 
-<$ifneq <$ROS_DISTRO>|indigo>
+<$ifeq <$ROS_DISTRO>|kinetic>
 
 ![NEXTAGE - Gazebo Starts](images/kinetic/nextage_gazebo-starts.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|melodic>
+
+![NEXTAGE - Gazebo Starts](images/melodic/nextage_gazebo_starts.png)
 
 <$endif>
 
@@ -473,9 +481,15 @@ $ roslaunch nextage_moveit_config moveit_planning_execution.launch
 
 <$endif>
 
-<$ifneq <$ROS_DISTRO>|indigo>
+<$ifeq <$ROS_DISTRO>|kinetic>
 
 ![NEXTAGE - MoveIt! Starts](images/kinetic/nextage_moveit-starts.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|melodic>
+
+![NEXTAGE - MoveIt! Starts](images/melodic/nextage_moveit_starts.png)
 
 <$endif>
 
@@ -591,9 +605,15 @@ $ roslaunch tra1_bringup tra1_moveit.launch
 
 <$endif>
 
-<$ifneq <$ROS_DISTRO>|indigo>
+<$ifeq <$ROS_DISTRO>|kinetic>
 
 ![MINAS TRA1 - MoveIt! Starts](images/kinetic/minas-tra1_moveit_starts.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|melodic>
+
+![MINAS TRA1 - MoveIt! Starts](images/melodic/minas-tra1_moveit_starts.png)
 
 <$endif>
 
@@ -614,7 +634,18 @@ $ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch khi_duaro_gazebo duaro_world.launch  
 ```
 
+<$if <$ROS_DISTRO>==kinetic>
+
 ![duaro Simulator - Starts](images/kinetic/duaro-simulator_starts.png)
+
+<$endif>
+
+<$if <$ROS_DISTRO>==melodic>
+
+![duaro Simulator - Starts](images/melodic/duaro_gazebo_starts.png)
+
+<$endif>
+
 
 しばらくすると次のようなメッセージが **ターミナル-1** に表示されます．
 
@@ -637,7 +668,17 @@ $ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
 ```
 
+<$if <$ROS_DISTRO>==kinetic>
+
 ![duaro MoveIt! - Starts](images/kinetic/duaro-moveit_starts.png)
+
+<$endif>
+
+<$if <$ROS_DISTRO>==melodic>
+
+![duaro MoveIt! - Starts](images/melodic/duaro_moveit_starts.png)
+
+<$endif>
 
 これで MoveIt! の動作計画機能が利用できる状態になっています．
 
@@ -703,9 +744,15 @@ MoveIt! が動作計画を行い，シミュレータのロボットが動作し
 
 <$endif>
 
-<$ifneq <$ROS_DISTRO>|indigo>
+<$ifeq <$ROS_DISTRO>|kinetic>
 
 ![MoveIt! - RViz Plan and Execute](images/kinetic/nextage_moveit_plan-execute.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|melodic>
+
+![MoveIt! - RViz Plan and Execute](images/melodic/nextage_moveit_plan-execute.png)
 
 <$endif>
 

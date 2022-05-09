@@ -667,9 +667,15 @@ if __name__ == '__main__':
 
 <$endif>
 
-<$ifneq <$ROS_DISTRO>|indigo>
+<$ifeq <$ROS_DISTRO>|kinetic>
 
 ![Nextage - MoveIt! / Poses Relative](images/kinetic/nextage_moveit_poses_relative.png)
+
+<$endif>
+
+<$ifeq <$ROS_DISTRO>|melodic>
+
+![Nextage - MoveIt! / Poses Relative](images/melodic/nextage_moveit_poses_relative.png)
 
 <$endif>
 
