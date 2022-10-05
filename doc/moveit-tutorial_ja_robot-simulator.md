@@ -302,6 +302,7 @@ $ source devel/setup.bash
 ```
 $ cd ~/catkin_ws/src
 $ git clone https://github.com/elephantrobotics/mycobot_ros
+$ rosdep install --from-paths . --ignore-src -y
 $ cd ~/catkin_ws
 $ catkin_make
 $ source devel/setup.bash
