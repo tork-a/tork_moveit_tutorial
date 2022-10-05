@@ -27,6 +27,7 @@
 
 <$elif <$ROS_DISTRO>==noetic>
 
+- myCobot : 教育用単腕マニピュレータ
 - KHI duaro : スカラ型双腕ロボット（「ソースインストール」の章にて）
 
 <$endif>
@@ -69,7 +70,7 @@
 <$elif <$ROS_DISTRO>==noetic>
 
 - ROS のシミュレータ
-  - KHI duaro
+  - myCobot / KHI duaro
     - MoveIt! シミュレータ : 運動学のみの動作計画シミュレータ
     - Gazebo シミュレータ : 動力学を含む環境・物理シミュレータ
 
@@ -276,7 +277,7 @@ $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-khi-duaro-gazebo
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|melodic>
+<$if <$ROS_DISTRO>==melodic|<$ROS_DISTRO>==noetic>
 
 ### myCobot ソフトウェアのインストール
 
