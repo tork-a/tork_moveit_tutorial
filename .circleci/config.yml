@@ -14,7 +14,8 @@ commands:
             wget http://packages.ros.org/ros.key -O - | apt-key add -
             apt update
             apt install -y --force-yes -q -qq dpkg # https://github.com/travis-ci/travis-ci/issues/9361#issuecomment-408431262 dpkg-deb: error: archive has premature member 'control.tar.xz' before 'control.tar.gz' #9361
-            apt install -y -q python-catkin-pkg python-rosdep ros-${ROS_DISTRO}-catkin
+            if [ $ROS_PYTHON_VERSION -eq 2 ]; then apt install -y -q python-catkin-pkg python-rosdep ros-${ROS_DISTRO}-catkin; fi
+            if [ $ROS_PYTHON_VERSION -eq 3 ]; then apt install -y -q python3-catkin-pkg python3-rosdep ros-${ROS_DISTRO}-catkin; fi
             apt install -y -q mongodb # to install ros-i${ROS_DISTRO}-warehouse-ros
             rosdep init && rosdep update --include-eol-distros
             mkdir -p ~/catkin_ws/src
