@@ -60,7 +60,7 @@ jobs:
       - build
   build_noetic:
     docker:
-      - image: ubuntu:bionic
+      - image: ubuntu:focal
     environment:
       - ROS_DISTRO: noetic
       - ROS_REPOSITORY_PATH: http://packages.ros.org/ros/ubuntu
