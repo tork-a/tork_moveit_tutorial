@@ -12,4 +12,4 @@ Contents
 <$endif>
 * [トラブルシューティング](moveit-tutorial_ja_trouble-shooting.md)
 * [クラス・関数リファレンス](moveit-tutorial_ja_reference-class-functions.md)
-* [Python チュートリアル ](moveit-tutorial_ja_python.md)
+* [Python チュートリアル](moveit-tutorial_ja_python.md)
