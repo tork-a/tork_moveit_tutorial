@@ -712,7 +712,7 @@ roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|melodic>
+<$if <$ROS_DISTRO>==melodic|<$ROS_DISTRO>==noetic>
 
 ### myCobot - シミュレータ
 
