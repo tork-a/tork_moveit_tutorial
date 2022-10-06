@@ -761,19 +761,19 @@ MoveIt! が動作計画を行い，シミュレータのロボットが動作し
 
 動作計画だけを行いたい場合は `Plan` ボタンをクリックします．
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 ![MoveIt! - RViz Plan and Execute](images/nextage_moveit_plan-execute.png)
 
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$elif <$ROS_DISTRO>==kinetic>
 
 ![MoveIt! - RViz Plan and Execute](images/kinetic/nextage_moveit_plan-execute.png)
 
-<$endif>
+<$elif <$ROS_DISTRO>==melodic>
 
-<$ifeq <$ROS_DISTRO>|melodic>
+![MoveIt! - RViz Plan and Execute](images/melodic/nextage_moveit_plan-execute.png)
+
+<$elif <$ROS_DISTRO>==noetic>
 
 ![MoveIt! - RViz Plan and Execute](images/melodic/nextage_moveit_plan-execute.png)
 
