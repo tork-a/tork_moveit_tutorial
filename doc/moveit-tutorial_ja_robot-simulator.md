@@ -333,9 +333,29 @@ echo "source /opt/ros/<$ROS_DISTRO>/setup.bash" >> ~/.bashrc
 
 - **注意**: 上記コマンドの `>>` を `>` にしてしまうと元々あった .bashrc 内の設定が消えてしまうので気をつけてください．
 
+<$if <$ROS_DISTRO>==melodic|<$ROS_DISTRO>==noetic>
+また，`~/catkin_ws`というワークスペースを作成した場合は，ワークスペース内の setup.bash を読み込むことで，ワークスペース内を含むROSの環境を設定することができます。
+
+```bash
+source ~/catkin_ws/devel/setup.bash
+```
+
+同様に、これは新しくターミナルを立ち上げて ROS を使用する前には毎回必要になるので，下記のように .bashrc ファイルに設定を加えることで
+ターミナル起動時に自動で実行するようにしておくと便利です．
+
+```bash
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+```
+
+<$endif>
+
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic>
 .bashrc の設定ができていると以後のターミナルを起動するたびに行う
 `source /opt/ros/<$ROS_DISTRO>/setup.bash` は不要です．
-
+<$elif <$ROS_DISTRO>==melodic|<$ROS_DISTRO>==noetic>
+.bashrc の設定ができていると以後のターミナルを起動するたびに行う
+`source /opt/ros/<$ROS_DISTRO>/setup.bash` 及び `source ~/catkin_ws/devel/setup.bash` は不要です．
+<$endif>
 
 <$if <$ROS_DISTRO>==melodic>
 
