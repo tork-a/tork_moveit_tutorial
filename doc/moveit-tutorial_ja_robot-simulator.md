@@ -385,7 +385,10 @@ catkin_make_isolated --install --install-space /opt/ros/<$ROS_DISTRO> -DCMAKE_BU
 
 ## シミュレータと MoveIt! の起動
 
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
+
 <a id="start-nextage-hrpsys-simulator"></a>
+
 ### <a href="#start-nextage-hrpsys-simulator">NEXTAGE OPEN - hrpsys シミュレータ</a>
 
 #### hrpsys シミュレータ・MoveIt! などの起動
@@ -423,7 +426,12 @@ rtmlaunch nextage_moveit_config nextage_demo.launch
 シミュレータを終了するには全体を起動したターミナル上で
 Ctrl-C を入力すると全体が終了します．
 
+<$endif>
+
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
+
 <a id="start-nextage-gazebo-simulator"></a>
+
 ### <a href="#start-nextage-gazebo-simulator">NEXTAGE OPEN - Gazebo シミュレータ</a>
 
 NEXTAGE OPEN のもうひとつの動力学シミュレータは
@@ -502,6 +510,7 @@ roslaunch nextage_moveit_config moveit_planning_execution.launch
 
 シミュレータを終了するには各ターミナルで Ctrl-C を入力してください．
 
+<$endif>
 
 <$if <$ROS_DISTRO>==indigo>
 
