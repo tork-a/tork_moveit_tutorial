@@ -176,26 +176,25 @@ NEXTAGE OPEN に加えて他のロボットのソフトウェアもインスト�
 します．
 既に ROS がインストールされていれば，次のチュートリアルパッケージのインストールに進んでください．
 
-
-```
-$ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-$ sudo apt-get install curl
-$ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-$ sudo apt-get update
-$ sudo apt-get install ros-<$ROS_DISTRO>-desktop-full
+```bash
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt-get install curl
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install ros-<$ROS_DISTRO>-desktop-full
 ```
 
 
 rosdep の初期化を行います．
 
-```
-$ sudo rosdep init
-$ rosdep update
+```bash
+sudo rosdep init
+rosdep update
 ```
 
 rosinstall をインストールします．
 
-```
+```bash
 sudo apt-get install python-rosinstall
 ```
 
@@ -209,8 +208,8 @@ sudo apt-get install python-rosinstall
 ターミナルから次のコマンドを実行して
 チュートリアルパッケージのソフトウェアをインストールします．
 
-```
-$ sudo apt-get install ros-<$ROS_DISTRO>-tork-moveit-tutorial
+```bash
+sudo apt-get install ros-<$ROS_DISTRO>-tork-moveit-tutorial
 ```
 
 
@@ -221,8 +220,8 @@ $ sudo apt-get install ros-<$ROS_DISTRO>-tork-moveit-tutorial
 ターミナルから次のコマンドを実行して
 NEXTAGE OPEN のソフトウェアをインストールします．
 
-```
-$ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-rtmros-nextage ros-<$ROS_DISTRO>-rtmros-hironx
+```bash
+sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-rtmros-nextage ros-<$ROS_DISTRO>-rtmros-hironx
 ```
 
 <$endif>
@@ -235,12 +234,12 @@ $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-rtmros-nextage r
 ターミナルから次のコマンドを実行して
 Baxter Research Robot のソフトウェアをインストールします．
 
-```
-$ sudo apt-get update
-$ sudo apt-get install git-core python-argparse python-wstool python-vcstools python-rosdep ros-<$ROS_DISTRO>-control-msgs ros-<$ROS_DISTRO>-joystick-drivers
-$ sudo apt-get install ros-<$ROS_DISTRO>-baxter-sdk ros-<$ROS_DISTRO>-baxter-moveit-config
-$ sudo apt-get install gazebo2 ros-<$ROS_DISTRO>-qt-build ros-<$ROS_DISTRO>-driver-common ros-<$ROS_DISTRO>-gazebo-ros-control ros-<$ROS_DISTRO>-gazebo-ros-pkgs ros-<$ROS_DISTRO>-ros-control ros-<$ROS_DISTRO>-control-toolbox ros-<$ROS_DISTRO>-realtime-tools ros-<$ROS_DISTRO>-ros-controllers ros-<$ROS_DISTRO>-xacro python-wstool ros-<$ROS_DISTRO>-tf-conversions ros-<$ROS_DISTRO>-kdl-parser
-$ sudo apt-get install ros-<$ROS_DISTRO>-baxter-simulator
+```bash
+sudo apt-get update
+sudo apt-get install git-core python-argparse python-wstool python-vcstools python-rosdep ros-<$ROS_DISTRO>-control-msgs ros-<$ROS_DISTRO>-joystick-drivers
+sudo apt-get install ros-<$ROS_DISTRO>-baxter-sdk ros-<$ROS_DISTRO>-baxter-moveit-config
+sudo apt-get install gazebo2 ros-<$ROS_DISTRO>-qt-build ros-<$ROS_DISTRO>-driver-common ros-<$ROS_DISTRO>-gazebo-ros-control ros-<$ROS_DISTRO>-gazebo-ros-pkgs ros-<$ROS_DISTRO>-ros-control ros-<$ROS_DISTRO>-control-toolbox ros-<$ROS_DISTRO>-realtime-tools ros-<$ROS_DISTRO>-ros-controllers ros-<$ROS_DISTRO>-xacro python-wstool ros-<$ROS_DISTRO>-tf-conversions ros-<$ROS_DISTRO>-kdl-parser
+sudo apt-get install ros-<$ROS_DISTRO>-baxter-simulator
 ```
 
 インストール方法については以下の公式ページにも説明があるので参照ください．
@@ -257,8 +256,8 @@ $ sudo apt-get install ros-<$ROS_DISTRO>-baxter-simulator
 ターミナルから次のコマンドを実行して
 MINAS TRA1 のソフトウェアをインストールします．
 
-```
-$ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-minas
+```bash
+sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-minas
 ```
 
 <$endif>
@@ -271,8 +270,8 @@ $ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-minas
 ターミナルから次のコマンドを実行して
 KHI duaro のソフトウェアをインストールします．
 
-```
-$ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-khi-duaro-gazebo ros-<$ROS_DISTRO>-khi-duaro-description ros-<$ROS_DISTRO>-khi-duaro-ikfast-plugin ros-<$ROS_DISTRO>-khi-duaro-moveit-config
+```bash
+sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-khi-duaro-gazebo ros-<$ROS_DISTRO>-khi-duaro-description ros-<$ROS_DISTRO>-khi-duaro-ikfast-plugin ros-<$ROS_DISTRO>-khi-duaro-moveit-config
 ```
 
 <$endif>
@@ -288,24 +287,24 @@ myCobot のソフトウェアのインストールにはワークスペースの
 
 `catkin_ws` という名前のワークスペースを作成する手順は次のとおりです．
 
-```
-$ mkdir -p ~/catkin_ws/src
-$ cd ~/catkin_ws/src
-$ catkin_init_workspace
-$ cd ~/catkin_ws/
-$ catkin_make
-$ source devel/setup.bash
+```bash
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+catkin_init_workspace
+cd ~/catkin_ws/
+catkin_make
+source devel/setup.bash
 ```
 
 次に，myCobot のソースコードの取得とビルドを行います．
 
-```
-$ cd ~/catkin_ws/src
-$ git clone https://github.com/elephantrobotics/mycobot_ros
-$ rosdep install --from-paths . --ignore-src -y
-$ cd ~/catkin_ws
-$ catkin_make
-$ source devel/setup.bash
+```bash
+cd ~/catkin_ws/src
+git clone https://github.com/elephantrobotics/mycobot_ros
+rosdep install --from-paths . --ignore-src -y
+cd ~/catkin_ws
+catkin_make
+source devel/setup.bash
 ```
 
 <$endif>
@@ -315,16 +314,16 @@ $ source devel/setup.bash
 
 インストールの最後に setup.bash を読み込み，ROS の環境を設定します．
 
-```
-$ source /opt/ros/<$ROS_DISTRO>/setup.bash
+```bash
+source /opt/ros/<$ROS_DISTRO>/setup.bash
 ```
 
 これは新しくターミナルを立ち上げて ROS を使用する前に毎回必要になります．
 下記のように .bashrc ファイルに設定を加えて
 ターミナル起動時に setup.bash を自動で実行し ROS 環境になるようにしておくと便利です．
 
-```
-$ echo "source /opt/ros/<$ROS_DISTRO>/setup.bash" >> ~/.bashrc
+```bash
+echo "source /opt/ros/<$ROS_DISTRO>/setup.bash" >> ~/.bashrc
 ```
 
 - **注意**: 上記コマンドの `>>` を `>` にしてしまうと元々あった .bashrc 内の設定が消えてしまうので気をつけてください．
@@ -341,11 +340,11 @@ apt でインストールできるようにバイナリ／リリースされて�
 
 まず，`/tmp/catkin_ws` という名前のワークスペースを作成する手順は次のとおりです．
 
-```
-$ source /opt/ros/<$ROS_DISTRO>/setup.bash
-$ mkdir -p /tmp/catkin_ws/src
-$ cd /tmp/catkin_ws/src
-$ catkin_init_workspace
+```bash
+source /opt/ros/<$ROS_DISTRO>/setup.bash
+mkdir -p /tmp/catkin_ws/src
+cd /tmp/catkin_ws/src
+catkin_init_workspace
 ```
 
 <$if <$ROS_DISTRO>==melodic>
@@ -355,12 +354,12 @@ $ catkin_init_workspace
 次の手順で MINAS TRA1 のクローンと
 それに必要なソフトウェアパッケージの取得，ビルドを行います．
 
-```
-$ cd /tmp/catkin_ws/src
-$ git clone https://github.com/tork-a/minas.git
-$ rosdep install --from-paths . --ignore-src -y
-$ cd /tmp/catkin_ws
-$ catkin_make
+```bash
+cd /tmp/catkin_ws/src
+git clone https://github.com/tork-a/minas.git
+rosdep install --from-paths . --ignore-src -y
+cd /tmp/catkin_ws
+catkin_make
 ```
 
 <$endif>
@@ -372,12 +371,12 @@ $ catkin_make
 次の手順で KHI Duaro のクローンと
 それに必要なソフトウェアパッケージの取得，ビルドを行います．
 
-```
-$ cd /tmp/catkin_ws/src
-$ git clone https://github.com/Kawasaki-Robotics/khi_robot.git
-$ rosdep install --from-paths . --ignore-src -y
-$ cd /tmp/catkin_ws
-$ catkin_make
+```bash
+cd /tmp/catkin_ws/src
+git clone https://github.com/Kawasaki-Robotics/khi_robot.git
+rosdep install --from-paths . --ignore-src -y
+cd /tmp/catkin_ws
+catkin_make
 ```
 
 <$endif>
@@ -391,11 +390,11 @@ $ catkin_make
 繰り返しになりますが標準では推奨されない方法ですので
 もしここまでの手順でエラーが出ていれば作業を中止してください．
 
-```
-$ cd /tmp/catkin_ws
-$ sudo su
-$ source /opt/ros/<$ROS_DISTRO>/setup.bash
-$ catkin_make_isolated --install --install-space /opt/ros/<$ROS_DISTRO> -DCMAKE_BUILD_TYPE=Release
+```bash
+cd /tmp/catkin_ws
+sudo su
+source /opt/ros/<$ROS_DISTRO>/setup.bash
+catkin_make_isolated --install --install-space /opt/ros/<$ROS_DISTRO> -DCMAKE_BUILD_TYPE=Release
 ```
 
 <$endif>
@@ -411,9 +410,9 @@ NEXTAGE OPEN の動力学シミュレータの一つである
 NEXTAGE OPEN hrpsys(RTM) シミュレータを起動します．
 ターミナルを開いて次のコマンドを実行してください．
 
-```
-$ source /opt/ros/<$ROS_DISTRO>/setup.bash
-$ rtmlaunch nextage_moveit_config nextage_demo.launch
+```bash
+source /opt/ros/<$ROS_DISTRO>/setup.bash
+rtmlaunch nextage_moveit_config nextage_demo.launch
 ```
 
 コマンドを実行すると次の4つのウィンドウが開きます．
@@ -456,7 +455,8 @@ ROS の動力学環境シミュレータ Gazebo 上で動きます．
 NEXTAGE OPEN Gazebo シミュレータを起動します．
 
 **ターミナル-1** : Gazebo シミュレータの起動
-```
+
+```bash
 $ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ roslaunch nextage_gazebo nextage_world.launch
 :
@@ -498,10 +498,12 @@ NEXTAGE OPEN ロボットの準備が完了しています．
 2つ目のターミナルで次のコマンドを入力して MoveIt! を起動します．
 
 **ターミナル-2** : MoveIt! の起動
+
+```bash
+source /opt/ros/<$ROS_DISTRO>/setup.bash
+roslaunch nextage_moveit_config moveit_planning_execution.launch
 ```
-$ source /opt/ros/<$ROS_DISTRO>/setup.bash
-$ roslaunch nextage_moveit_config moveit_planning_execution.launch
-```
+
 <$ifeq <$ROS_DISTRO>|indigo>
 
 ![NEXTAGE - MoveIt! Starts](images/nextage_moveit-starts.png)
@@ -536,16 +538,17 @@ $ roslaunch nextage_moveit_config moveit_planning_execution.launch
 ターミナルを3つ開きます．
 
 **ターミナル-1** : Baxter シミュレータの起動
-```
-$ source /opt/ros/<$ROS_DISTRO>/setup.bash
-$ roslaunch baxter_gazebo baxter_world.launch  
+
+```bash
+source /opt/ros/<$ROS_DISTRO>/setup.bash
+roslaunch baxter_gazebo baxter_world.launch  
 ```
 
 ![Baxter Simulator - Starts](images/baxter-simulator_starts.png)
 
 しばらくすると次のようなメッセージが **ターミナル-1** に表示されます．
 
-```
+```bash
 [ INFO] [1509004453.402952141, 10.130000000]: Simulator is loaded and started successfully
 [ INFO] [1509004453.462744480, 10.140000000]: Robot is disabled
 [ INFO] [1509004453.462870807, 10.140000000]: Gravity compensation was turned off
@@ -559,7 +562,8 @@ $ roslaunch baxter_gazebo baxter_world.launch
 2つ目のターミナル上で次のコマンドを実行してください．
 
 **ターミナル-2** : ロボットの準備
-```
+
+```bash
 $ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ rosrun baxter_tools enable_robot.py -e
 
@@ -588,9 +592,10 @@ Running. Ctrl-c to quit
 3つ目のターミナルで次のコマンドを実行して MoveIt! を起動します．
 
 **ターミナル-3** : MoveIt! の起動
-```
-$ source /opt/ros/<$ROS_DISTRO>/setup.bash
-$ roslaunch baxter_moveit_config baxter_grippers.launch
+
+```bash
+source /opt/ros/<$ROS_DISTRO>/setup.bash
+roslaunch baxter_moveit_config baxter_grippers.launch
 ```
 
 ![Baxter MoveIt! - Starts](images/baxter-moveIt_starts.png)
@@ -615,17 +620,19 @@ $ roslaunch baxter_moveit_config baxter_grippers.launch
 1つ目のターミナルでコントローラをシミュレーションモードで起動します．
 
 **ターミナル-1**
-```
-$ source /opt/ros/<$ROS_DISTRO>/setup.bash
-$ roslaunch tra1_bringup tra1_bringup.launch simulation:=true
+
+```bash
+source /opt/ros/<$ROS_DISTRO>/setup.bash
+roslaunch tra1_bringup tra1_bringup.launch simulation:=true
 ```
 
 2つ目のターミナルで MoveIt! を起動します．
 
 **ターミナル-2**
-```
-$ source /opt/ros/<$ROS_DISTRO>/setup.bash
-$ roslaunch tra1_bringup tra1_moveit.launch
+
+```bash
+source /opt/ros/<$ROS_DISTRO>/setup.bash
+roslaunch tra1_bringup tra1_moveit.launch
 ```
 
 <$ifeq <$ROS_DISTRO>|indigo>
@@ -680,7 +687,7 @@ $ roslaunch khi_duaro_gazebo duaro_world.launch
 
 しばらくすると次のようなメッセージが **ターミナル-1** に表示されます．
 
-```
+```bash
 [INFO] [1557303124.764122, 0.426000]: Started controllers: joint_state_controller, duaro_lower_arm_controller, duaro_upper_arm_controller
 [go_initial-8] process has finished cleanly
 log file: /home/robotuser/.ros/log/f5391a42-7168-11e9-931c-1c1bb5f26084/go_initial-8*.log
@@ -694,9 +701,10 @@ log file: /home/robotuser/.ros/log/f5391a42-7168-11e9-931c-1c1bb5f26084/go_initi
 2つ目のターミナルで次のコマンドを実行して MoveIt! を起動します．
 
 **ターミナル-2** : MoveIt! の起動
-```
-$ source /opt/ros/<$ROS_DISTRO>/setup.bash
-$ roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
+
+```bash
+source /opt/ros/<$ROS_DISTRO>/setup.bash
+roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
 ```
 
 <$if <$ROS_DISTRO>==kinetic>
@@ -730,9 +738,10 @@ $ roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
 ーミナルで次のコマンドを実行して MoveIt! を起動します．
 
 **ターミナル-2** : MoveIt! の起動
-```
-$ source ~/catkin_ws/devel/setup.bash
-$ roslaunch roslaunch mycobot_320_moveit demo.launch
+
+```bash
+source ~/catkin_ws/devel/setup.bash
+roslaunch roslaunch mycobot_320_moveit demo.launch
 ```
 
 ![myCobot MoveIt! - Starts](images/melodic/mycobot-moveit_starts.png)
