@@ -131,7 +131,7 @@ NEXTAGE OPEN に加えて他のロボットのソフトウェアもインスト�
 
 また，システム構成は次のとおりです．
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 - Ubuntu 14.04
 - ROS Indigo
@@ -227,7 +227,7 @@ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-rtmros-nextage ros
 <$endif>
 
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 ### Baxter ソフトウェアのインストール
 
@@ -276,7 +276,7 @@ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-khi-duaro-gazebo r
 
 <$endif>
 
-<$if <$ROS_DISTRO>==melodic|<$ROS_DISTRO>==noetic>
+<$if <$ROS_DISTRO>==melodic||<$ROS_DISTRO>==noetic>
 
 ### myCobot ソフトウェアのインストール
 
@@ -422,13 +422,11 @@ rtmlaunch nextage_moveit_config nextage_demo.launch
 - MoveIt! / RViz
 - Hironx Dashboard (Command Panel for Hironx / NEXTAGE Open)
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 ![NextageROS_Demo - Starts](images/nextageros-demo_starts.png)
 
-<$endif>
-
-<$ifneq <$ROS_DISTRO>|indigo>
+<$else>
 
 ![NextageROS_Demo - Starts](images/kinetic/nextage_moveit-demo_starts.png)
 
@@ -469,19 +467,15 @@ log file: /home/robotuser/.ros/log/5d4ac8aa-baeb-11e7-af06-001c4284b313/go_initi
 Gazebo が起動して上記のターミナルの出力が得られたら Gazebo シミュレータ内の
 NEXTAGE OPEN ロボットの準備が完了しています．
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 ![NEXTAGE - Gazebo Starts](images/nextage_gazebo-starts.png)
 
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$elif <$ROS_DISTRO>==kinetic>
 
 ![NEXTAGE - Gazebo Starts](images/kinetic/nextage_gazebo-starts.png)
 
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|melodic>
+<$elif <$ROS_DISTRO>==melodic>
 
 ![NEXTAGE - Gazebo Starts](images/melodic/nextage_gazebo_starts.png)
 
@@ -504,19 +498,15 @@ source /opt/ros/<$ROS_DISTRO>/setup.bash
 roslaunch nextage_moveit_config moveit_planning_execution.launch
 ```
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 ![NEXTAGE - MoveIt! Starts](images/nextage_moveit-starts.png)
 
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$elif <$ROS_DISTRO>==kinetic>
 
 ![NEXTAGE - MoveIt! Starts](images/kinetic/nextage_moveit-starts.png)
 
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|melodic>
+<$elif <$ROS_DISTRO>==melodic>
 
 ![NEXTAGE - MoveIt! Starts](images/melodic/nextage_moveit_starts.png)
 
