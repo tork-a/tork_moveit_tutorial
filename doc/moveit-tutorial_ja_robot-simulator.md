@@ -92,12 +92,16 @@ NEXTAGE OPEN の Gazebo シミュレータと MoveIt! の組み合わせを基�
 - ロボットシミュレータなどのインストール
 
 次のソフトウェアのインストールをします．
+<$if <$ROS_DISTRO>==indigo||<$ROS_DISTRO>==kinetic||<$ROS_DISTRO>==melodic>
 各ロボットソフトウェアは全てインストールしても，どれか1つでも大丈夫ですが，
 本チュートリアルは NEXTAGE OPEN を中心的な例として記述していますので
 少なくとも NEXTAGE OPEN ソフトウェアのインストールをお願いします．
 
 NEXTAGE OPEN に加えて他のロボットのソフトウェアもインストールすると
 他のロボットへのプログラム応用方法についての理解が進みます．
+<$elif ROS_DISTRO==noetic>
+各ロボットソフトウェアは全てインストールしても，どれか1つでも大丈夫です．
+<$endif>
 
 <$if <$ROS_DISTRO>==indigo>
 
