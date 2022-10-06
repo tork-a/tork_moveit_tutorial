@@ -28,7 +28,7 @@
 <$elif <$ROS_DISTRO>==noetic>
 
 - myCobot : 教育用単腕マニピュレータ
-- KHI duaro : スカラ型双腕ロボット（「ソースインストール」の章にて）
+- KHI duaro : スカラ型双腕ロボット
 
 <$endif>
 
@@ -126,6 +126,7 @@ NEXTAGE OPEN に加えて他のロボットのソフトウェアもインスト�
 
 - ROS とチュートリアルパッケージ
 - ロボットソフトウェア
+  - KHI duaro ソフトウェア
 
 <$endif>
 
@@ -263,7 +264,7 @@ sudo apt-get update && sudo apt-get install ros-<$ROS_DISTRO>-minas
 <$endif>
 
 
-<$if <$ROS_DISTRO>==kinetic||<$ROS_DISTRO>==melodic>
+<$if <$ROS_DISTRO>==kinetic||<$ROS_DISTRO>==melodic||<$ROS_DISTRO>==noetic>
 
 ### KHI duaro ソフトウェアのインストール
 
@@ -332,7 +333,7 @@ echo "source /opt/ros/<$ROS_DISTRO>/setup.bash" >> ~/.bashrc
 `source /opt/ros/<$ROS_DISTRO>/setup.bash` は不要です．
 
 
-<$if <$ROS_DISTRO>==melodic||<$ROS_DISTRO>==noetic>
+<$if <$ROS_DISTRO>==melodic>
 
 ## ソースインストール
 
@@ -347,8 +348,6 @@ cd /tmp/catkin_ws/src
 catkin_init_workspace
 ```
 
-<$if <$ROS_DISTRO>==melodic>
-
 ### MINAS TRA1 ソフトウェアの取得とビルド
 
 次の手順で MINAS TRA1 のクローンと
@@ -361,25 +360,6 @@ rosdep install --from-paths . --ignore-src -y
 cd /tmp/catkin_ws
 catkin_make
 ```
-
-<$endif>
-
-<$if <$ROS_DISTRO>==noetic>
-
-### KHI duaro ソフトウェアの取得とビルド
-
-次の手順で KHI Duaro のクローンと
-それに必要なソフトウェアパッケージの取得，ビルドを行います．
-
-```bash
-cd /tmp/catkin_ws/src
-git clone https://github.com/Kawasaki-Robotics/khi_robot.git
-rosdep install --from-paths . --ignore-src -y
-cd /tmp/catkin_ws
-catkin_make
-```
-
-<$endif>
 
 ### ワークスペースでビルドしたソフトウェアのインストール
 
