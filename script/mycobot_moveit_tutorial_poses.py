@@ -13,9 +13,9 @@ if __name__ == '__main__':
     pose_target_1 = Pose()
 
     # quaternion_from_euler(0, 0, -1.57079)
-    pose_target_1.position.x = 0.3
+    pose_target_1.position.x = 0.2
     pose_target_1.position.y = 0.0
-    pose_target_1.position.z = 0.3
+    pose_target_1.position.z = 0.2
     pose_target_1.orientation.x = 0.0
     pose_target_1.orientation.y = 0.0
     pose_target_1.orientation.z = -0.7071
@@ -30,8 +30,8 @@ if __name__ == '__main__':
     pose_target_2 = Pose()
 
     pose_target_2.position.x = 0.0
-    pose_target_2.position.y =-0.3
-    pose_target_2.position.z = 0.3
+    pose_target_2.position.y =-0.2
+    pose_target_2.position.z = 0.2
     pose_target_2.orientation.z = -0.7071
     pose_target_2.orientation.w =  0.7071
 

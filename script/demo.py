@@ -20,9 +20,9 @@ if __name__ == '__main__':
     waypoints_rectangular = make_waypoints_rectangular( rpy=rpy_nextage )
 
     rpy_mycobot = [ 0.0, -math.pi, 0.0 ]
-    dp_a_mycobot = [ 0.15, 0.15, 0.15 ]
-    dp_b_mycobot = [ 0.2, 0.2, 0.15 ]
-    center_mycobot = [ 0.18, 0.18, 0.15 ]
+    dp_a_mycobot = [ 0.10, 0.10, 0.1 ]
+    dp_b_mycobot = [ 0.15, 0.15, 0.1 ]
+    center_mycobot = [ 0.13, 0.13, 0.1 ]
     radius_mycobot = 0.03
     waypoints_mycobot_circular = make_waypoints_circular(
                                     center=center_mycobot,

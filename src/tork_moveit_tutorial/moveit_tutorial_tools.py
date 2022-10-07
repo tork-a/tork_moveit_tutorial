@@ -177,7 +177,7 @@ def make_waypoints_example( rtype="NEXTAGE" ):
         # 3rd Pose
         pose_target.position.x = 0.1
         pose_target.position.y = -0.1
-        pose_target.position.z = 0.3
+        pose_target.position.z = 0.2
         pose_target.orientation.x = 0.0
         pose_target.orientation.y = -1.0
         pose_target.orientation.z = 0.0
