@@ -158,6 +158,35 @@ def make_waypoints_example( rtype="NEXTAGE" ):
         # 4th Pose
         pose_target.position.y = -0.5
         wpts.append( copy.deepcopy( pose_target ) )
+    elif rtype == "myCobot":
+        # 1st Pose
+        pose_target = Pose()
+        pose_target.position.x = 0.1
+        pose_target.position.y = -0.1
+        pose_target.position.z = 0.1
+        pose_target.orientation.x = 0.0
+        pose_target.orientation.y = -0.707
+        pose_target.orientation.z = 0.0
+        pose_target.orientation.w = 0.707
+        wpts.append( copy.deepcopy( pose_target ) )
+        
+        # 2nd Pose
+        pose_target.position.y = -0.15
+        wpts.append( copy.deepcopy( pose_target ) )
+        
+        # 3rd Pose
+        pose_target.position.x = 0.1
+        pose_target.position.y = -0.1
+        pose_target.position.z = 0.3
+        pose_target.orientation.x = 0.0
+        pose_target.orientation.y = -1.0
+        pose_target.orientation.z = 0.0
+        pose_target.orientation.w = 0.0
+        wpts.append( copy.deepcopy( pose_target ) )
+        
+        # 4th Pose
+        pose_target.position.y = -0.2
+        wpts.append( copy.deepcopy( pose_target ) )
         
     return wpts
 
