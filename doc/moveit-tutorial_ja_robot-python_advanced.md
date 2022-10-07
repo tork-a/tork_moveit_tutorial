@@ -372,6 +372,8 @@ rospy.spin()
 
 下記プログラムでは次のことを行っています．
 
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
+
 - `pose_target_1` にロボット右腕の初期姿勢を定義
 - ログメッセージを表示してから `rospy.sleep(5.0)` で5秒休止
 - `rate = rospy.Rate(0.2)` で 0.2 [Hz] つまり5秒に1回の時間間隔を設定
@@ -438,6 +440,75 @@ if __name__ == '__main__':
 
 ```
 
+<$elif <$ROS_DISTRO>==noetic>
+
+- `pose_target_1` にロボット右腕の初期姿勢を定義
+- ログメッセージを表示してから `rospy.sleep(5.0)` で5秒休止
+- `rate = rospy.Rate(0.2)` で 0.2 [Hz] つまり5秒に1回の時間間隔を設定
+- `while not rospy.is_shutdown():` ノードが終了指定ない限り次のループを反復
+  - `group.set_pose_target( pose_target_1 )` で目標姿勢を設定
+  - `group.go()` で動作計画・実行
+  - 目標姿勢の位置のY座標を `step` だけずらす
+  - 目標姿勢の位置のY座標が -0.15 [m] よりも小さくなったら 0.0 [m] を代入
+  - `rate.sleep()` で次のタイミングが来るまで休止
+
+```
+$ rosrun tork_moveit_tutorial mycobot_moveit_tutorial_poses_rate.py
+```
+
+**mycobot_moveit_tutorial_poses_rate.py**
+
+```python
+#!/usr/bin/env python
+
+import sys, copy
+import rospy
+
+from moveit_commander import MoveGroupCommander
+from geometry_msgs.msg import Pose
+
+from tork_moveit_tutorial import init_node
+
+
+if __name__ == '__main__':
+    
+    init_node()
+    group = MoveGroupCommander("arm_group")
+    
+    # Pose Target 1
+    pose_target_1 = Pose()
+        
+    pose_target_1.position.x = 0.15
+    pose_target_1.position.y = 0.0
+    pose_target_1.position.z = 0.1
+    pose_target_1.orientation.x = 0.0
+    pose_target_1.orientation.y = -1.0
+    pose_target_1.orientation.z = 0.0
+    pose_target_1.orientation.w = 0.0
+    
+    rospy.loginfo( "Start Move Loop / Ctrl-C to Stop \nWaiting 5 seconds" )
+    rospy.sleep(5.0)
+    
+    step = -0.01
+    
+    rate = rospy.Rate(0.2)
+    while not rospy.is_shutdown():
+        
+        rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_1 ) )
+        group.set_pose_target( pose_target_1 )
+        group.plan()
+        group.go()
+        
+        pose_target_1.position.y += step
+        if pose_target_1.position.y < -0.15:
+            pose_target_1.position.y = 0.0
+
+        rospy.loginfo( "Waiting Next... / Ctrl-C to Stop" )
+        rate.sleep()
+    
+```
+
+<$endif>
 
 ## より複雑なロボット動作計画
 
