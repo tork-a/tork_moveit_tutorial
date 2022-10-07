@@ -884,7 +884,161 @@ Out[70]: True
 
 を通して学習します．
 
-TODO after here
+#### 連続した指令をロボットに送る
+
+ロボットの複数の異なる姿勢を指示して動作計画と実行を行います．
+
+複数の姿勢を指定した動作計画を行う場合も直線補間軌道でロボットを動かす場合と同じ 
+`compute_cartesian_path()` を用います．
+
+`compute_cartesian_path( self, waypoints, eef_step, jump_threshold, avoid_collisions = True )` 
+には次のものを渡します．
+
+- `waypoints` : エンドエフェクタが経由する姿勢のリスト
+- `eef_step` : エンドエフェクタの姿勢を計算する間隔の距離
+- `jump_threshold` : 軌道内の連続する点間の最大距離（`0.0` で無効）
+- `avoid_collisions` : 干渉と運動学上の制約チェック（デフォルトは `True` でチェックする）
+
+本チュートリアル手順に則って進めている場合，
+myCobot 用の複数の姿勢のリスト `waypoints_mycobot` が用意されているので内容を確かめてみます．
+
+```python
+In [2]: print(waypoints_mycobot)
+[position:
+  x: 0.1
+  y: -0.1
+  z: 0.1
+orientation:
+  x: 0.0
+  y: -0.707
+  z: 0.0
+  w: 0.707, position:
+  x: 0.1
+  y: -0.15
+  z: 0.1
+orientation:
+  x: 0.0
+  y: -0.707
+  z: 0.0
+  w: 0.707, position:
+  x: 0.1
+  y: -0.1
+  z: 0.3
+orientation:
+  x: 0.0
+  y: -1.0
+  z: 0.0
+  w: 0.0, position:
+  x: 0.1
+  y: -0.2
+  z: 0.3
+orientation:
+  x: 0.0
+  y: -1.0
+  z: 0.0
+  w: 0.0]
+
+```
+
+myCobot を特異姿勢でない姿勢にしてから，
+姿勢のリスト `waypoints` を `compute_cartesian_path()` に渡して動作計画を作成します．
+
+```python
+In [3]: group.set_joint_value_target([0, 0, -1.57, 0, 0, 0])
+
+In [4]: group.go()
+Out[4]: True
+
+In [5]: ( plan, fraction ) = group.compute_cartesian_path( waypoints_mycobot, 0.01, 0.0)
+```
+
+`compute_cartesian_path()` で得られた計画 `plan` を
+`group.execute()` に渡してロボットで動作を実行します．
+
+```python
+In [6]: group.execute(plan)
+Out[6]: True
+```
+
+#### 四角形や円に沿ってエンドエフェクタを動かす
+
+エンドエフェクタを四角形や円に沿って動かすような場合も
+複数の異なる姿勢を指示して動作計画と実行を行います．
+
+四角形や円に沿った複数の姿勢のリストをそれぞれ
+`waypoints_rectangular` と `waypoints_circular` として
+用意しているのでそれらを使います．
+
+```python
+In [8]: print( waypoints_mycobot_rectangular )
+[position: 
+  x: 0.15
+  y: 0.15
+  z: 0.15
+orientation: 
+  x: 0.0
+  y: -1.0
+  z: 0.0
+  w: 6.123233995736766e-17, position: 
+  x: 0.15
+  y: 0.2
+  z: 0.15
+orientation: 
+  x: 0.0
+  y: -1.0
+  z: 0.0
+  w: 6.123233995736766e-17, position: 
+  x: 0.2
+  y: 0.2
+  z: 0.15
+orientation: 
+  x: 0.0
+  y: -1.0
+  z: 0.0
+  w: 6.123233995736766e-17, position: 
+  x: 0.2
+  y: 0.15
+  z: 0.15
+orientation: 
+  x: 0.0
+  y: -1.0
+  z: 0.0
+  w: 6.123233995736766e-17, position: 
+  x: 0.15
+  y: 0.15
+  z: 0.15
+orientation: 
+  x: 0.0
+  y: -1.0
+  z: 0.0
+  w: 6.123233995736766e-17]
+
+In [9]: group.set_joint_value_target([0, 0, -1.57, 0, 0, 0])
+
+In [10]: group.go()
+Out[10]: True
+
+In [11]: ( plan, fraction ) = group.compute_cartesian_path( waypoints_mycobot_rectangular, 0.01, 0.0)
+
+In [12]: group.execute(plan)
+Out[12]: True
+```
+
+同様に円に沿った動作を行います．
+
+```python
+In [13]: ( plan, fraction ) = group.compute_cartesian_path( waypoints_mycobot_circular, 0.01, 0.0)
+
+In [14]: group.execute(plan)
+Out[14]: True
+
+```
+
+`exit` もしくは `quit` で終了します．
+
+```python
+In [15]: exit
+```
 
 <$endif>
 
