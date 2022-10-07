@@ -1377,7 +1377,7 @@ if __name__ == '__main__':
 <$endif>
 
 
-<$ifeq <$ROS_DISTRO>|melodic>
+<$if <$ROS_DISTRO>==melodic|<$ROS_DISTRO>==noetic>
 
 ### myCobot の場合
 
@@ -1470,17 +1470,21 @@ if __name__ == '__main__':
 
 ### ROS や MoveIt! のメリット
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 NEXTAGE OPEN や Baxter Research Robot, MINAS TRA1
 の動作計画・動作プログラムの相違点を見ると下記の2ヶ所だけが
 各ロボットに対応しただけだということが分かります．
 
-<$endif>
-
-<$ifneq <$ROS_DISTRO>|indigo>
+<$elif <$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 NEXTAGE OPEN や MINAS TRA1，KHI duaro
+の動作計画・動作プログラムの相違点を見ると下記の2ヶ所だけが
+各ロボットに対応しただけだということが分かります．
+
+<$elif <$ROS_DISTRO>==noetic>
+
+KHI duaro や myCobot
 の動作計画・動作プログラムの相違点を見ると下記の2ヶ所だけが
 各ロボットに対応しただけだということが分かります．
 
