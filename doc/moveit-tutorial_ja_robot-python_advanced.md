@@ -514,15 +514,13 @@ if __name__ == '__main__':
 
 ### 動作アームを指定する
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 これまで NEXTAGE OPEN や Baxter Research Robot の動作プログラムの例では
 「右腕」を動かしていました．
 これらのロボットは双腕ですから「右腕」だけでなく「左腕」や「両腕」を動かすこともできます．
 
-<$endif>
-
-<$ifneq <$ROS_DISTRO>|indigo>
+<$elif <$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 これまで NEXTAGE OPEN や duaro の動作プログラムの例では
 NEXTAGE OPEN では「右腕」( right_arm ) を，
@@ -530,9 +528,16 @@ duaro では「上側の腕」(upper_arm) を動かしていました．
 これらのロボットは双腕ですから「右腕」や「上側の腕」だけでなく
 「左腕」や「下側の腕」，「両腕」を動かすこともできます．
 
+<$elif <$ROS_DISTRO>==noetic>
+
+duaro の動作プログラムの例では
+duaro では「上側の腕」(upper_arm) を動かしていました．
+これらのロボットは双腕ですから「上側の腕」だけでなく
+「下側の腕」，「両腕」を動かすこともできます．
+
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 #### 左腕を動かす
 
@@ -545,9 +550,7 @@ group = MoveGroupCommander("right_arm")    # 変更前（右腕）
 group = MoveGroupCommander("left_arm")     # 変更後（左腕）
 ```
 
-<$endif>
-
-<$ifneq <$ROS_DISTRO>|indigo>
+<$elif <$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 #### もう一方の腕を動かす
 
@@ -569,7 +572,22 @@ group = MoveGroupCommander("upper_arm")    # 変更前（上側の腕）
 group = MoveGroupCommander("lower_arm")    # 変更後（下側の腕）
 ```
 
+<$elif <$ROS_DISTRO>==noetic>
+
+#### もう一方の腕を動かす
+
+KHI duaro の「下側の腕」を動かすには次の変更を行います．
+
+- 動作グループを `lower_arm` に変更
+```python
+group = MoveGroupCommander("upper_arm")    # 変更前（上側の腕）
+↓
+group = MoveGroupCommander("lower_arm")    # 変更後（下側の腕）
+```
+
 <$endif>
+
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 下記プログラムは NEXTAGE OPEN の左腕を動かすプログラムの例です．
 右腕のターゲット姿勢のままでは左腕の動作にはきつくなるので
@@ -630,6 +648,11 @@ if __name__ == '__main__':
 
 ```
 
+<$elif <$ROS_DISTRO>==noetic>
+
+<!-- TODO here -->
+
+<$endif>
 
 #### 両腕を動かす
 
