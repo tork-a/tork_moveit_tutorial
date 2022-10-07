@@ -1,6 +1,7 @@
 
 # 発展的なロボットプログラミング
 
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 本章は NEXTAGE OPEN ロボットシミュレータを対象にしてチュートリアルを進めてゆきます．
 
 NEXTAGE OPEN の下記ソフトウェアを既に起動した状態で
@@ -8,7 +9,14 @@ NEXTAGE OPEN の下記ソフトウェアを既に起動した状態で
 
 - NEXTAGE OPEN の Gazebo シミュレータもしくは hypsys(RTM) シミュレータ
 - NEXTAGE OPEN の MoveIt!
+<$elif <$ROS_DISTRO>==noetic>
+本章は myCobot ロボットシミュレータを対象にしてチュートリアルを進めてゆきます．
 
+myCobot の下記ソフトウェアを既に起動した状態で
+本章の各プログラムを実行してください．
+
+- myCobot の MoveIt!
+<$endif>
 
 ## プログラム制御フローツールとロボットプログラミング
 
@@ -26,6 +34,8 @@ NEXTAGE OPEN の下記ソフトウェアを既に起動した状態で
 
 本文中の `if` 文の条件部分で関数 `question_yn()` を呼び出して
 返ってきた `True`/`False` により「動作の実行」と「スキップ」の分岐を行っています．
+
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 ```
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_ifqyn.py
@@ -84,6 +94,66 @@ if __name__ == '__main__':
 
 ```
 
+<$elif <$ROS_DISTRO>==noetic>
+
+```bash
+$ rosrun tork_moveit_tutorial mycobot_moveit_tutorial_poses_ifqyn.py
+```
+
+**mycobot_moveit_tutorial_poses_ifqyn.py**
+```python
+#!/usr/bin/env python
+
+import sys, copy
+import rospy
+
+from moveit_commander import MoveGroupCommander
+from geometry_msgs.msg import Pose
+
+from tork_moveit_tutorial import init_node, question_yn
+
+
+if __name__ == '__main__':
+    
+    init_node()
+    group = MoveGroupCommander("arm_group")
+    
+    # Pose Target 1
+    rospy.loginfo( "Start Pose Target 1")
+    pose_target_1 = Pose()
+        
+    pose_target_1.position.x = 0.1
+    pose_target_1.position.y = -0.1
+    pose_target_1.position.z = 0.1
+    pose_target_1.orientation.x = 0.0
+    pose_target_1.orientation.y = -0.707
+    pose_target_1.orientation.z = 0.0
+    pose_target_1.orientation.w = 0.707
+    
+    rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_1 ) )
+    group.set_pose_target( pose_target_1 )
+    
+    if question_yn( "Start moving to target 1 ?" ):
+        group.go()
+    
+    # Pose Target 2
+    rospy.loginfo( "Start Pose Target 2")
+    pose_target_2 = Pose()
+    
+    pose_target_2.position.x = 0.1
+    pose_target_2.position.y = -0.1
+    pose_target_2.position.z = 0.2
+    pose_target_2.orientation.y = -1.0
+    
+    rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_2 ) )
+    group.set_pose_target( pose_target_2 )
+    
+    if question_yn( "Start moving to target 2 ?" ):
+        group.go()
+```
+
+
+<$endif>
 
 ### 繰り返しとロボット動作 - for
 
