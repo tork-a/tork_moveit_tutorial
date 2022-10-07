@@ -740,9 +740,18 @@ roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
 
 #### MoveIt! の起動
 
-ターミナルで次のコマンドを実行して MoveIt! を起動します．
+ターミナルで次のコマンドを実行して myCobot 280 用 MoveIt! を起動します．
 
-**ターミナル-1** : MoveIt! の起動
+**ターミナル-1** : myCobot 280 用の MoveIt! の起動
+
+```bash
+source ~/catkin_ws/devel/setup.bash
+roslaunch roslaunch mycobot_280_moveit demo.launch
+```
+
+他のmyCobot ，例えば myCobot 320 用のシミュレータを立ち上げる場合は次のようにして MoveIt! を起動します．
+
+**ターミナル-2** : myCobot 320 用の MoveIt! の起動
 
 ```bash
 source ~/catkin_ws/devel/setup.bash

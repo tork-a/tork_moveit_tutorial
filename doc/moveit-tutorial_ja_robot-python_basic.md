@@ -596,7 +596,7 @@ Out[2]:
 In [3]:
 ```
 
-上は myCobot 320 の場合の出力結果で
+上は myCobot 280 の場合の出力結果で
 `joint2_to_joint1`〜`joint6output_to_joint6` の6つの関節があることがわかります．
 
 肘関節に相当する `joint4_to_joint3` を動かしてみます．
@@ -740,7 +740,7 @@ Out[42]: True
 もう1つ位置・姿勢を指定して腕を動かしてみます．
 
 ```python
-In [43]: group.set_pose_target( [ 0.1, -0.1, 0.3, 0, -3.14, 0 ] )
+In [43]: group.set_pose_target( [ 0.1, -0.1, 0.2, 0, -3.14, 0 ] )
 In [44]: group.go()
 Out[44]: True
 ```
@@ -754,7 +754,7 @@ Out[46]: True
 ```
 
 ```python
-In [47]: group.set_pose_target( [ 0.1, -0.1, 0.3, 0.0, -1.0, 0.0, 0.0] )
+In [47]: group.set_pose_target( [ 0.1, -0.1, 0.2, 0.0, -1.0, 0.0, 0.0] )
 In [48]: group.go()
 Out[48]: True
 ```
@@ -834,14 +834,14 @@ orientation:
 
 In [63]: pose_target_2.position.x = 0.1
 In [64]: pose_target_2.position.y = -0.1
-In [65]: pose_target_2.position.z = 0.3
+In [65]: pose_target_2.position.z = 0.2
 In [66]: pose_target_2.orientation.y = -1.0
 
 In [68]: print( pose_target_2 )
 position:
   x: 0.1
   y: -0.1
-  z: 0.e
+  z: 0.2
 orientation:
   x: 0.0
   y: -1.0
@@ -903,7 +903,7 @@ Out[70]: True
 myCobot 用の複数の姿勢のリスト `waypoints_mycobot` が用意されているので内容を確かめてみます．
 
 ```python
-In [2]: print(waypoints_mycobot)
+In [2]: print( waypoints_mycobot )
 [position:
   x: 0.1
   y: -0.1
@@ -923,7 +923,7 @@ orientation:
   w: 0.707, position:
   x: 0.1
   y: -0.1
-  z: 0.3
+  z: 0.2
 orientation:
   x: 0.0
   y: -1.0
@@ -931,17 +931,16 @@ orientation:
   w: 0.0, position:
   x: 0.1
   y: -0.2
-  z: 0.3
+  z: 0.2
 orientation:
   x: 0.0
   y: -1.0
   z: 0.0
   w: 0.0]
-
 ```
 
 myCobot を特異姿勢でない姿勢にしてから，
-姿勢のリスト `waypoints` を `compute_cartesian_path()` に渡して動作計画を作成します．
+姿勢のリスト `waypoints_mycobot` を `compute_cartesian_path()` に渡して動作計画を作成します．
 
 ```python
 In [3]: group.set_joint_value_target([0, 0, -1.57, 0, 0, 0])
@@ -970,58 +969,58 @@ Out[6]: True
 用意しているのでそれらを使います．
 
 ```python
-In [8]: print( waypoints_mycobot_rectangular )
-[position: 
+In [10]: print( waypoints_mycobot_rectangular )
+[position:
+  x: 0.1
+  y: 0.1
+  z: 0.1
+orientation:
+  x: 0.0
+  y: -1.0
+  z: 0.0
+  w: 6.123233995736766e-17, position:
+  x: 0.1
+  y: 0.15
+  z: 0.1
+orientation:
+  x: 0.0
+  y: -1.0
+  z: 0.0
+  w: 6.123233995736766e-17, position:
   x: 0.15
   y: 0.15
-  z: 0.15
-orientation: 
+  z: 0.1
+orientation:
   x: 0.0
   y: -1.0
   z: 0.0
-  w: 6.123233995736766e-17, position: 
+  w: 6.123233995736766e-17, position:
   x: 0.15
-  y: 0.2
-  z: 0.15
-orientation: 
+  y: 0.1
+  z: 0.1
+orientation:
   x: 0.0
   y: -1.0
   z: 0.0
-  w: 6.123233995736766e-17, position: 
-  x: 0.2
-  y: 0.2
-  z: 0.15
-orientation: 
-  x: 0.0
-  y: -1.0
-  z: 0.0
-  w: 6.123233995736766e-17, position: 
-  x: 0.2
-  y: 0.15
-  z: 0.15
-orientation: 
-  x: 0.0
-  y: -1.0
-  z: 0.0
-  w: 6.123233995736766e-17, position: 
-  x: 0.15
-  y: 0.15
-  z: 0.15
-orientation: 
+  w: 6.123233995736766e-17, position:
+  x: 0.1
+  y: 0.1
+  z: 0.1
+orientation:
   x: 0.0
   y: -1.0
   z: 0.0
   w: 6.123233995736766e-17]
 
-In [9]: group.set_joint_value_target([0, 0, -1.57, 0, 0, 0])
+In [11]: group.set_joint_value_target( [ 0.0, 0.0, -1.57, 0.0, 0.0, 0.0 ] )
 
-In [10]: group.go()
-Out[10]: True
-
-In [11]: ( plan, fraction ) = group.compute_cartesian_path( waypoints_mycobot_rectangular, 0.01, 0.0)
-
-In [12]: group.execute(plan)
+In [12]: group.go()
 Out[12]: True
+
+In [13]: ( plan, fraction ) = group.compute_cartesian_path( waypoints_mycobot_rectangular, 0.01, 0.0)
+
+In [14]: group.execute(plan)
+Out[14]: True
 ```
 
 同様に円に沿った動作を行います．
@@ -1384,7 +1383,7 @@ if __name__ == '__main__':
 **ターミナル-1**
 ```
 $ source ~/catkin_ws/devel/setup.bash
-$ roslaunch roslaunch mycobot_320_moveit demo.launch
+$ roslaunch roslaunch mycobot_280_moveit demo.launch
 ```
 
 動作プログラムファイルを実行します．
