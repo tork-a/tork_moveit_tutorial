@@ -32,6 +32,37 @@ commands:
           command : |-
             . /opt/ros/${ROS_DISTRO}/setup.bash && cd ~/catkin_ws && catkin_make run_tests
             . /opt/ros/${ROS_DISTRO}/setup.bash && cd ~/catkin_ws && catkin_test_results --verbose build
+  build_python3:
+    steps:
+      - checkout
+      - run:
+          name: Setup ROS catkin workspace
+          command : |-
+            apt update
+            echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections # fix for tzdata
+            apt install -y -q lsb-release wget apt gnupg
+            sh -c "echo \"deb $ROS_REPOSITORY_PATH `lsb_release -cs` main\" > /etc/apt/sources.list.d/ros-latest.list"
+            wget http://packages.ros.org/ros.key -O - | apt-key add -
+            apt update
+            apt install -y --force-yes -q -qq dpkg # https://github.com/travis-ci/travis-ci/issues/9361#issuecomment-408431262 dpkg-deb: error: archive has premature member 'control.tar.xz' before 'control.tar.gz' #9361
+            apt install -y -q python3-catkin-pkg python3-rosdep ros-${ROS_DISTRO}-catkin
+            apt install -y -q mongodb # to install ros-i${ROS_DISTRO}-warehouse-ros
+            rosdep init && rosdep update --include-eol-distros
+            mkdir -p ~/catkin_ws/src
+            cd ~/catkin_ws/src && ln -sf ~/project ${CIRCLE_PROJECT_REPONAME}
+      - run:
+          name: Run rosdep install
+          command : |-
+            . /opt/ros/${ROS_DISTRO}/setup.bash && cd ~/catkin_ws && rosdep install --from-paths src/ --ignore-src -y
+      - run:
+          name: Build packages
+          command : |-
+            . /opt/ros/${ROS_DISTRO}/setup.bash && cd ~/catkin_ws && catkin_make
+      - run:
+          name: Run tests
+          command : |-
+            . /opt/ros/${ROS_DISTRO}/setup.bash && cd ~/catkin_ws && catkin_make run_tests
+            . /opt/ros/${ROS_DISTRO}/setup.bash && cd ~/catkin_ws && catkin_test_results --verbose build
 
 jobs:
   build_indigo:
@@ -65,7 +96,7 @@ jobs:
       - ROS_DISTRO: noetic
       - ROS_REPOSITORY_PATH: http://packages.ros.org/ros/ubuntu
     steps:
-      - build
+      - build_python3
 
   build_doc:
     docker:
