@@ -540,7 +540,7 @@ In [99]: moveit_commander.os._exit(0)
 
 <$endif>
 
-<$if <$ROS_DISTRO>==noetic>
+<$if <$ROS_DISTRO>==melodic|<$ROS_DISTRO>==noetic>
 
 ### myCobot の場合
 
