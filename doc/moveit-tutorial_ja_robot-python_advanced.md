@@ -650,11 +650,70 @@ if __name__ == '__main__':
 
 <$elif <$ROS_DISTRO>==noetic>
 
-<!-- TODO here -->
+下記プログラムは duaro の左腕を動かすプログラムの例です．
+右腕のターゲット姿勢のままでは左腕の動作にはきつくなるので
+ターゲット位置のY座標の正負（左右）を反転しています．
+
+```bash
+rosrun tork_moveit_tutorial duaro_moveit_tutorial_poses_lower_arm.py
+```
+
+**duaro_moveit_tutorial_poses_lower_arm.py**
+
+```python
+#!/usr/bin/env python
+
+import sys, copy
+import rospy
+
+from moveit_commander import MoveGroupCommander
+from geometry_msgs.msg import Pose
+
+from tork_moveit_tutorial import init_node, question_yn
+
+
+if __name__ == '__main__':
+    
+    init_node()
+    
+    group = MoveGroupCommander("lower_arm")
+    
+    # Pose Target 1
+    rospy.loginfo( "Start Pose Target 1")
+    pose_target_1 = Pose()
+    
+    pose_target_1.position.x = 0.0
+    pose_target_1.position.y = 0.55
+    pose_target_1.position.z =  1.0
+    pose_target_1.orientation.x =  0.0
+    pose_target_1.orientation.y =  0.0
+    pose_target_1.orientation.z =  0.707
+    pose_target_1.orientation.w =  0.707
+    
+    rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_1 ) )
+    group.set_pose_target( pose_target_1 )
+    group.go()
+    
+    # Pose Target 2
+    rospy.loginfo( "Start Pose Target 2")
+    pose_target_2 = Pose()
+    
+    pose_target_2.position.x = 0.55
+    pose_target_2.position.y = 0
+    pose_target_2.position.z = 1.05
+    pose_target_2.orientation.z =  0.707
+    pose_target_2.orientation.w =  0.707
+    
+    rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_2 ) )
+    group.set_pose_target( pose_target_2 )
+    group.go()
+```
 
 <$endif>
 
 #### 両腕を動かす
+
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 前項目で動作グループに `left_arm` を指定して左腕を動かしました．
 他に指定できる「動作グループ」に何があるのかは動作プログラムの例を実行したときに
@@ -684,7 +743,43 @@ upperbody
 双腕のロボットで「両腕」を動かすには「両腕のグループ」を使います．
 上記の出力結果から NEXTAGE OPEN では `botharms` の動作グループがあります．
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$elif <$ROS_DISTRO>==noetic>
+
+前項目で動作グループに `lower_arm` を指定して左腕を動かしました．
+他に指定できる「動作グループ」に何があるのかは動作プログラムの例を実行したときに
+表示されるようにしてあります．
+
+下の出力例は duaro の場合のもので `lower_arm` や `upper_arm` の他に
+`botharms` や `lower_arm_tool` , `upper_arm_tool` などがあるのが分かります．
+
+```bash
+$ rosrun tork_moveit_tutorial duaro_moveit_tutorial_poses_lower_arm.py
+[ INFO] [WallTime: 1665371044.681512363] [node:/moveit_python_wrappers_1665371044674037973] [func:core::RobotModel::buildModel]: Loading robot model 'khi_duaro'...
+[ INFO] [WallTime: 1665371044.682251570] [node:/moveit_python_wrappers_1665371044674037973] [func:core::JointModel* moveit::core::RobotModel::constructJointModel]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[ WARN] [WallTime: 1665371044.786909727] [node:/moveit_python_wrappers_1665371044674037973] [func:core::SolverAllocatorFn kinematics_plugin_loader::KinematicsPluginLoader::getLoaderFunction]: Kinematics solver doesn't support #attempts anymore, but only a timeout.
+Please remove the parameter '/robot_description_kinematics/lower_arm/kinematics_solver_attempts' from your configuration.
+[ WARN] [WallTime: 1665371044.797097737] [node:/moveit_python_wrappers_1665371044674037973] [func:KinematicsBase::initialize]: IK plugin for group 'lower_arm' relies on deprecated API. Please implement initialize(RobotModel, ...).
+[ WARN] [WallTime: 1665371044.800244786] [node:/moveit_python_wrappers_1665371044674037973] [func:KinematicsBase::initialize]: IK plugin for group 'upper_arm' relies on deprecated API. Please implement initialize(RobotModel, ...).
+[INFO] [WallTime: 1665371044.806787] [node:/commander_example_4439_1665371044520] [func:init_node]: Move Groups defined in the robot :
+botharms
+lower_arm
+lower_arm_tool
+upper_arm
+upper_arm_tool
+[ INFO] [WallTime: 1665371044.823875247] [node:/moveit_python_wrappers_1665371044674037973] [func:core::RobotModel::buildModel]: Loading robot model 'khi_duaro'...
+[ INFO] [WallTime: 1665371044.823899703] [node:/moveit_python_wrappers_1665371044674037973] [func:core::JointModel* moveit::core::RobotModel::constructJointModel]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[ WARN] [WallTime: 1665371044.900999804] [node:/moveit_python_wrappers_1665371044674037973] [func:KinematicsBase::initialize]: IK plugin for group 'lower_arm' relies on deprecated API. Please implement initialize(RobotModel, ...).
+[ WARN] [WallTime: 1665371044.904525028] [node:/moveit_python_wrappers_1665371044674037973] [func:KinematicsBase::initialize]: IK plugin for group 'upper_arm' relies on deprecated API. Please implement initialize(RobotModel, ...).
+[ INFO] [WallTime: 1665371046.074714832] [node:/moveit_python_wrappers_1665371044674037973] [func:planning_interface::MoveGroupInterface::MoveGroupInterfaceImpl::MoveGroupInterfaceImpl]: Ready to take commands for planning group lower_arm.
+..
+```
+
+双腕のロボットで「両腕」を動かすには「両腕のグループ」を使います．
+上記の出力結果から duaro では `botharms` の動作グループがあります．
+
+<$endif>
+
+<$if <$ROS_DISTRO>==indigo>
 
 両腕のグループの名称は各ロボットで次のようになっていて
 `_` の有無の違いがあるので各ロボットで気をつけて指定します．
@@ -698,9 +793,7 @@ group = MoveGroupCommander("botharms")
 group = MoveGroupCommander("both_arms")
 ```
 
-<$endif>
-
-<$ifneq <$ROS_DISTRO>|indigo>
+<$elif <$ROS_DISTRO>==kinetic|<$?ROS_DISTRO>melodic>
 
 両腕のグループの名称は NEXTAGE OPEN と KHI duaro は同じ `botharms` です．
 他のロボットではこの名称は異なっている場合もあるのでロボットごとに名称を確認して適切な名称を指定します．
