@@ -1076,6 +1076,8 @@ if __name__ == '__main__':
 - `set_pose_reference_frame()` を用いる
   - `set_pose_reference_frame()` に参照フレーム名を渡して実行することで動作計画の参照フレーム設定を変更する．
 
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
+
 下方にある動作プログラム例 **nextage_moveit_tutorial_poses_relative.py** では
 左腕のエンドエフェクタリンクである `LARM_JOINT5_Link` を参照リンクとしています．
 `LARM_JOINT5_Link` のリンク座標系上で
@@ -1092,6 +1094,26 @@ if __name__ == '__main__':
 `Pose` 型の `target_pose` を渡すだけで
 リンクに相対的な位置・姿勢の目標を指定し動作計画と実行を行います．
 
+<$elif <$ROS_DISTRO>==noetic>
+
+下方にある動作プログラム例 **duaro_moveit_tutorial_poses_relative.py** では
+下の腕のエンドエフェクタリンクである `lower_link_j4` を参照リンクとしています．
+`lower_link_j4` のリンク座標系上で
+
+- 位置 : `[ 0.4, 0.0, 0.0 ]`
+- 姿勢 : クォータニオン表現で `[ 0.0, 0.0, 0.0, 1.0 ]`（＝回転無し）
+
+になるように目標姿勢を設定し，2つの方法について動作計画と実行を行っています．
+
+まず `PoseStamped` 型を利用して参照リンク `/lower_link_j4` の情報を一緒に変数
+`target_posestamped` で渡すことでリンクに相対的な位置・姿勢の目標を指定し動作計画と実行を行います．
+
+次に `set_pose_reference_frame()` で参照リンクを `/lower_link_j4` に設定して
+`Pose` 型の `target_pose` を渡すだけで
+リンクに相対的な位置・姿勢の目標を指定し動作計画と実行を行います．
+
+<$endif>
+
 また逐次 `group.get_pose_reference_frame()` で現状の参照リンクフレームを取得して
 ログ表示しています．
 
@@ -1100,38 +1122,34 @@ if __name__ == '__main__':
 `get_current_pose()` を利用して
 `initial_pose = group.get_current_pose()` として姿勢の取得をしています．
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 ![Nextage - Gazebo / Poses Relative](images/nextage_gazebo_poses_relative.png)
 
-<$endif>
-
-<$ifneq <$ROS_DISTRO>|indigo>
+<$elif <$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 ![Nextage - Gazebo / Poses Relative](images/kinetic/nextage_gazebo_poses_relative.png)
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 ![Nextage - MoveIt! / Poses Relative](images/nextage_moveit_poses_relative.png)
 
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$elif <$ROS_DISTRO>==kinetic>
 
 ![Nextage - MoveIt! / Poses Relative](images/kinetic/nextage_moveit_poses_relative.png)
 
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|melodic>
+<$elif <$ROS_DISTRO>==melodic>
 
 ![Nextage - MoveIt! / Poses Relative](images/melodic/nextage_moveit_poses_relative.png)
 
 <$endif>
 
-```
-$ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_relative.py
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
+
+```bash
+rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_relative.py
 ```
 
 **nextage_moveit_tutorial_poses_relative.py**
@@ -1221,6 +1239,99 @@ if __name__ == '__main__':
 
 ```
 
+<$elif <$ROS_DISTRO>==noetic>
+
+```bash
+rosrun tork_moveit_tutorial duaro_moveit_tutorial_poses_relative.py
+```
+
+**duaro_moveit_tutorial_poses_relative.py**
+
+```python
+#!/usr/bin/env python
+
+import sys, copy
+import rospy
+
+from moveit_commander import MoveGroupCommander
+from geometry_msgs.msg import Pose, PoseStamped
+
+from tork_moveit_tutorial import init_node
+
+
+if __name__ == '__main__':
+    
+    init_node()
+    
+    # Preparing Lower Arm
+    rospy.loginfo( "Preparing Lower Arm..." )
+    larmg = MoveGroupCommander("lower_arm")
+    larm_init_pose = Pose()
+    larm_init_pose.position.x = 0.1
+    larm_init_pose.position.y = 0.5
+    larm_init_pose.position.z = 1.0
+    larm_init_pose.orientation.x = 0.0
+    larm_init_pose.orientation.y = 0.0
+    larm_init_pose.orientation.z = 0.707
+    larm_init_pose.orientation.w = 0.707
+    larmg.set_pose_target(larm_init_pose)
+    larmg.go()
+    
+    
+    # Upper Arm
+    group = MoveGroupCommander("upper_arm")
+    
+    initial_reference_frame = group.get_pose_reference_frame()
+    rospy.loginfo( "Initial Reference Frame: {}".format( initial_reference_frame ) )
+    
+    initial_pose = group.get_current_pose()
+    rospy.loginfo( "Initial Pose:\n{}".format( initial_pose ) )
+    
+    # Relative Target Pose
+    target_pose = Pose()
+    target_pose.position.x = 0.2
+    target_pose.orientation.w = 1.0
+    
+    # Relative Target with PoseStamped
+    rospy.loginfo( "Using PoseStamped" )
+    
+    target_posestamped = PoseStamped()
+    target_posestamped.pose.position.x = 0.2
+    target_posestamped.pose.orientation.w = 1.0
+    target_posestamped.header.frame_id = '/lower_link_j4'
+    target_posestamped.header.stamp = rospy.Time.now()
+    
+    rospy.loginfo( "Target Pose:\n{}".format( target_posestamped ) )
+    group.set_pose_target( target_posestamped )
+    group.go()
+    
+    rospy.loginfo( "Current Reference Frame: {}".format( group.get_pose_reference_frame() ) )
+    
+    # Go Back to Initial Pose
+    group.set_pose_target( initial_pose.pose )
+    group.go()
+        
+    # Relative Target with set_pose_reference_frame
+    rospy.loginfo( "Using set_pose_refercence_frame() and Pose" )
+    
+    group.set_pose_reference_frame( '/lower_link_j4' )
+    rospy.loginfo( "Current Reference Frame: {}".format( group.get_pose_reference_frame() ) )
+    rospy.loginfo( "Target Pose:\n{}".format( target_pose ) )
+    
+    group.set_pose_target( target_pose )
+    group.go()
+
+    # Reset Pose Reference Frame
+    group.set_pose_reference_frame( initial_reference_frame )
+    rospy.loginfo( "Current Reference Frame: {}".format( group.get_pose_reference_frame() ) )
+    
+    # Go Back to Initial Pose
+    rospy.loginfo( "Go Back to Initial Pose..." )
+    group.set_pose_target( initial_pose )
+    group.go()
+```
+
+<$endif>
 
 ### 座標系フレーム間の相対姿勢を取得する - tf
 
