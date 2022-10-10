@@ -822,7 +822,7 @@ group.go()
 両腕を同時に動作させるプログラム例を下に示します．
 
 ```
-$ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_ifqyn.py
+$ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_botharms.py
 ```
 
 **nextage_moveit_tutorial_poses_botharms.py**
