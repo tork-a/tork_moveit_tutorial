@@ -361,7 +361,7 @@ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 ## ソースインストール
 
-apt でインストールできるようにバイナリ／リリースされていないロボットパッケージはワークスペース経由でインストールすることができます．標準では推奨されていな方法ですので十分に注意して実行してください．
+apt でインストールできるようにバイナリ／リリースされていないロボットパッケージはワークスペース経由でインストールすることができます．標準では推奨されていない方法ですので十分に注意して実行してください．
 
 まず，`/tmp/catkin_ws` という名前のワークスペースを作成する手順は次のとおりです．
 
@@ -746,7 +746,7 @@ roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
 
 ```bash
 source ~/catkin_ws/devel/setup.bash
-roslaunch roslaunch mycobot_280_moveit demo.launch
+roslaunch mycobot_280_moveit demo.launch
 ```
 
 他のmyCobot ，例えば myCobot 320 用のシミュレータを立ち上げる場合は次のようにして MoveIt! を起動します．

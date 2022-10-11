@@ -1450,7 +1450,7 @@ if __name__ == '__main__':
 で得られる，`quaternion_from_euler(0, 0, -1.57079)` 関数を用いて取得します．
 
 また，このプログラムに続けて
-以下のようにうに，`pose_target_1`, `pose_target_2`を用いて
+以下のように，`pose_target_1`, `pose_target_2`を用いて
 `group.compute_cartesian_path([pose_target_1, pose_target_2], 0.01, 0.0)`
 として直線補間軌道を計画し，`group.execute( plan )` で実行します．
 
