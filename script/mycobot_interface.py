@@ -14,8 +14,8 @@ import rospy
 import actionlib
 from control_msgs.msg import FollowJointTrajectoryAction, FollowJointTrajectoryResult, FollowJointTrajectoryFeedback, GripperCommandAction, GripperCommandResult, GripperCommandFeedback
 from sensor_msgs.msg import JointState
-from geometry_msgs.msg import PoseStamped #, Quaternion
-from std_srvs.srv import SetBool, SetBoolResponse #, Empty 
+from geometry_msgs.msg import PoseStamped
+from std_srvs.srv import SetBool, SetBoolResponse
 import tf
 import numpy as np
 
@@ -25,7 +25,6 @@ class MycobotInterface(object):
     def __init__(self):
         port = rospy.get_param("~port", "/dev/ttyUSB0")
         baud = rospy.get_param("~baud", 115200)
-        #self.model = rospy.get_param("~model", '280')
         self.vel_rate = rospy.get_param("~vel_rate", 32.0) # bit/rad
         self.min_vel = rospy.get_param("~min_vel", 10) # bit, for the bad velocity tracking of mycobot.
         rospy.loginfo("Connect mycobot on %s,%s" % (port, baud))
@@ -42,20 +41,11 @@ class MycobotInterface(object):
 
         self.servo_srv = rospy.Service("set_servo", SetBool, self.set_servo_cb)
 
-        #self.open_gripper_srv = rospy.Service("open_gripper", Empty, self.open_gripper_cb)
-        #self.close_gripper_srv = rospy.Service("close_gripper", Empty, self.close_gripper_cb)
-        #self.gripper_is_moving = False
-        #self.gripper_value = None
-        #self.get_gripper_state = False
-
         # action server for joint and gripper
         self.joint_as = actionlib.SimpleActionServer("arm_controller/follow_joint_trajectory", FollowJointTrajectoryAction, execute_cb=self.joint_as_cb)
         self.joint_as.start()
 
         self.get_joint_state = True
-
-        #self.gripper_as = actionlib.SimpleActionServer("gripper_controller/gripper_command", GripperCommandAction, execute_cb=self.gripper_as_cb)
-        #self.gripper_as.start()
 
     def run(self):
 
@@ -87,15 +77,6 @@ class MycobotInterface(object):
                    msg.name.append('joint' + str(i+1))
                    msg.position.append(ang / 180.0 * math.pi)
                 self.joint_angle_pub.publish(msg)
-
-            # # get gripper state
-            # # Note: we only retreive the gripper state when doing the grasp action.
-            # # We find following polling function will cause the failure of get_angles() for Mycobot Pro 320.
-            # # This makes the publish of joint state decrease from 20Hz to 2Hz for MyCobot Pro 320.
-            # if self.get_gripper_state:
-            #     self.gripper_is_moving = self.mc.is_gripper_moving()
-            #     self.gripper_value = self.mc.get_gripper_value()
-
 
             # Get end-effector if necessary (use tf by ros in default)
             if self.pub_end_coord:
@@ -149,22 +130,7 @@ class MycobotInterface(object):
 
         return SetBoolResponse(True, "")
 
-    # def open_gripper_cb(self, req):
-    #     self.lock.acquire()
-    #     self.mc.set_gripper_state(0, 80)
-    #     self.lock.release()
-    #     rospy.loginfo("open gripper")
-
-    # def close_gripper_cb(self, req):
-    #     self.lock.acquire()
-    #     self.mc.set_gripper_state(1, 80)
-    #     self.lock.release()
-    #     rospy.loginfo("close gripper")
-
     def joint_as_cb(self, goal):
-
-        # if '320' in self.model: # workaround for mycobot pro 320
-        #     self.get_joint_state = False
 
         # Error case1
         if not self.real_angles:
@@ -378,68 +344,6 @@ class MycobotInterface(object):
         self.joint_as.set_succeeded(res, msg);
 
         self.get_joint_state = True
-
-    # def gripper_as_cb(self, goal):
-
-    #     goal_state = (int)(goal.command.position)
-    #     if not (goal_state == 0 or goal_state == 1):
-    #         res = GripperCommandResult()
-    #         res.position = self.gripper_value
-    #         res.stalled = True
-    #         res.reached_goal = False
-    #         msg = "We only support 1 (totally close) or 0 (totally open) for gripper action"
-    #         rospy.logerr(msg);
-    #         self.gripper_as.set_aborted(res, msg)
-    #         return
-
-    #     feedback = GripperCommandFeedback()
-
-    #     self.get_gripper_state = True # start retrive the grasping data
-    #     if '320' in self.model: # workaround for mycobot pro 320
-    #         self.get_joint_state = False # stop polling joint angles
-    #         time.sleep(0.1) # wait for the finish of last joint angles polling
-
-    #     self.lock.acquire()
-    #     self.mc.set_gripper_state(goal_state, 100) # first arg is the flag 0 - open, 1 - close; second arg is the speed
-    #     self.lock.release()
-
-    #     self.get_joint_state = True # resume polling joint state if necessary
-
-    #     t = rospy.Time(0)
-    #     rospy.sleep(0.3) # wait for the gripper to start moving
-
-    #     r = rospy.Rate(20) # 20 Hz
-    #     while not rospy.is_shutdown():
-
-    #         rospy.logdebug("Current gripper value is  %d state is %d", self.gripper_value, self.gripper_is_moving);
-
-    #         if self.gripper_as.is_preempt_requested():
-
-    #             self.gripper_as.set_preempted()
-    #             self.get_gripper_state = False
-    #             return;
-
-    #         if (rospy.Time.now() - t).to_sec() > 0.1: # 10 Hz
-    #             feedback.position = self.gripper_value
-    #             feedback.stalled = False
-    #             feedback.stalled = False
-    #             self.gripper_as.publish_feedback(feedback);
-    #             t = rospy.Time.now()
-
-    #         if self.gripper_is_moving == 0: # not moving
-    #             self.get_gripper_state = False
-    #             msg = "Gripper stops moving"
-    #             rospy.loginfo(msg)
-    #             res = GripperCommandResult()
-    #             res.position = self.gripper_value
-    #             res.stalled = True
-    #             res.reached_goal = True
-    #             self.gripper_as.set_succeeded(res, msg);
-    #             break
-
-
-    #         r.sleep();
-
 
 if __name__ == "__main__":
     rospy.init_node("mycobot_topics")
