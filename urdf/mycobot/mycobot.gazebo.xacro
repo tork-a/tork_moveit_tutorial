@@ -3,7 +3,7 @@
 
   <xacro:arg name="robot_namespace" default="" />
 
-  <xacro:include filename="$(find mycobot_description)/urdf/mycobot/mycobot.urdf.xacro" />
+  <xacro:include filename="$(find tork_moveit_tutorial)/urdf/mycobot/mycobot.urdf.xacro" />
 
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">

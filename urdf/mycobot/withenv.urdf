@@ -15,7 +15,7 @@
     <visual>
       <geometry>
 	     <!--- 0.0 0 -0.04  1.5708 3.14159-->
-       <mesh filename="package://mycobot_description/urdf/mycobot/suit_env.dae"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/suit_env.dae"/>
       </geometry>
       <origin xyz = "0 0 0.0" rpy = "1.5708 0 -1.5708"/>
     </visual>
@@ -33,14 +33,14 @@
     <visual>
       <geometry>
 	     <!--- 0.0 0 -0.04  1.5708 3.14159-->
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint1.dae"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint1.dae"/>
       </geometry>
       <origin xyz = "0.0 0 0.02 " rpy = " 0 0 -1.5708"/>
     </visual>
     <collision>
       <geometry>
 	     <!--- 0.0 0 -0.04  1.5708 3.14159-->
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint1.dae"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint1.dae"/>
         </geometry>
         <origin xyz = "0.0 0 0.02 " rpy = " 0 0 -1.5708"/>
     </collision>
@@ -57,13 +57,13 @@
     </inertial>
     <visual>
       <geometry>
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint2.dae"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint2.dae"/>
       </geometry>
       <origin xyz = "0.0 0 -0.06096 " rpy = " 0 0 -1.5708"/>
     </visual>
     <collision>
      <geometry>
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint2.dae"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint2.dae"/>
       </geometry>
       <origin xyz = "0.0 0 -0.06096 " rpy = " 0 0 -1.5708"/>
     </collision>
@@ -80,13 +80,13 @@
     </inertial>
     <visual>
       <geometry>
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint3.dae"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint3.dae"/>
       </geometry>
     <origin xyz = "-0.0 0 0.03256 " rpy = " 0 -1.5708 0"/>
     </visual>
     <collision>
       <geometry>
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint3.dae"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint3.dae"/>
       </geometry>
       <origin xyz = "-0.0 0 0.03256 " rpy = " 0 -1.5708 0"/>
     </collision>
@@ -104,14 +104,14 @@
     <visual>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint4.dae"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint4.dae"/>
       </geometry>
       <origin xyz = "-0.0 0 0.03056 " rpy = " 0 -1.5708 0"/>
     </visual>
     <collision>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint4.dae"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint4.dae"/>
       </geometry>
       <origin xyz = "-0.0 0 0.03056 " rpy = " 0 -1.5708 0"/>
     </collision>
@@ -130,14 +130,14 @@
     <visual>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint5.stl"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint5.stl"/>
       </geometry>
     <origin xyz = "0.0 0 -0.03356 " rpy = " 0 -1.5708 1.57080 "/>
     </visual>
     <collision>
        <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint5.stl"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint5.stl"/>
       </geometry>
       <origin xyz = "0.0 0 -0.03356 " rpy = " 0 -1.5708 1.57080"/>
     </collision>
@@ -156,14 +156,14 @@
     <visual>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint6.dae"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint6.dae"/>
       </geometry>
     <origin xyz = "0.00 0.00 -0.048 " rpy = " 0 0 0"/>
     </visual>
     <collision>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint6.dae"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint6.dae"/>
       </geometry>
     <origin xyz = "0.00 0.00 -0.048 " rpy = " 0 0 0"/>
     </collision>
@@ -181,14 +181,14 @@
     <visual>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint7.dae"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint7.dae"/>
       </geometry>
     <origin xyz = "-0.00 -0.00 -0.026 " rpy = " 0 0 0"/>
     </visual>
     <collision>
       <geometry>
        <!--- 0.0 0 -0.04 -->
-       <mesh filename="package://mycobot_description/urdf/mycobot/joint7.dae"/>
+       <mesh filename="package://tork_moveit_tutorial/urdf/mycobot/joint7.dae"/>
       </geometry>
     <origin xyz = "-0.00 -0.00 -0.026 " rpy = " 0 0 0"/>
     </collision>
