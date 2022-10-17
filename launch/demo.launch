@@ -8,6 +8,8 @@
   <!-- By default, we are not in debug mode -->
   <arg name="debug" default="false" />
 
+  <arg name="mode" default="fake" /> <!-- mode: fake or real -->
+
   <!--
   By default, hide joint_state_publisher's GUI
 
@@ -25,19 +27,33 @@
 
   <!-- If needed, broadcast static tf for robot root -->
 
-  <!-- We do not have a robot connected, so publish fake joint states -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-    <param name="use_gui" value="$(arg use_gui)"/>
-    <rosparam param="source_list">[/joint_states]</rosparam>
-  </node>
+  <group if="$(eval arg('mode') == 'real')">
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+      <param name="use_gui" value="$(arg use_gui)"/>
+      <rosparam param="source_list">[/joint_states]</rosparam>
+    </node>
+  </group>
+  <group if="$(eval arg('mode') == 'fake')">
+    <!-- We do not have a robot connected, so publish fake joint states -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+      <param name="use_gui" value="$(arg use_gui)"/>
+      <rosparam param="source_list">[move_group/fake_controller_joint_states]</rosparam>
+    </node>
+  </group>
 
   <!-- Given the published joint states, publish tf for the robot links -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
 
   <!-- Run the main MoveIt! executable without trajectory execution (we do not have controllers configured by default) -->
-  <include file="$(find tork_moveit_tutorial)/launch/move_group.launch">
+  <include file="$(find tork_moveit_tutorial)/launch/move_group.launch" if="$(eval arg('mode')=='real')">
     <arg name="allow_trajectory_execution" value="true"/>
     <arg name="fake_execution" value="false"/>
+    <arg name="info" value="true"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+  <include file="$(find tork_moveit_tutorial)/launch/move_group.launch" if="$(eval arg('mode')=='fake')">
+    <arg name="allow_trajectory_execution" value="true"/>
+    <arg name="fake_execution" value="true"/>
     <arg name="info" value="true"/>
     <arg name="debug" value="$(arg debug)"/>
   </include>
