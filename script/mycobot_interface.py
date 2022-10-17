@@ -42,7 +42,7 @@ class MycobotInterface(object):
         self.servo_srv = rospy.Service("set_servo", SetBool, self.set_servo_cb)
 
         # action server for joint and gripper
-        self.joint_as = actionlib.SimpleActionServer("arm_controller/follow_joint_trajectory", FollowJointTrajectoryAction, execute_cb=self.joint_as_cb)
+        self.joint_as = actionlib.SimpleActionServer("arm_controller/follow_joint_trajectory", FollowJointTrajectoryAction, execute_cb=self.joint_as_cb, auto_start=False)
         self.joint_as.start()
 
         self.get_joint_state = True
