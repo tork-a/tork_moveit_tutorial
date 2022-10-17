@@ -586,27 +586,22 @@ In [1]: group = MoveGroupCommander("arm_group")
 ```python
 In [2]: group.get_joints()
 Out[2]: 
-['joint2_to_joint1',
- 'joint3_to_joint2',
- 'joint4_to_joint3',
- 'joint5_to_joint4',
- 'joint6_to_joint5',
- 'joint6output_to_joint6']
+['joint1', 'joint2', 'joint3', 'joint4', 'joint5', 'joint6']
 
 In [3]:
 ```
 
 上は myCobot 280 の場合の出力結果で
-`joint2_to_joint1`〜`joint6output_to_joint6` の6つの関節があることがわかります．
+`joint1`〜`joint6` の6つの関節があることがわかります．
 
-肘関節に相当する `joint4_to_joint3` を動かしてみます．
+肘関節に相当する `joint3` を動かしてみます．
 
 `set_joint_value_target()` を使って関節の目標値を設定します．
-`set_joint_value_target()` に関節名 `'joint4_to_joint3'` と
+`set_joint_value_target()` に関節名 `'joint3'` と
 関節角度を `-2.0`（単位ラジアン[rad]）を渡します．
 
 ```python
-In [3]: group.set_joint_value_target( 'joint4_to_joint3', -2.0 )
+In [3]: group.set_joint_value_target( 'joint3', -2.0 )
 ```
 
 関節角度目標を設定したので `go()` で動かします．
@@ -617,20 +612,20 @@ Out[4]: True
 ```
 
 正常に動作が完了すると `True` が返ってきます．
-肘関節 `joint4_to_joint3` が少し屈曲したと思います．
+肘関節 `joint3` が少し屈曲したと思います．
 
 同じ要領で他の右腕の関節もそれぞれ動かしてみます．
 
 ```python
-In [5]: group.set_joint_value_target( 'joint5_to_joint4', -0.78 )
+In [5]: group.set_joint_value_target( 'joint4', -0.78 )
 In [6]: group.go()
 Out[6]: True
 
-In [7]: group.set_joint_value_target( 'joint6_to_joint5', 0.78 )
+In [7]: group.set_joint_value_target( 'joint5', 0.78 )
 In [8]: group.go()
 Out[8]: True
 
-In [9]: group.set_joint_value_target( 'joint6output_to_joint6', 0.78 )
+In [9]: group.set_joint_value_target( 'joint6', 0.78 )
 In [10]: group.go()
 Out[10]: True
 ```
