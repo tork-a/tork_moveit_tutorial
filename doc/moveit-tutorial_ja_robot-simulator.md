@@ -749,15 +749,6 @@ source ~/catkin_ws/devel/setup.bash
 roslaunch tork_moveit_tutorial demo.launch
 ```
 
-他のmyCobot ，例えば myCobot 320 用のシミュレータを立ち上げる場合は次のようにして MoveIt! を起動します．
-
-**ターミナル-2** : myCobot 320 用の MoveIt! の起動
-
-```bash
-source ~/catkin_ws/devel/setup.bash
-roslaunch roslaunch mycobot_320_moveit demo.launch
-```
-
 ![myCobot MoveIt! - Starts](images/melodic/mycobot-moveit_starts.png)
 
 これで MoveIt! の動作計画機能が利用できる状態になっています．
