@@ -305,7 +305,7 @@ source devel/setup.bash
 
 ```bash
 cd ~/catkin_ws/src
-git clone https://github.com/elephantrobotics/mycobot_ros
+git clone https://github.com/tork-a/tork_moveit_tutorial
 rosdep install --from-paths . --ignore-src -y
 cd ~/catkin_ws
 catkin_make
@@ -746,7 +746,7 @@ roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
 
 ```bash
 source ~/catkin_ws/devel/setup.bash
-roslaunch mycobot_280_moveit demo.launch
+roslaunch tork_moveit_tutorial demo.launch
 ```
 
 他のmyCobot ，例えば myCobot 320 用のシミュレータを立ち上げる場合は次のようにして MoveIt! を起動します．
