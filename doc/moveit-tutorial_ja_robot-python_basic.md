@@ -558,6 +558,34 @@ source /opt/ros/<$ROS_DISTRO>/setup.bash
 rosrun tork_moveit_tutorial demo.py
 ```
 
+#### 実機を動かす場合
+
+先に「[実機の使い方 - myCobot の場合](moveit-tutorial_ja_how-to-use-real-mycobot.md)」を参照してください．
+
+そのあと，上に書かれたコマンドの代わりに，
+以下を実行してください．
+
+**ターミナル-1** : myCobot 280 とパソコンの接続プログラムの起動
+
+```bash
+source ~/catkin_ws/devel/setup.bash
+roslaunch tork_moveit_tutorial mycobot_interface.launch
+```
+
+**ターミナル-2** : myCobot 280 用の MoveIt! の起動
+
+```bash
+source ~/catkin_ws/devel/setup.bash
+roslaunch tork_moveit_tutorial demo.launch mode:=real
+```
+
+**ターミナル-3** : 対話的プログラミングのコンソールの起動
+
+```bash
+source /opt/ros/<$ROS_DISTRO>/setup.bash
+rosrun tork_moveit_tutorial demo.py
+```
+
 #### 特定の関節を動かす
 
 プログラムから関節を動かすなどをするために「右腕」の `group` を作成します．
@@ -1378,12 +1406,39 @@ if __name__ == '__main__':
 **ターミナル-1**
 ```
 $ source ~/catkin_ws/devel/setup.bash
-$ roslaunch roslaunch mycobot_280_moveit demo.launch
+$ roslaunch tork_moveit_tutorial demo.launch
 ```
 
 動作プログラムファイルを実行します．
 
 **ターミナル-2**
+```
+$ source /opt/ros/<$ROS_DISTRO>/setup.bash
+$ rosrun tork_moveit_tutorial mycobot_moveit_tutorial_poses.py
+```
+
+**実機を動かす場合**
+
+先に「[実機の使い方 - myCobot の場合](moveit-tutorial_ja_how-to-use-real-mycobot.md)」を参照してください．
+
+そのあと，上に書かれたコマンドの代わりに，
+以下を実行してください．
+
+**ターミナル-1** : myCobot 280 とパソコンの接続プログラムの起動
+
+```bash
+$ source ~/catkin_ws/devel/setup.bash
+$ roslaunch tork_moveit_tutorial mycobot_interface.launch
+```
+
+**ターミナル-2** : myCobot 280 用の MoveIt! の起動
+
+```bash
+$ source ~/catkin_ws/devel/setup.bash
+$ roslaunch tork_moveit_tutorial demo.launch mode:=real
+```
+
+**ターミナル-3**
 ```
 $ source /opt/ros/<$ROS_DISTRO>/setup.bash
 $ rosrun tork_moveit_tutorial mycobot_moveit_tutorial_poses.py
