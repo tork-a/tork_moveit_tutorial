@@ -642,21 +642,33 @@ Out[4]: True
 正常に動作が完了すると `True` が返ってきます．
 肘関節 `joint3` が少し屈曲したと思います．
 
+![myCobot - result of group.set_joint_value_target( 'joint3', -2.0 )](images/melodic/3.1_In_[3]_set_joint_value_target('joint3', -2.0).jpg)
+
 同じ要領で他の右腕の関節もそれぞれ動かしてみます．
 
 ```python
 In [5]: group.set_joint_value_target( 'joint4', -0.78 )
 In [6]: group.go()
 Out[6]: True
+```
 
+![myCobot - result of group.set_joint_value_target( 'joint4', -0.78 )](images/melodic/3.1_In_[5]_set_joint_value_target('joint4', -0.78).jpg)
+
+```python
 In [7]: group.set_joint_value_target( 'joint5', 0.78 )
 In [8]: group.go()
 Out[8]: True
+```
 
+![myCobot - result of group.set_joint_value_target( 'joint5', 0.78 )](images/melodic/3.1_In_[7]_set_joint_value_target('joint5', 0.78).jpg)
+
+```python
 In [9]: group.set_joint_value_target( 'joint6', 0.78 )
 In [10]: group.go()
 Out[10]: True
 ```
+
+![myCobot - result of group.set_joint_value_target( 'joint6', 0.78 )](images/melodic/3.1_In_[9]_set_joint_value_target('joint6', 0.78).jpg)
 
 #### 腕全体の関節を動かす
 
@@ -670,6 +682,8 @@ In [11]: group.set_joint_value_target( [ 0.0, 0.0, 0, 0.0, 0.0, 0.0 ] )
 In [12]: group.go()
 Out[12]: True
 ```
+
+![myCobot - result of group.set_joint_value_target( [ 0.0, 0.0, 0, 0.0, 0.0, 0.0 ] )](images/melodic/3.1_In_[11]_set_joint_value_target( [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] ).jpg)
 
 myCobot ロボットは初期姿勢に戻っていることと思います．
 
@@ -703,6 +717,8 @@ Out[22]: True
 手先の「位置」しか指定していないので
 手先の「姿勢」は思わぬ方を向いていることもあります．
 
+![myCobot - one result of group.set_position_target( [ 0.1, -0.1, 0.1 ] )](images/melodic/3.1_In_[21]_set_position_target( [0.1, -0.1, 0.1] ).jpg)
+
 #### 手先の姿勢を指定して動かす
 
 手先の姿勢を指定してロボットを動かしてみます．
@@ -724,6 +740,8 @@ Out[32]: True
 
 手先の「姿勢」しか指定していないので
 手先の「位置」は思わぬところにあることもあります．
+
+![myCobot - one result of group.set_rpy_target( [ 0.0, -2.36, 0.0 ] )](images/melodic/3.1_In_[31]_set_rpy_target( [0.0, -2.36, 0.0] ).jpg)
 
 - 注意：以下のようなエラーメッセージが表示された場合は，再度 `group.go()` をお送りください．
 
@@ -760,6 +778,8 @@ In [42]: group.go()
 Out[42]: True
 ```
 
+![myCobot - result of group.set_pose_target( [ 0.1, -0.1, 0.1, 0, -1.57, 0 ] )](images/melodic/3.1_In_[41]_set_pose_target( [0.1, -0.1, 0.1, 0, -1.57, 0] ).jpg)
+
 もう1つ位置・姿勢を指定して腕を動かしてみます．
 
 ```python
@@ -767,6 +787,8 @@ In [43]: group.set_pose_target( [ 0.1, -0.1, 0.2, 0, -3.14, 0 ] )
 In [44]: group.go()
 Out[44]: True
 ```
+
+![myCobot - result of group.set_pose_target( [ 0.1, -0.1, 0.2, 0, -3.14, 0 ] )](images/melodic/3.1_In_[43]_set_pose_target( [0.1, -0.1, 0.2, 0, -3.14, 0] ).jpg)
 
 今度は 位置とクォータニオン を `set_pose_target()` に渡して腕を動かしてみます．
 
@@ -776,11 +798,15 @@ In [46]: group.go()
 Out[46]: True
 ```
 
+![myCobot - result of group.set_pose_target( [ 0.1, -0.1, 0.1, 0.0, -0.707, 0.0, 0.707 ] )](images/melodic/3.1_In_[45]_set_pose_target( [0.1, -0.1, 0.1, 0.0, -0.707, 0.0, 0.707] ).jpg)
+
 ```python
 In [47]: group.set_pose_target( [ 0.1, -0.1, 0.2, 0.0, -1.0, 0.0, 0.0] )
 In [48]: group.go()
 Out[48]: True
 ```
+
+![myCobot - result of group.set_pose_target( [ 0.1, -0.1, 0.2, 0.0, -1.0, 0.0, 0.0] )](images/melodic/3.1_In_[47]_set_pose_target( [0.1, -0.1, 0.2, 0.0, -1.0, 0.0, 0.0] ).jpg)
 
 > - クォータニオン（四元数/しげんすう）
 >   - 空間上の姿勢を表現するための4つの成分をもつベクトル
@@ -839,6 +865,8 @@ In [60]: group.go()
 Out[60]: True
 ```
 
+![myCobot - result of group.set_pose_target( pose_target_1 )](images/melodic/3.1_In_[59]_set_pose_target( pose_target_1 ).jpg)
+
 ポーズをもう1つ指定して腕を動かします．
 
 ```python
@@ -875,6 +903,8 @@ In [69]: group.set_pose_target( pose_target_2 )
 In [70]: group.go()
 Out[70]: True
 ```
+
+![myCobot - result of group.set_pose_target( pose_target_2 )](images/melodic/3.1_In_[69]_set_pose_target(pose_target_2).jpg)
 
 `set_pose_target()` に渡せるもう1つの型 `PoseStamped` 型については
 
@@ -982,6 +1012,9 @@ In [6]: group.execute(plan)
 Out[6]: True
 ```
 
+![myCobot - result of group.compute_cartesian_path( waypoints_mycobot, 0.01, 0.0) (1)](images/melodic/3.1_waypoints_mycobot_1.jpg) ![myCobot - result of group.compute_cartesian_path( waypoints_mycobot, 0.01, 0.0) (2)](images/melodic/3.1_waypoints_mycobot_2.jpg)
+![myCobot - result of group.compute_cartesian_path( waypoints_mycobot, 0.01, 0.0) (3)](images/melodic/3.1_waypoints_mycobot_3.jpg) ![myCobot - result of group.compute_cartesian_path( waypoints_mycobot, 0.01, 0.0) (4)](images/melodic/3.1_waypoints_mycobot_4.jpg)
+
 #### 四角形や円に沿ってエンドエフェクタを動かす
 
 エンドエフェクタを四角形や円に沿って動かすような場合も
@@ -1046,6 +1079,9 @@ In [14]: group.execute(plan)
 Out[14]: True
 ```
 
+![myCobot - result of ( plan, fraction ) = group.compute_cartesian_path( waypoints_mycobot_rectangular, 0.01, 0.0) (1)](images/melodic/3.1_waypoints_mycobot_rectangular_1.jpg) ![myCobot - result of ( plan, fraction ) = group.compute_cartesian_path( waypoints_mycobot_rectangular, 0.01, 0.0) (2)](images/melodic/3.1_waypoints_mycobot_rectangular_2.jpg)
+![myCobot - result of ( plan, fraction ) = group.compute_cartesian_path( waypoints_mycobot_rectangular, 0.01, 0.0) (3)](images/melodic/3.1_waypoints_mycobot_rectangular_3.jpg) ![myCobot - result of ( plan, fraction ) = group.compute_cartesian_path( waypoints_mycobot_rectangular, 0.01, 0.0) (4)](images/melodic/3.1_waypoints_mycobot_rectangular_4.jpg)
+
 同様に円に沿った動作を行います．
 
 ```python
@@ -1055,6 +1091,9 @@ In [14]: group.execute(plan)
 Out[14]: True
 
 ```
+
+![myCobot - result of ( plan, fraction ) = group.compute_cartesian_path( waypoints_mycobot_circular, 0.01, 0.0) (1)](images/melodic/3.1_waypoints_mycobot_circular_1.jpg) ![myCobot - result of ( plan, fraction ) = group.compute_cartesian_path( waypoints_mycobot_circular, 0.01, 0.0) (2)](images/melodic/3.1_waypoints_mycobot_circular_2.jpg)
+![myCobot - result of ( plan, fraction ) = group.compute_cartesian_path( waypoints_mycobot_circular, 0.01, 0.0) (3)](images/melodic/3.1_waypoints_mycobot_circular_3.jpg) ![myCobot - result of ( plan, fraction ) = group.compute_cartesian_path( waypoints_mycobot_circular, 0.01, 0.0) (4)](images/melodic/3.1_waypoints_mycobot_circular_4.jpg)
 
 `exit` もしくは `quit` で終了します．
 
@@ -1496,6 +1535,9 @@ if __name__ == '__main__':
 ```
 
 ![myCobot MoveIt! - cartesian path](images/melodic/mycobot-moveit_pose.png)
+
+![myCobot - (1) result of group.set_pose_target( pose_target_1 )](images/melodic/3.2_1_set_pose_target(pose_target_1).jpg) ![myCobot - (2) result of group.set_pose_target( pose_target_2 )](images/melodic/3.2_2_set_pose_target(pose_target_2).jpg)
+![myCobot - (3) result of group.compute_cartesian_path([pose_target_1, pose_target_2], 0.01, 0.0)](images/melodic/3.2_3_compute_cartesian_path(pose_target_1, pose_target_2).jpg) ![myCobot - (4) result of group.compute_cartesian_path([pose_target_1, pose_target_2], 0.01, 0.0)](images/melodic/3.2_4_compute_cartesian_path(pose_target_1, pose_target_2).jpg)
 
 他のロボットの動作計画・動作の実行ファイルとの相違点は次のとおりです．
 
