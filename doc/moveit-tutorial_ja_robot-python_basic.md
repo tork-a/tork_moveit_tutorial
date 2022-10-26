@@ -560,7 +560,7 @@ rosrun tork_moveit_tutorial demo.py
 
 #### 実機を動かす場合
 
-先に「[実機の使い方 - myCobot の場合](moveit-tutorial_ja_how-to-use-real-mycobot.md)」を参照してください．
+先に「[実機の使い方 - myCobot の場合](moveit-tutorial_ja_how-to-use-real-mycobot)」を参照してください．
 
 そのあと，上に書かれたコマンドの代わりに，
 以下を実行してください．
@@ -1458,7 +1458,7 @@ $ rosrun tork_moveit_tutorial mycobot_moveit_tutorial_poses.py
 
 **実機を動かす場合**
 
-先に「[実機の使い方 - myCobot の場合](moveit-tutorial_ja_how-to-use-real-mycobot.md)」を参照してください．
+先に「[実機の使い方 - myCobot の場合](moveit-tutorial_ja_how-to-use-real-mycobot)」を参照してください．
 
 そのあと，上に書かれたコマンドの代わりに，
 以下を実行してください．
