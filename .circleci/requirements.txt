@@ -16,7 +16,7 @@ six==1.14.0
 snowballstemmer==2.0.0
 sphinx==1.8.1
 sphinxcontrib-websupport==1.2.0
-sphinx-markdown-tables==0.0.15
+sphinx-markdown-tables==0.0.6
 typing==3.7.4.1
 urllib3==1.26.5
 recommonmark==0.4.0
