@@ -642,7 +642,8 @@ Out[4]: True
 正常に動作が完了すると `True` が返ってきます．
 肘関節 `joint3` が少し屈曲したと思います．
 
-![myCobot - result of group.set_joint_value_target( 'joint3', -2.0 )](images/melodic/3.1_In_[3]_set_joint_value_target.png)
+![myCobot - result of group.set_joint_value_target( 'joint3', -2.0 ) (simulation)](images/melodic/3.1_In_[3]_set_joint_value_target.png)
+![myCobot - result of group.set_joint_value_target( 'joint3', -2.0 ) (real robot)](images/melodic/3.1_In_[3]_set_joint_value_target-real.jpg)
 
 同じ要領で他の右腕の関節もそれぞれ動かしてみます．
 
@@ -1012,7 +1013,9 @@ In [6]: group.execute(plan)
 Out[6]: True
 ```
 
-![myCobot - result of group.compute_cartesian_path( waypoints_mycobot, 0.01, 0.0)](images/melodic/3.1_waypoints_mycobot.png)
+![myCobot - result of group.compute_cartesian_path( waypoints_mycobot, 0.01, 0.0) (1)](images/melodic/3.1_waypoints_mycobot_1.jpg) ![myCobot - result of group.compute_cartesian_path( waypoints_mycobot, 0.01, 0.0) (2)](images/melodic/3.1_waypoints_mycobot_2.jpg)
+
+![myCobot - result of group.compute_cartesian_path( waypoints_mycobot, 0.01, 0.0) (3)](images/melodic/3.1_waypoints_mycobot_3.jpg) ![myCobot - result of group.compute_cartesian_path( waypoints_mycobot, 0.01, 0.0) (4)](images/melodic/3.1_waypoints_mycobot_4.jpg)
 
 #### 四角形や円に沿ってエンドエフェクタを動かす
 
@@ -1533,6 +1536,8 @@ if __name__ == '__main__':
 
 ![myCobot MoveIt! - cartesian path](images/melodic/mycobot-moveit_pose.png)
 
+![myCobot MoveIt! - cartesian path (real robot 1)](images/melodic/mycobot-moveit_pose-real-robot-1.jpg) ![myCobot MoveIt! - cartesian path (real robot 2)](images/melodic/mycobot-moveit_pose-real-robot-2.jpg)
+
 他のロボットの動作計画・動作の実行ファイルとの相違点は次のとおりです．
 
 - `group = MoveGroupCommander()` に渡すグループ名を `"arm_group"` に変更
@@ -1553,9 +1558,9 @@ if __name__ == '__main__':
     group.execute( plan )
 ```
 
-
-
 ![myCobot MoveIt! - cartesian path](images/melodic/mycobot-moveit_cartesian_path.png)
+
+![myCobot MoveIt! - cartesian path (real robot 1)](images/melodic/mycobot-moveit_cartesian_path-real-robot-1.jpg) ![myCobot MoveIt! - cartesian path (real robot 2)](images/melodic/mycobot-moveit_cartesian_path-real-robot-2.jpg)
 
 <$endif>
 
