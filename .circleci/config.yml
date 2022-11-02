@@ -32,6 +32,38 @@ commands:
           command : |-
             . /opt/ros/${ROS_DISTRO}/setup.bash && cd ~/catkin_ws && catkin_make run_tests
             . /opt/ros/${ROS_DISTRO}/setup.bash && cd ~/catkin_ws && catkin_test_results --verbose build
+  build_python3:
+    steps:
+      - checkout
+      - run:
+          name: Setup ROS catkin workspace
+          command : |-
+            apt update
+            echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections # fix for tzdata
+            apt install -y -q lsb-release wget apt gnupg
+            sh -c "echo \"deb $ROS_REPOSITORY_PATH `lsb_release -cs` main\" > /etc/apt/sources.list.d/ros-latest.list"
+            wget http://packages.ros.org/ros.key -O - | apt-key add -
+            apt update
+            apt install -y --force-yes -q -qq dpkg # https://github.com/travis-ci/travis-ci/issues/9361#issuecomment-408431262 dpkg-deb: error: archive has premature member 'control.tar.xz' before 'control.tar.gz' #9361
+            apt install -y -q python3-catkin-pkg python3-rosdep ros-${ROS_DISTRO}-catkin
+            apt install -y -q mongodb # to install ros-i${ROS_DISTRO}-warehouse-ros
+            apt install -y -q build-essential
+            rosdep init && rosdep update --include-eol-distros
+            mkdir -p ~/catkin_ws/src
+            cd ~/catkin_ws/src && ln -sf ~/project ${CIRCLE_PROJECT_REPONAME}
+      - run:
+          name: Run rosdep install
+          command : |-
+            . /opt/ros/${ROS_DISTRO}/setup.bash && cd ~/catkin_ws && rosdep install --from-paths src/ --ignore-src -y
+      - run:
+          name: Build packages
+          command : |-
+            . /opt/ros/${ROS_DISTRO}/setup.bash && cd ~/catkin_ws && catkin_make
+      - run:
+          name: Run tests
+          command : |-
+            . /opt/ros/${ROS_DISTRO}/setup.bash && cd ~/catkin_ws && catkin_make run_tests
+            . /opt/ros/${ROS_DISTRO}/setup.bash && cd ~/catkin_ws && catkin_test_results --verbose build
 
 jobs:
   build_indigo:
@@ -58,6 +90,14 @@ jobs:
       - ROS_REPOSITORY_PATH: http://packages.ros.org/ros/ubuntu
     steps:
       - build
+  build_noetic:
+    docker:
+      - image: ubuntu:focal
+    environment:
+      - ROS_DISTRO: noetic
+      - ROS_REPOSITORY_PATH: http://packages.ros.org/ros/ubuntu
+    steps:
+      - build_python3
 
   build_doc:
     docker:
@@ -87,6 +127,7 @@ jobs:
             make docbuild_${CIRCLE_PROJECT_REPONAME}_indigo
             make docbuild_${CIRCLE_PROJECT_REPONAME}_kinetic
             make docbuild_${CIRCLE_PROJECT_REPONAME}_melodic
+            make docbuild_${CIRCLE_PROJECT_REPONAME}_noetic
             mkdir ~/artifacts && find -L .. -iname '*.pdf' -exec cp {} ~/artifacts/ \;
       - persist_to_workspace:
           root: /root
@@ -105,6 +146,7 @@ jobs:
             docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:indigo-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python-bloom fakeroot debhelper; rosdep init; rosdep update --include-eol-distros; cd src; bloom-generate rosdebian --os-name ubuntu --os-version trusty --ros-distro indigo; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
             docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:kinetic-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python-bloom fakeroot debhelper; rosdep init; rosdep update --include-eol-distros; cd src; bloom-generate rosdebian --os-name ubuntu --os-version xenial --ros-distro kinetic; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
             docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:melodic-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python-bloom fakeroot debhelper; rosdep init; rosdep update --include-eol-distros; cd src; bloom-generate rosdebian --os-name ubuntu --os-version bionic --ros-distro melodic; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
+            docker run --rm -v `pwd`:/home/ubuntu/src/ -w /home/ubuntu -it osrf/ros:noetic-desktop  sh -c 'apt-get update -q -y; apt-get install -q -y python3-bloom fakeroot debhelper build-essential; rosdep init; rosdep update --include-eol-distros; cd src; bloom-generate rosdebian --os-name ubuntu --os-version focal --ros-distro noetic; MAKEFLAGS= fakeroot debian/rules binary; rm -fr debian obj-*; cp ../*.deb .'
             mkdir ~/artifacts && find -L . -iname '*.deb' -exec cp {} ~/artifacts/ \;
       - persist_to_workspace:
           root: /home/circleci
@@ -133,6 +175,7 @@ workflows:
       - build_indigo
       - build_kinetic
       - build_melodic
+      - build_noetic
       - build_doc:
           filters:
             tags:

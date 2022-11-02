@@ -1,6 +1,7 @@
 
 # 発展的なロボットプログラミング
 
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 本章は NEXTAGE OPEN ロボットシミュレータを対象にしてチュートリアルを進めてゆきます．
 
 NEXTAGE OPEN の下記ソフトウェアを既に起動した状態で
@@ -8,7 +9,14 @@ NEXTAGE OPEN の下記ソフトウェアを既に起動した状態で
 
 - NEXTAGE OPEN の Gazebo シミュレータもしくは hypsys(RTM) シミュレータ
 - NEXTAGE OPEN の MoveIt!
+<$elif <$ROS_DISTRO>==noetic>
+本章は myCobot ロボットシミュレータを対象にしてチュートリアルを進めてゆきます．
 
+myCobot の下記ソフトウェアを既に起動した状態で
+本章の各プログラムを実行してください．
+
+- myCobot の MoveIt!
+<$endif>
 
 ## プログラム制御フローツールとロボットプログラミング
 
@@ -26,6 +34,8 @@ NEXTAGE OPEN の下記ソフトウェアを既に起動した状態で
 
 本文中の `if` 文の条件部分で関数 `question_yn()` を呼び出して
 返ってきた `True`/`False` により「動作の実行」と「スキップ」の分岐を行っています．
+
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 ```
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_ifqyn.py
@@ -84,6 +94,66 @@ if __name__ == '__main__':
 
 ```
 
+<$elif <$ROS_DISTRO>==noetic>
+
+```bash
+$ rosrun tork_moveit_tutorial mycobot_moveit_tutorial_poses_ifqyn.py
+```
+
+**mycobot_moveit_tutorial_poses_ifqyn.py**
+```python
+#!/usr/bin/env python
+
+import sys, copy
+import rospy
+
+from moveit_commander import MoveGroupCommander
+from geometry_msgs.msg import Pose
+
+from tork_moveit_tutorial import init_node, question_yn
+
+
+if __name__ == '__main__':
+    
+    init_node()
+    group = MoveGroupCommander("arm_group")
+    
+    # Pose Target 1
+    rospy.loginfo( "Start Pose Target 1")
+    pose_target_1 = Pose()
+        
+    pose_target_1.position.x = 0.1
+    pose_target_1.position.y = -0.1
+    pose_target_1.position.z = 0.1
+    pose_target_1.orientation.x = 0.0
+    pose_target_1.orientation.y = -0.707
+    pose_target_1.orientation.z = 0.0
+    pose_target_1.orientation.w = 0.707
+    
+    rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_1 ) )
+    group.set_pose_target( pose_target_1 )
+    
+    if question_yn( "Start moving to target 1 ?" ):
+        group.go()
+    
+    # Pose Target 2
+    rospy.loginfo( "Start Pose Target 2")
+    pose_target_2 = Pose()
+    
+    pose_target_2.position.x = 0.1
+    pose_target_2.position.y = -0.1
+    pose_target_2.position.z = 0.2
+    pose_target_2.orientation.y = -1.0
+    
+    rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_2 ) )
+    group.set_pose_target( pose_target_2 )
+    
+    if question_yn( "Start moving to target 2 ?" ):
+        group.go()
+```
+
+
+<$endif>
 
 ### 繰り返しとロボット動作 - for
 
@@ -92,6 +162,8 @@ if __name__ == '__main__':
 下のプログラム例では
 `for` 文で動作計画と実行を5回繰り返し，
 繰り返すごとに右腕の目標姿勢のY座標を `step` 変数で指定した長さ横に移動します．
+
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 ```
 $ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_for.py
@@ -143,6 +215,59 @@ if __name__ == '__main__':
 
 ```
 
+<$elif <$ROS_DISTRO>==noetic>
+
+```bash
+rosrun tork_moveit_tutorial mycobot_moveit_tutorial_poses_for.py
+```
+
+**mycobot_moveit_tutorial_poses_for.py**
+
+```python
+#!/usr/bin/env python
+
+import sys, copy
+import rospy
+
+from moveit_commander import MoveGroupCommander
+from geometry_msgs.msg import Pose
+
+from tork_moveit_tutorial import init_node, question_yn
+
+
+if __name__ == '__main__':
+    
+    init_node()
+    group = MoveGroupCommander("arm_group")
+    
+    # Pose Target 1
+    rospy.loginfo( "Start Pose Target 1")
+    pose_target_1 = Pose()
+        
+    pose_target_1.position.x = 0.15
+    pose_target_1.position.y = 0.0
+    pose_target_1.position.z = 0.1
+    pose_target_1.orientation.x = 0.0
+    pose_target_1.orientation.y = -1.0
+    pose_target_1.orientation.z = 0.0
+    pose_target_1.orientation.w = 0.0
+    
+    step = -0.03
+    
+    for i in range(5):
+        pose_target_1.position.y = i * step
+        rospy.loginfo( "Set Target to Pose No.{}:\n{}".format( i, pose_target_1 ) )
+    
+        group.set_pose_target( pose_target_1 )
+
+        if question_yn( "Start moving to target No.{} ?".format( i ) ):
+            group.go()
+        else:
+            rospy.loginfo( "Skipped Pose No.{}".format( i ) )
+    
+```
+
+<$endif>
 
 ## プログラムのタイミングを図る
 
@@ -247,6 +372,8 @@ rospy.spin()
 
 下記プログラムでは次のことを行っています．
 
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
+
 - `pose_target_1` にロボット右腕の初期姿勢を定義
 - ログメッセージを表示してから `rospy.sleep(5.0)` で5秒休止
 - `rate = rospy.Rate(0.2)` で 0.2 [Hz] つまり5秒に1回の時間間隔を設定
@@ -313,20 +440,87 @@ if __name__ == '__main__':
 
 ```
 
+<$elif <$ROS_DISTRO>==noetic>
+
+- `pose_target_1` にロボット右腕の初期姿勢を定義
+- ログメッセージを表示してから `rospy.sleep(5.0)` で5秒休止
+- `rate = rospy.Rate(0.2)` で 0.2 [Hz] つまり5秒に1回の時間間隔を設定
+- `while not rospy.is_shutdown():` ノードが終了指定ない限り次のループを反復
+  - `group.set_pose_target( pose_target_1 )` で目標姿勢を設定
+  - `group.go()` で動作計画・実行
+  - 目標姿勢の位置のY座標を `step` だけずらす
+  - 目標姿勢の位置のY座標が -0.15 [m] よりも小さくなったら 0.0 [m] を代入
+  - `rate.sleep()` で次のタイミングが来るまで休止
+
+```
+$ rosrun tork_moveit_tutorial mycobot_moveit_tutorial_poses_rate.py
+```
+
+**mycobot_moveit_tutorial_poses_rate.py**
+
+```python
+#!/usr/bin/env python
+
+import sys, copy
+import rospy
+
+from moveit_commander import MoveGroupCommander
+from geometry_msgs.msg import Pose
+
+from tork_moveit_tutorial import init_node
+
+
+if __name__ == '__main__':
+    
+    init_node()
+    group = MoveGroupCommander("arm_group")
+    
+    # Pose Target 1
+    pose_target_1 = Pose()
+        
+    pose_target_1.position.x = 0.15
+    pose_target_1.position.y = 0.0
+    pose_target_1.position.z = 0.1
+    pose_target_1.orientation.x = 0.0
+    pose_target_1.orientation.y = -1.0
+    pose_target_1.orientation.z = 0.0
+    pose_target_1.orientation.w = 0.0
+    
+    rospy.loginfo( "Start Move Loop / Ctrl-C to Stop \nWaiting 5 seconds" )
+    rospy.sleep(5.0)
+    
+    step = -0.01
+    
+    rate = rospy.Rate(0.2)
+    while not rospy.is_shutdown():
+        
+        rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_1 ) )
+        group.set_pose_target( pose_target_1 )
+        group.plan()
+        group.go()
+        
+        pose_target_1.position.y += step
+        if pose_target_1.position.y < -0.15:
+            pose_target_1.position.y = 0.0
+
+        rospy.loginfo( "Waiting Next... / Ctrl-C to Stop" )
+        rate.sleep()
+    
+```
+
+<$endif>
 
 ## より複雑なロボット動作計画
 
 ### 動作アームを指定する
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 これまで NEXTAGE OPEN や Baxter Research Robot の動作プログラムの例では
 「右腕」を動かしていました．
 これらのロボットは双腕ですから「右腕」だけでなく「左腕」や「両腕」を動かすこともできます．
 
-<$endif>
-
-<$ifneq <$ROS_DISTRO>|indigo>
+<$elif <$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 これまで NEXTAGE OPEN や duaro の動作プログラムの例では
 NEXTAGE OPEN では「右腕」( right_arm ) を，
@@ -334,9 +528,16 @@ duaro では「上側の腕」(upper_arm) を動かしていました．
 これらのロボットは双腕ですから「右腕」や「上側の腕」だけでなく
 「左腕」や「下側の腕」，「両腕」を動かすこともできます．
 
+<$elif <$ROS_DISTRO>==noetic>
+
+duaro の動作プログラムの例では
+duaro では「上側の腕」(upper_arm) を動かしていました．
+これらのロボットは双腕ですから「上側の腕」だけでなく
+「下側の腕」，「両腕」を動かすこともできます．
+
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 #### 左腕を動かす
 
@@ -349,9 +550,7 @@ group = MoveGroupCommander("right_arm")    # 変更前（右腕）
 group = MoveGroupCommander("left_arm")     # 変更後（左腕）
 ```
 
-<$endif>
-
-<$ifneq <$ROS_DISTRO>|indigo>
+<$elif <$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 #### もう一方の腕を動かす
 
@@ -373,7 +572,22 @@ group = MoveGroupCommander("upper_arm")    # 変更前（上側の腕）
 group = MoveGroupCommander("lower_arm")    # 変更後（下側の腕）
 ```
 
+<$elif <$ROS_DISTRO>==noetic>
+
+#### もう一方の腕を動かす
+
+KHI duaro の「下側の腕」を動かすには次の変更を行います．
+
+- 動作グループを `lower_arm` に変更
+```python
+group = MoveGroupCommander("upper_arm")    # 変更前（上側の腕）
+↓
+group = MoveGroupCommander("lower_arm")    # 変更後（下側の腕）
+```
+
 <$endif>
+
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 下記プログラムは NEXTAGE OPEN の左腕を動かすプログラムの例です．
 右腕のターゲット姿勢のままでは左腕の動作にはきつくなるので
@@ -434,8 +648,72 @@ if __name__ == '__main__':
 
 ```
 
+<$elif <$ROS_DISTRO>==noetic>
+
+下記プログラムは duaro の左腕を動かすプログラムの例です．
+右腕のターゲット姿勢のままでは左腕の動作にはきつくなるので
+ターゲット位置のY座標の正負（左右）を反転しています．
+
+```bash
+rosrun tork_moveit_tutorial duaro_moveit_tutorial_poses_lower_arm.py
+```
+
+**duaro_moveit_tutorial_poses_lower_arm.py**
+
+```python
+#!/usr/bin/env python
+
+import sys, copy
+import rospy
+
+from moveit_commander import MoveGroupCommander
+from geometry_msgs.msg import Pose
+
+from tork_moveit_tutorial import init_node, question_yn
+
+
+if __name__ == '__main__':
+    
+    init_node()
+    
+    group = MoveGroupCommander("lower_arm")
+    
+    # Pose Target 1
+    rospy.loginfo( "Start Pose Target 1")
+    pose_target_1 = Pose()
+    
+    pose_target_1.position.x = 0.0
+    pose_target_1.position.y = 0.55
+    pose_target_1.position.z =  1.0
+    pose_target_1.orientation.x =  0.0
+    pose_target_1.orientation.y =  0.0
+    pose_target_1.orientation.z =  0.707
+    pose_target_1.orientation.w =  0.707
+    
+    rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_1 ) )
+    group.set_pose_target( pose_target_1 )
+    group.go()
+    
+    # Pose Target 2
+    rospy.loginfo( "Start Pose Target 2")
+    pose_target_2 = Pose()
+    
+    pose_target_2.position.x = 0.55
+    pose_target_2.position.y = 0
+    pose_target_2.position.z = 1.05
+    pose_target_2.orientation.z =  0.707
+    pose_target_2.orientation.w =  0.707
+    
+    rospy.loginfo( "Set Target to Pose:\n{}".format( pose_target_2 ) )
+    group.set_pose_target( pose_target_2 )
+    group.go()
+```
+
+<$endif>
 
 #### 両腕を動かす
+
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 前項目で動作グループに `left_arm` を指定して左腕を動かしました．
 他に指定できる「動作グループ」に何があるのかは動作プログラムの例を実行したときに
@@ -465,7 +743,43 @@ upperbody
 双腕のロボットで「両腕」を動かすには「両腕のグループ」を使います．
 上記の出力結果から NEXTAGE OPEN では `botharms` の動作グループがあります．
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$elif <$ROS_DISTRO>==noetic>
+
+前項目で動作グループに `lower_arm` を指定して左腕を動かしました．
+他に指定できる「動作グループ」に何があるのかは動作プログラムの例を実行したときに
+表示されるようにしてあります．
+
+下の出力例は duaro の場合のもので `lower_arm` や `upper_arm` の他に
+`botharms` や `lower_arm_tool` , `upper_arm_tool` などがあるのが分かります．
+
+```bash
+$ rosrun tork_moveit_tutorial duaro_moveit_tutorial_poses_lower_arm.py
+[ INFO] [WallTime: 1665371044.681512363] [node:/moveit_python_wrappers_1665371044674037973] [func:core::RobotModel::buildModel]: Loading robot model 'khi_duaro'...
+[ INFO] [WallTime: 1665371044.682251570] [node:/moveit_python_wrappers_1665371044674037973] [func:core::JointModel* moveit::core::RobotModel::constructJointModel]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[ WARN] [WallTime: 1665371044.786909727] [node:/moveit_python_wrappers_1665371044674037973] [func:core::SolverAllocatorFn kinematics_plugin_loader::KinematicsPluginLoader::getLoaderFunction]: Kinematics solver doesn't support #attempts anymore, but only a timeout.
+Please remove the parameter '/robot_description_kinematics/lower_arm/kinematics_solver_attempts' from your configuration.
+[ WARN] [WallTime: 1665371044.797097737] [node:/moveit_python_wrappers_1665371044674037973] [func:KinematicsBase::initialize]: IK plugin for group 'lower_arm' relies on deprecated API. Please implement initialize(RobotModel, ...).
+[ WARN] [WallTime: 1665371044.800244786] [node:/moveit_python_wrappers_1665371044674037973] [func:KinematicsBase::initialize]: IK plugin for group 'upper_arm' relies on deprecated API. Please implement initialize(RobotModel, ...).
+[INFO] [WallTime: 1665371044.806787] [node:/commander_example_4439_1665371044520] [func:init_node]: Move Groups defined in the robot :
+botharms
+lower_arm
+lower_arm_tool
+upper_arm
+upper_arm_tool
+[ INFO] [WallTime: 1665371044.823875247] [node:/moveit_python_wrappers_1665371044674037973] [func:core::RobotModel::buildModel]: Loading robot model 'khi_duaro'...
+[ INFO] [WallTime: 1665371044.823899703] [node:/moveit_python_wrappers_1665371044674037973] [func:core::JointModel* moveit::core::RobotModel::constructJointModel]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[ WARN] [WallTime: 1665371044.900999804] [node:/moveit_python_wrappers_1665371044674037973] [func:KinematicsBase::initialize]: IK plugin for group 'lower_arm' relies on deprecated API. Please implement initialize(RobotModel, ...).
+[ WARN] [WallTime: 1665371044.904525028] [node:/moveit_python_wrappers_1665371044674037973] [func:KinematicsBase::initialize]: IK plugin for group 'upper_arm' relies on deprecated API. Please implement initialize(RobotModel, ...).
+[ INFO] [WallTime: 1665371046.074714832] [node:/moveit_python_wrappers_1665371044674037973] [func:planning_interface::MoveGroupInterface::MoveGroupInterfaceImpl::MoveGroupInterfaceImpl]: Ready to take commands for planning group lower_arm.
+..
+```
+
+双腕のロボットで「両腕」を動かすには「両腕のグループ」を使います．
+上記の出力結果から duaro では `botharms` の動作グループがあります．
+
+<$endif>
+
+<$if <$ROS_DISTRO>==indigo>
 
 両腕のグループの名称は各ロボットで次のようになっていて
 `_` の有無の違いがあるので各ロボットで気をつけて指定します．
@@ -479,9 +793,7 @@ group = MoveGroupCommander("botharms")
 group = MoveGroupCommander("both_arms")
 ```
 
-<$endif>
-
-<$ifneq <$ROS_DISTRO>|indigo>
+<$elif <$ROS_DISTRO>==kinetic|<$?ROS_DISTRO>melodic>
 
 両腕のグループの名称は NEXTAGE OPEN と KHI duaro は同じ `botharms` です．
 他のロボットではこの名称は異なっている場合もあるのでロボットごとに名称を確認して適切な名称を指定します．
@@ -492,6 +804,8 @@ group = MoveGroupCommander("botharms")
 ```
 
 <$endif>
+
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 また，`group` が両腕になるので `set_pose_target()` にターゲットポーズに加えて
 エンドエフェクタのリンク名を渡して明示的に「右腕」と「左腕」を区別します．
@@ -510,7 +824,7 @@ group.go()
 両腕を同時に動作させるプログラム例を下に示します．
 
 ```
-$ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_ifqyn.py
+$ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_botharms.py
 ```
 
 **nextage_moveit_tutorial_poses_botharms.py**
@@ -612,6 +926,143 @@ if __name__ == '__main__':
 
 ```
 
+<$elif <$ROS_DISTRO>==noetic>
+
+また，`group` が両腕になるので `set_pose_target()` にターゲットポーズに加えて
+エンドエフェクタのリンク名を渡して明示的に「上の腕」と「下の腕」を区別します．
+
+```python
+group.set_pose_target( pose_target_uarm_1, 'upper_link_j4' )
+group.set_pose_target( pose_target_larm_1, 'lower_link_j4' )
+```
+
+あとは片腕の動作計画と実行の手順と同じです．
+
+```python
+group.go()
+```
+
+両腕を同時に動作させるプログラム例を下に示します．
+
+```
+$ rosrun tork_moveit_tutorial duaro_moveit_tutorial_poses_botharms.py
+```
+
+**duaro_moveit_tutorial_poses_botharms.py**
+
+```python
+#!/usr/bin/env python
+
+import sys, copy, os
+import rospy
+
+from moveit_commander import MoveGroupCommander
+from geometry_msgs.msg import Pose
+
+from tork_moveit_tutorial import init_node, question_yn, get_ros_version, normalize_orientation
+
+
+if __name__ == '__main__':
+    
+    init_node()
+    
+    group = MoveGroupCommander("botharms")
+    
+    # Pose Target 1
+    pose_target_uarm_1 = Pose()
+    pose_target_uarm_1.position.x = -0.4
+    pose_target_uarm_1.position.y = 0.4
+    pose_target_uarm_1.position.z = 1.0
+    pose_target_uarm_1.orientation.x = 0.0
+    pose_target_uarm_1.orientation.y = 0.0
+    pose_target_uarm_1.orientation.z = 0.707
+    pose_target_uarm_1.orientation.w = 0.707
+    
+#    ros_version = get_ros_version()
+    ros_version = rospy.get_param('/rosdistro')
+    ros_version = ros_version.rstrip('\n')
+#    ros_version = os.environ["ROS_DISTRO"]
+    
+    if ros_version == 'kinetic':
+        pose_target_uarm_1 = normalize_orientation( pose_target_uarm_1 )
+    
+    rospy.loginfo( "Right Arm Pose Target 1:\n{}".format( pose_target_uarm_1 ) )
+    
+    pose_target_larm_1 = Pose()
+    pose_target_larm_1.position.x = pose_target_uarm_1.position.x * -1.0
+    pose_target_larm_1.position.y = pose_target_uarm_1.position.y
+    pose_target_larm_1.position.z = pose_target_uarm_1.position.z
+    pose_target_larm_1.orientation.x = pose_target_uarm_1.orientation.x
+    pose_target_larm_1.orientation.y = pose_target_uarm_1.orientation.y
+    pose_target_larm_1.orientation.z = pose_target_uarm_1.orientation.z
+    pose_target_larm_1.orientation.w = pose_target_uarm_1.orientation.w
+    
+    if ros_version == 'kinetic':
+        pose_target_larm_1 = normalize_orientation( pose_target_larm_1 )
+    
+    rospy.loginfo( "Left Arm Pose Target 1:\n{}".format( pose_target_larm_1 ) )
+    
+    group.set_pose_target( pose_target_uarm_1, 'upper_link_j4' )
+    group.set_pose_target( pose_target_larm_1, 'lower_link_j4' )
+    group.plan()
+    group.go()
+    
+    # Pose Target 2
+    pose_target_uarm_2 = Pose()    
+    pose_target_uarm_2.position.x = -0.5
+    pose_target_uarm_2.position.y = 0.0
+    pose_target_uarm_2.position.z = 1.0
+    
+    if ros_version == 'kinetic':
+        pose_target_uarm_2 = normalize_orientation( pose_target_uarm_2 )
+    
+    rospy.loginfo( "Right Arm Pose Target 2:\n{}".format( pose_target_uarm_2 ) )
+    
+    pose_target_larm_2 = Pose()
+    pose_target_larm_2.position.x = pose_target_uarm_2.position.x * -1.0
+    pose_target_larm_2.position.y = pose_target_uarm_2.position.y
+    pose_target_larm_2.position.z = pose_target_uarm_2.position.z
+    pose_target_larm_2.orientation.x = pose_target_uarm_2.orientation.x
+    pose_target_larm_2.orientation.y = pose_target_uarm_2.orientation.y
+    pose_target_larm_2.orientation.z = pose_target_uarm_2.orientation.z
+    pose_target_larm_2.orientation.w = pose_target_uarm_2.orientation.w
+    
+    if ros_version == 'kinetic':
+        pose_target_larm_2 = normalize_orientation( pose_target_larm_2 )
+    
+    rospy.loginfo( "Left Arm Pose Target 2:\n{}".format( pose_target_larm_2 ) )    
+    
+    # Move to Pose Target 1
+    rospy.loginfo( "Move to Pose Target 1" )    
+    group.set_pose_target( pose_target_uarm_1, 'upper_link_j4' )
+    group.set_pose_target( pose_target_larm_1, 'lower_link_j4' )
+    group.go()
+    
+    # Move to Pose Target 2
+    rospy.loginfo( "Move to Pose Target 2" )    
+    group.set_pose_target( pose_target_uarm_2, 'upper_link_j4' )
+    group.set_pose_target( pose_target_larm_2, 'lower_link_j4' )
+    group.go()
+    
+    # Pose Target 1 & 2 Mixture
+    rospy.loginfo( "Move to Pose Target Right:1 Left:2" )    
+    group.set_pose_target( pose_target_uarm_1, 'upper_link_j4' )
+    group.set_pose_target( pose_target_larm_2, 'lower_link_j4' )
+    group.go()
+    
+    rospy.loginfo( "Move to Pose Target Right:2 Left:1" )    
+    group.set_pose_target( pose_target_uarm_2, 'upper_link_j4' )
+    group.set_pose_target( pose_target_larm_1, 'lower_link_j4' )
+    group.go()
+    
+    # Back to Pose Target 1
+    rospy.loginfo( "Go Back to Pose Target 1" )    
+    group.set_pose_target( pose_target_uarm_1, 'upper_link_j4' )
+    group.set_pose_target( pose_target_larm_1, 'lower_link_j4' )
+    group.go()
+```
+
+<$endif>
 
 ### 姿勢の参照座標を指定する
 
@@ -624,6 +1075,8 @@ if __name__ == '__main__':
   - 参照フレーム情報を含む `PoseStamped` 型のデータを `set_pose_target()` の姿勢に渡して動作を計画する．
 - `set_pose_reference_frame()` を用いる
   - `set_pose_reference_frame()` に参照フレーム名を渡して実行することで動作計画の参照フレーム設定を変更する．
+
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 下方にある動作プログラム例 **nextage_moveit_tutorial_poses_relative.py** では
 左腕のエンドエフェクタリンクである `LARM_JOINT5_Link` を参照リンクとしています．
@@ -641,6 +1094,26 @@ if __name__ == '__main__':
 `Pose` 型の `target_pose` を渡すだけで
 リンクに相対的な位置・姿勢の目標を指定し動作計画と実行を行います．
 
+<$elif <$ROS_DISTRO>==noetic>
+
+下方にある動作プログラム例 **duaro_moveit_tutorial_poses_relative.py** では
+下の腕のエンドエフェクタリンクである `lower_link_j4` を参照リンクとしています．
+`lower_link_j4` のリンク座標系上で
+
+- 位置 : `[ 0.4, 0.0, 0.0 ]`
+- 姿勢 : クォータニオン表現で `[ 0.0, 0.0, 0.0, 1.0 ]`（＝回転無し）
+
+になるように目標姿勢を設定し，2つの方法について動作計画と実行を行っています．
+
+まず `PoseStamped` 型を利用して参照リンク `/lower_link_j4` の情報を一緒に変数
+`target_posestamped` で渡すことでリンクに相対的な位置・姿勢の目標を指定し動作計画と実行を行います．
+
+次に `set_pose_reference_frame()` で参照リンクを `/lower_link_j4` に設定して
+`Pose` 型の `target_pose` を渡すだけで
+リンクに相対的な位置・姿勢の目標を指定し動作計画と実行を行います．
+
+<$endif>
+
 また逐次 `group.get_pose_reference_frame()` で現状の参照リンクフレームを取得して
 ログ表示しています．
 
@@ -649,38 +1122,34 @@ if __name__ == '__main__':
 `get_current_pose()` を利用して
 `initial_pose = group.get_current_pose()` として姿勢の取得をしています．
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 ![Nextage - Gazebo / Poses Relative](images/nextage_gazebo_poses_relative.png)
 
-<$endif>
-
-<$ifneq <$ROS_DISTRO>|indigo>
+<$elif <$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
 
 ![Nextage - Gazebo / Poses Relative](images/kinetic/nextage_gazebo_poses_relative.png)
 
 <$endif>
 
-<$ifeq <$ROS_DISTRO>|indigo>
+<$if <$ROS_DISTRO>==indigo>
 
 ![Nextage - MoveIt! / Poses Relative](images/nextage_moveit_poses_relative.png)
 
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|kinetic>
+<$elif <$ROS_DISTRO>==kinetic>
 
 ![Nextage - MoveIt! / Poses Relative](images/kinetic/nextage_moveit_poses_relative.png)
 
-<$endif>
-
-<$ifeq <$ROS_DISTRO>|melodic>
+<$elif <$ROS_DISTRO>==melodic>
 
 ![Nextage - MoveIt! / Poses Relative](images/melodic/nextage_moveit_poses_relative.png)
 
 <$endif>
 
-```
-$ rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_relative.py
+<$if <$ROS_DISTRO>==indigo|<$ROS_DISTRO>==kinetic|<$ROS_DISTRO>==melodic>
+
+```bash
+rosrun tork_moveit_tutorial nextage_moveit_tutorial_poses_relative.py
 ```
 
 **nextage_moveit_tutorial_poses_relative.py**
@@ -770,6 +1239,99 @@ if __name__ == '__main__':
 
 ```
 
+<$elif <$ROS_DISTRO>==noetic>
+
+```bash
+rosrun tork_moveit_tutorial duaro_moveit_tutorial_poses_relative.py
+```
+
+**duaro_moveit_tutorial_poses_relative.py**
+
+```python
+#!/usr/bin/env python
+
+import sys, copy
+import rospy
+
+from moveit_commander import MoveGroupCommander
+from geometry_msgs.msg import Pose, PoseStamped
+
+from tork_moveit_tutorial import init_node
+
+
+if __name__ == '__main__':
+    
+    init_node()
+    
+    # Preparing Lower Arm
+    rospy.loginfo( "Preparing Lower Arm..." )
+    larmg = MoveGroupCommander("lower_arm")
+    larm_init_pose = Pose()
+    larm_init_pose.position.x = 0.1
+    larm_init_pose.position.y = 0.5
+    larm_init_pose.position.z = 1.0
+    larm_init_pose.orientation.x = 0.0
+    larm_init_pose.orientation.y = 0.0
+    larm_init_pose.orientation.z = 0.707
+    larm_init_pose.orientation.w = 0.707
+    larmg.set_pose_target(larm_init_pose)
+    larmg.go()
+    
+    
+    # Upper Arm
+    group = MoveGroupCommander("upper_arm")
+    
+    initial_reference_frame = group.get_pose_reference_frame()
+    rospy.loginfo( "Initial Reference Frame: {}".format( initial_reference_frame ) )
+    
+    initial_pose = group.get_current_pose()
+    rospy.loginfo( "Initial Pose:\n{}".format( initial_pose ) )
+    
+    # Relative Target Pose
+    target_pose = Pose()
+    target_pose.position.x = 0.2
+    target_pose.orientation.w = 1.0
+    
+    # Relative Target with PoseStamped
+    rospy.loginfo( "Using PoseStamped" )
+    
+    target_posestamped = PoseStamped()
+    target_posestamped.pose.position.x = 0.2
+    target_posestamped.pose.orientation.w = 1.0
+    target_posestamped.header.frame_id = '/lower_link_j4'
+    target_posestamped.header.stamp = rospy.Time.now()
+    
+    rospy.loginfo( "Target Pose:\n{}".format( target_posestamped ) )
+    group.set_pose_target( target_posestamped )
+    group.go()
+    
+    rospy.loginfo( "Current Reference Frame: {}".format( group.get_pose_reference_frame() ) )
+    
+    # Go Back to Initial Pose
+    group.set_pose_target( initial_pose.pose )
+    group.go()
+        
+    # Relative Target with set_pose_reference_frame
+    rospy.loginfo( "Using set_pose_refercence_frame() and Pose" )
+    
+    group.set_pose_reference_frame( '/lower_link_j4' )
+    rospy.loginfo( "Current Reference Frame: {}".format( group.get_pose_reference_frame() ) )
+    rospy.loginfo( "Target Pose:\n{}".format( target_pose ) )
+    
+    group.set_pose_target( target_pose )
+    group.go()
+
+    # Reset Pose Reference Frame
+    group.set_pose_reference_frame( initial_reference_frame )
+    rospy.loginfo( "Current Reference Frame: {}".format( group.get_pose_reference_frame() ) )
+    
+    # Go Back to Initial Pose
+    rospy.loginfo( "Go Back to Initial Pose..." )
+    group.set_pose_target( initial_pose )
+    group.go()
+```
+
+<$endif>
 
 ### 座標系フレーム間の相対姿勢を取得する - tf
 

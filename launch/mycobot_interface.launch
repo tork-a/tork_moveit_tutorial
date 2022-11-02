@@ -1,0 +1,16 @@
+<launch>
+  <arg name="port" default="/dev/ttyUSB0" doc ="the serial port for connection" />
+  <arg name="baud" default="115200" doc ="the serial baudrate" />
+  <arg name="urdf_path" default="$(find tork_moveit_tutorial)/urdf/mycobot/mycobot.urdf.xacro"/>
+
+  <!-- Driver -->
+  <node pkg="tork_moveit_tutorial" type="mycobot_interface.py" name="mycobot_bridge"  output="screen" >
+    <param name="port" value="$(arg port)" />
+    <param name="baud" value="$(arg baud)" />
+  </node>
+
+  <!-- robot state publisher for tf -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(arg urdf_path)'" />
+  <node name="$(anon robot_state_publisher)" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+</launch>
