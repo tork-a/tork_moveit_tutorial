@@ -701,7 +701,7 @@ $ roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
 **ターミナル-2** : MoveIt! の起動
 ```
 $ source ~/catkin_ws/devel/setup.bash
-$ roslaunch roslaunch mycobot_320_moveit demo.launch
+$ roslaunch mycobot_320_moveit demo.launch
 ```
 
 ![myCobot MoveIt! - Starts](images/melodic/mycobot-moveit_starts.png)
