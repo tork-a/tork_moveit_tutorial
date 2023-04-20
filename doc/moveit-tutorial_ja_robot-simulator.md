@@ -284,6 +284,7 @@ $ source devel/setup.bash
 ```
 $ cd ~/catkin_ws/src
 $ git clone https://github.com/elephantrobotics/mycobot_ros
+$ rosdep install --from-paths . --ignore-src -y
 $ cd ~/catkin_ws
 $ catkin_make
 $ source devel/setup.bash
@@ -696,12 +697,12 @@ $ roslaunch khi_duaro_moveit_config moveit_planning_execution.launch
 
 #### MoveIt! の起動
 
-ーミナルで次のコマンドを実行して MoveIt! を起動します．
+ターミナルで次のコマンドを実行して MoveIt! を起動します．
 
-**ターミナル-2** : MoveIt! の起動
+**ターミナル-1** : MoveIt! の起動
 ```
 $ source ~/catkin_ws/devel/setup.bash
-$ roslaunch roslaunch mycobot_320_moveit demo.launch
+$ roslaunch mycobot_320_moveit demo.launch
 ```
 
 ![myCobot MoveIt! - Starts](images/melodic/mycobot-moveit_starts.png)
